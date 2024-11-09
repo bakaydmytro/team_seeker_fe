@@ -1,0 +1,35 @@
+.register-button{
+    width: 95px;
+    height: 40px;
+    border: 1px solid white;
+    background-color: #08042e;
+}
+
+.register-button:hover{
+    background-color: white;
+    color: #08042e;
+}
+
+.log-in-button{
+    width: 85px;
+    height: 40px;   
+    background-color: #ba1f33;
+    border: 1px solid #ba1f33;
+}
+
+.log-in-button:hover{
+    background-color: #c32121;
+    color: #08042e;
+}
+
+.log-in-button , .register-button , .learn-more-button{
+    color: white;
+    font-size: 16px;
+}
+
+.learn-more-button{
+    width: 125px;
+    height: 45px;
+    border: 1px solid white;
+    background-color: #08042e;
+}
