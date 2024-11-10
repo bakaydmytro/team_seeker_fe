@@ -3,6 +3,7 @@
     height: 40px;
     border: 1px solid white;
     background-color: #08042e;
+    cursor: pointer;
 }
 
 .register-button:hover{
@@ -15,6 +16,7 @@
     height: 40px;   
     background-color: #ba1f33;
     border: 1px solid #ba1f33;
+    cursor:pointer;
 }
 
 .log-in-button:hover{
@@ -30,6 +32,13 @@
 .learn-more-button{
     width: 125px;
     height: 45px;
-    border: 1px solid white;
-    background-color: #08042e;
+    background-color: #ba1f33;
+    border: 1px solid #ba1f33;
+    cursor:pointer;
+}
+
+.learn-more-button:hover{
+    background-color: #c32121;
+    border-color: #c32121;
+    color: #08042e;
 }
