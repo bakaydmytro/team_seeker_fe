@@ -1,0 +1,14 @@
+.img2 ,.img3 ,.img1{
+    position: relative;
+    max-width: 500px;
+}
+
+.img2{
+    bottom: 520px;
+    left: 20px;
+}
+
+.img3{
+    bottom: 1040px;
+    left: 40px;
+}
