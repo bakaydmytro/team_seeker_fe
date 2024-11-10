@@ -1,6 +1,6 @@
 import './Header.css';
-import LogInButton from '../Buttons/LogInButton'
-import RegisterButton from '../Buttons/RegisterButton'
+import LogInButton from '../../Buttons/LogInButton'
+import RegisterButton from '../../Buttons/RegisterButton'
 
 export default function Header(){
     return(
