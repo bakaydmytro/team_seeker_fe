@@ -1,5 +1,4 @@
 import './App.css';
-import Login from'./components/Login/Login'
 import Header from './components/MainPage/Header/Header'
 import Main from './components/MainPage/Main/Main'
 
