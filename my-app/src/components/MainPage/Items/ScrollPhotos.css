@@ -14,17 +14,14 @@
     animation-duration: -0.3s;
 }
 
-.scroll-photo-block1:last-child{
-
+.scroll-photo> img {
+    width: 100%;
 }
 
 .scroll-photo-block2{
     animation: 9s linear infinite running scrollUp;
 }
 
-img{
-    width: 100%;
-}
 
 @keyframes scrollUp {
     0% {

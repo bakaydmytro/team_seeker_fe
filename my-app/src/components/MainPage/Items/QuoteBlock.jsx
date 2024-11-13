@@ -7,8 +7,8 @@ export default function QuoteBlock(){
     return(    
         <div class="owl-carousel">
         <div> <img src={Quote1} className='img1'/> </div>
-        <div> <img src={Quote2} className='img2'/> </div>
-        <div> <img src={Quote3} className='img3'/> </div>
+        {/* <div> <img src={Quote2} className='img2'/> </div>
+        <div> <img src={Quote3} className='img3'/> </div> */}
       </div>
     )
 }

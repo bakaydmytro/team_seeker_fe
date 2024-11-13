@@ -1,0 +1,48 @@
+footer {
+  position: absolute;
+  bottom: 1;
+  left: 0;
+  background: linear-gradient(to bottom, #08042e, #000000);
+  width: 100%;
+  height: 240px;
+}
+
+footer > img {
+  max-width: 40px;
+}
+
+.footer-container {
+  padding-top: 70px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.first-footer-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #ba1f33;
+  padding-bottom: 18px;
+}
+
+.top-footer-block,
+.second-footer-block {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 30px;
+}
+
+.footer-links {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer-links:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.second-footer-block {
+  margin-top: 18px;
+}

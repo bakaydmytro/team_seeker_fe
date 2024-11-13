@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap');
 
+
 .scroll-section {
     display: flex;
     justify-content: space-between;
@@ -53,6 +54,7 @@ a>img{
     justify-content: space-between;
     gap: 150px;
     margin-top: 50px;
+    margin-bottom: 200px;
 }
 
 .first-main-info-block{
