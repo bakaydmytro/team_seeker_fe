@@ -1,0 +1,12 @@
+.custom-switch:where(.css-dev-only-do-not-override-tpassh).ant-switch.ant-switch-checked{
+    background: red; /* Змінюємо фон на червоний */
+  }
+.custom-switch:where(.css-dev-only-do-not-override-tpassh).ant-switch:hover:not(.ant-switch-disabled){
+    background: red; 
+}
+.custom-switch:where(.css-dev-only-do-not-override-tpassh).ant-switch{
+    background: grey;
+}
+.custom-switch{
+    margin-right: 10px;
+}
