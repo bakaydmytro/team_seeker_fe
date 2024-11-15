@@ -11,8 +11,10 @@
 }
 
 .container {
-  background: #08042E;
+  padding: 50px 0;
   height: 100%;
+  overflow: scroll;
+  background: #08042E;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +32,24 @@
   text-align: center;
   font: 400 70px "Rubik Glitch";
   color: white;
+}
+.container .login_wrapper .have_account {
+  display: flex;
+  justify-content: center;
+}
+.container .login_wrapper .have_account p {
+  margin-right: 10px;
+  text-align: center;
+  font: 400 20px "Roboto";
+  color: white;
+}
+.container .login_wrapper .have_account .custom_link {
+  color: red;
+  height: -moz-min-content;
+  height: min-content;
+}
+.container .login_wrapper .have_account .custom_link:hover {
+  border-bottom: 1px solid red;
 }
 .container .login_wrapper form {
   display: flex;
@@ -82,4 +102,8 @@
 .error {
   color: #fff;
   font: 400 14px "Roboto";
+}
+
+.button_login:disabled {
+  background: black;
 }/*# sourceMappingURL=Login.css.map */

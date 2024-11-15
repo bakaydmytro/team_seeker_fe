@@ -1,198 +1,150 @@
-// import '/Users/max/Desktop/project/src/reset.css'
-// import '/Users/max/Desktop/project/src/Components/Loginn/Login.css';
-// import SwitchButton from '/Users/max/Desktop/project/src/Components/Loginn/SwitchButton.js'
-// import Date from '/Users/max/Desktop/project/src/Components/Regist/Date.js'
-// import { useState } from 'react';
-// // import { useNavigate } from 'react-router-dom';
 
-// function Regist() {
-//     const [formData, setFormData] = useState({
-//         username: '',
-//         email: '',
-//         password: '',
-//         confirmPassword: ''
-//       })
-    
-//       const [errors, setErrors] = useState({})
-    
-//       const handleChange = (e) => {
-//         const {name, value} = e.target;
-//         setFormData({
-//             ...formData, [name] : value
-//         })
-//       }
-    
-//       const handleSubmit = (e) => {
-//         e.preventDefault()
-//         const validationErrors = {}
-//         if(!formData.username.trim()) {
-//             validationErrors.username = "username is required"
-//         }
-    
-//         if(!formData.email.trim()) {
-//             validationErrors.email = "email is required"
-//         } else if(!/\S+@\S+\.\S+/.test(formData.email)){
-//             validationErrors.email = "email is not valid"
-//         }
-    
-//         if(!formData.password.trim()) {
-//             validationErrors.password = "password is required"
-//         } else if(formData.password.length < 6){
-//             validationErrors.password = "password should be at least 6 char"
-//         }
-    
-//         if(formData.confirmPassword !== formData.password) {
-//             validationErrors.confirmPassword = "password not matched"
-//         }
-    
-//         setErrors(validationErrors)
-    
-//         if(Object.keys(validationErrors).length === 0) {
-//             alert("Form Submitted successfully")
-//         }
-    
-//       }
-//   return (
-//     <div style={{height: 'auto'}} className='container'>
-//       <div className="login_wrapper">
-//           <div className='title_block'>
-//             <h1 className='title'>Log in</h1>
-//           </div>
-//           <form onSubmit={handleSubmit}>
-//             <div className='input_block'>
-//               <label>User Name</label>
-//               <input name="username" placeholder='name' className='input' type='text' value={formData.username}
-//                 onChange={handleChange} required/> 
-//             </div>
-//             <div className='input_block'>
-//               <label>Email</label>
-//               <input name="email" placeholder='email' className='input' type='email' value={formData.email} onChange={handleChange}required/> 
-                
-//             </div>
-//             <div className='input_block'>
-//               <label>Password</label>
-//               <input name="password" placeholder='Password' className='input' type='password' value={formData.password}
-//                onChange={handleChange} required/>
-//             </div>
-//             <div className='input_block'>
-//               <label>Confirm Password</label>
-//               <input name="confirmPassword" placeholder='Password' className='input' type='password' value={formData.confirmPassword }
-//                 onChange={handleChange} required/>
-//             </div>
-//             <div className='input_block'>
-//               <label>Birth Day</label>
-//               <Date/>
-//             </div>
-//             <div className='switch_block'>
-//               <SwitchButton />
-//               <p>Remember me</p>
-//             </div>
-//             <div className='login_block'>
-//               <button className='button_login' type='submit'>Free Sign Up</button>
-//             </div>
-//           </form>
-            
-            
-          
-//       </div>
-//     </div>
-    
-//   );
-  
-// }
-
-// export default Regist;
 import '/Users/max/Desktop/project/src/reset.css';
 import '/Users/max/Desktop/project/src/Components/Loginn/Login.css';
-import SwitchButton from '/Users/max/Desktop/project/src/Components/Loginn/SwitchButton.js';
 import Date from '/Users/max/Desktop/project/src/Components/Regist/Date.js';
-import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {Routes , Route , Link} from 'react-router-dom'
 
 function Regist() {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    birthDate: '',
-    rememberMe: false
-  });
+  const [userName , setUserName] = useState('')
+  const [email , setEmail] = useState('')
+  const [pass , setPass] = useState('')
+  const [confirmPass , setConfirmPass] = useState('')
 
-  const [errors, setErrors] = useState({});
+  const [userNameDirty , setUserNameDirty] = useState(false)
+  const [emailDirty , setEmailDirty] = useState(false)
+  const [passDirty , setPassDirty] = useState(false)
+  const [confPassDirty , setConfPassDirty] = useState(false)
+
+  const  [userError , setUserError] = useState('Ім\'я не може бути пустим')
+  const [emailEror , setEmailEror] = useState('Емеїл не може бути пустим')
+  const [passEror , setPassEror] = useState('Пароль не може бути пустим')
+  const  [confPassEror , setConfPassEror] = useState('Пароль не може бути пустим')
+
+  const [formValid , setFormValid] = useState(false)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(emailEror || userError || passEror || confPassEror){
+      setFormValid(false)
+    }else{
+      setFormValid(true)
+    }
+  } , [emailEror,userError,passEror,confPassEror])
+
+    const userHandler = e =>{
+      setUserName(e.target.value)
+      if (e.target.value.length < 2 || e.target.value.length > 50) {
+        setUserError('Ім’я повинно бути від 2 до 50 символів');
+    } else {
+        setUserError('');
+    }
+    }
+    const emailHandler = e =>{
+      setEmail(e.target.value)
+      const re =   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      if(!re.test(e.target.value)){
+        setEmailEror('неправильне значення')
+      }
+      else{
+        setEmailEror('')
+      }
+    }
+    const passHandler = e =>{
+      setPass(e.target.value)
+      const re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
+      if(!re.test(e.target.value)){
+        setPassEror('неправильне значення')
+      }
+      else{
+        setPassEror('')
+      }
+    }
+    const confPassHandler = e =>{
+      const value = e.target.value;
+      setConfirmPass(value)
+    
+      if(value !== pass){
+        setConfPassEror('неправильне значення')
+      }
+      else{
+        setConfPassEror('')
+      }
+    }
   
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value
-    });
-  };
-
   
+  const formData = async (e) => {
+    e.preventDefault(); // Потрібно завжди викликати preventDefault для уникнення перезавантаження сторінки
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // const validationErrors = {};
+    // Перевірка чи форма валідна перед відправкою
+    if (!formValid) {
+      console.log("Форма не пройшла валідацію");
+      return; // Якщо форма не валідна, просто не відправляти
+    }
+
+    const userData = {
+      username: userName,
+      email: email,
+      password: pass,
+    };
+
     try {
-      const response =  fetch('https://66b65cfab5ae2d11eb66aa31.mockapi.io/items', {
+      const response = await fetch('https://66b65cfab5ae2d11eb66aa31.mockapi.io/items', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(userData),
       });
 
       if (!response.ok) {
-        throw new Error('Помилка відправки форми');
+        throw new Error('Помилка при відправці даних');
       }
 
-      const result =  response.json();
+      const result = await response.json();
       console.log('Форма відправлена успішно:', result);
+      const { token } = data;  
+      localStorage.setItem('token', token);
+      navigate('/')
     } catch (error) {
       console.error('Помилка:', error);
+      alert('Помилка при відправці форми, спробуйте пізніше');
     }
   };
 
-    // if (!formData.username.trim()) {
-    //     validationErrors.username = 'Потрібно ввести ім\'я користувача';
-    //   } else if (formData.username.length < 2 || formData.username.length > 50) {
-    //     validationErrors.username = 'Ім’я користувача має містити від 2 до 50 символів';
-    //   }
-
-
-    // if (!formData.email.trim()) {
-    //   validationErrors.email = 'Email is required';
-    // } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    //   validationErrors.email = 'Email is not valid';
-    // }
-    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-
-    // if (!formData.password.trim()) {
-    //     validationErrors.password = 'Необхідно ввести пароль';
-    //   } else if (!passwordRegex.test(formData.password)) {
-    //     validationErrors.password =
-    //       'Пароль має містити принаймні 8 символів, містити одну велику літеру, одну малу літеру, одну цифру та один спеціальний символ';
-    //   }
-
-    // if (formData.confirmPassword !== formData.password) {
-    //   validationErrors.confirmPassword = 'Паролі не збігаються';
-    // }
-
-    
-
-    // setErrors(validationErrors);
-
-    
   
 
+  
+  const blurHandler = (e) => {
+    switch(e.target.name){
+      case 'username':
+        setUserNameDirty(true)
+        break
+      case 'email':
+        setEmailDirty(true)
+        break
+      case 'password':
+        setPassDirty(true)
+        break
+      case 'confirmPassword':
+        setConfPassDirty(true)
+        break
+    }
+      
+  }
+ 
   return (
     <div className="container">
       <div className="login_wrapper">
         <div className="title_block">
           <h1 className="title">Sign Up</h1>
         </div>
-        <form onSubmit={handleSubmit}>
+        <div className='have_account'>
+          <p>Already have an account? </p>
+          <p><Link className='custom_link' to='/'>Click</Link></p>
+        </div>
+        <form onSubmit={formData}>
           <div className="input_block">
             <label>User Name</label>
             <input
@@ -200,11 +152,12 @@ function Regist() {
               placeholder="Username"
               className="input"
               type="text"
-              value={formData.username}
-              onChange={handleChange}
               required
+              onChange={e => {userHandler(e)}}
+              onBlur={e => {blurHandler(e)}}
+              value={userName}
             />
-            {errors.username && <span className="error">{errors.username}</span>}
+            {userNameDirty && userError && <div className="error">{userError}</div>}
           </div>
           <div className="input_block">
             <label>Email</label>
@@ -213,11 +166,12 @@ function Regist() {
               placeholder="Email"
               className="input"
               type="text"
-              value={formData.email}
-              onChange={handleChange}
+              onBlur={e => {blurHandler(e)}}
+              value={email}
+              onChange={e => emailHandler(e)}
               required
             />
-            {errors.email && <span className="error">{errors.email}</span>}
+            {emailDirty && emailEror && <div className="error">{emailEror}</div>}
           </div>
           <div className="input_block">
             <label>Password</label>
@@ -226,11 +180,12 @@ function Regist() {
               placeholder="Password"
               className="input"
               type="password"
-              value={formData.password}
-              onChange={handleChange}
+              onChange={e =>{passHandler(e)}}
+              onBlur={e => {blurHandler(e)}}
+              value={pass}
               required
             />
-            {errors.password && <span className="error">{errors.password}</span>}
+            {passDirty && passEror && <div className="error">{passEror}</div>}
           </div>
           <div className="input_block">
             <label>Confirm Password</label>
@@ -239,23 +194,25 @@ function Regist() {
               placeholder="Confirm Password"
               className="input"
               type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
+              onBlur={e => {blurHandler(e)}}
+              value={confirmPass}
+              onChange={e => {confPassHandler(e)}}
               required
             />
-            {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+            {confPassDirty && confPassEror && <div className="error">{confPassEror}</div>}
           </div>
-         
-          {/* <div className="switch_block">
-            <SwitchButton 
-            //   checked={formData.rememberMe} 
-            //   onChange={handleChange} 
-              name="rememberMe" 
-            />
-            <p>Запам'ятай мене</p>
-          </div> */}
+
+
           <div className="login_block">
-            <button className="button_login" type="submit">Free Sign Up</button>
+            <button 
+            disabled={!formValid} 
+            className="button_login" 
+            type="submit"
+            style={{
+              backgroundColor: !formValid ? '#D3D3D3' : '#4CAF50',
+              cursor: !formValid ? 'not-allowed' : 'pointer', 
+              opacity: !formValid ? 0.6 : 1, 
+            }}>Sign Up</button>
           </div>
         </form>
       </div>
@@ -266,8 +223,3 @@ function Regist() {
 export default Regist;
 
 
-{/* <div className="input_block">
-            <label>Birth Day</label>
-            <Date onDateChange={handleDateChange} value={formData.birthDate} />
-            {errors.birthDate && <span className="error">{errors.birthDate}</span>}
-          </div> */}

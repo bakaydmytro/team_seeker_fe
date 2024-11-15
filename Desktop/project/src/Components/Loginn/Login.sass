@@ -12,8 +12,10 @@
     color: #fff
 
 .container
-    background: #08042E
+    padding: 50px 0
     height: 100%
+    overflow: scroll
+    background: #08042E
     display: flex
     align-items: center
     justify-content: center
@@ -28,6 +30,21 @@
             text-align: center
             font: 400 70px 'Rubik Glitch'
             color: #ffff
+        .have_account 
+            display: flex
+            justify-content: center
+            p 
+                margin-right: 10px
+                text-align: center
+                font: 400 20px 'Roboto'
+                color: #ffff
+            .custom_link
+                color: red
+                height: min-content
+            .custom_link:hover
+                border-bottom: 1px solid red
+                
+            
         form
             display: flex
             flex-direction: column
@@ -74,3 +91,5 @@
 .error
     color: #fff
     font: 400 14px 'Roboto'
+.button_login:disabled 
+    background: black
