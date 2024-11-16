@@ -1,0 +1,33 @@
+.scroll-photo{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+    
+}
+
+.scroll-photo-block1 ,.scroll-photo-block2{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: 12s linear infinite running scrollUp;
+    animation-duration: -0.3s;
+}
+
+.scroll-photo> img {
+    width: 100%;
+}
+
+.scroll-photo-block2{
+    animation: 9s linear infinite running scrollUp;
+}
+
+
+@keyframes scrollUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
