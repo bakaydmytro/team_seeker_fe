@@ -78,8 +78,8 @@ function Login() {
 
       const result = await response.json();
       console.log('Форма відправлена успішно:', result);
-      const { token } = data;  
-      localStorage.setItem('token', token);
+      
+      localStorage.setItem('token', response);
       navigate('/')
     } catch (error) {
       console.error('Помилка:', error);

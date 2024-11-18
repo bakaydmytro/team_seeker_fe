@@ -73,7 +73,6 @@ function Regist() {
       }
     }
   
-  
   const formData = async (e) => {
     e.preventDefault(); // Потрібно завжди викликати preventDefault для уникнення перезавантаження сторінки
 
@@ -90,7 +89,7 @@ function Regist() {
     };
 
     try {
-      const response = await fetch('https://66b65cfab5ae2d11eb66aa31.mockapi.io/items', {
+      const response = await fetch('http://localhost:5001/api/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,8 +103,8 @@ function Regist() {
 
       const result = await response.json();
       console.log('Форма відправлена успішно:', result);
-      const { token } = data;  
-      localStorage.setItem('token', token);
+
+      localStorage.setItem('token', response);
       navigate('/')
     } catch (error) {
       console.error('Помилка:', error);
@@ -201,7 +200,6 @@ function Regist() {
             />
             {confPassDirty && confPassEror && <div className="error">{confPassEror}</div>}
           </div>
-
 
           <div className="login_block">
             <button 
