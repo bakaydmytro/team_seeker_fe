@@ -1,6 +1,6 @@
 import './App.css';
 import Login from './components/Loginn/Login.js'
-import Regist from './components/Regist/Regist'
+import Registration from './components/Registration/Registration'
 import MainPage from './components/MainPage/MainPage';
 import {Routes , Route , Link} from 'react-router-dom'
 
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<MainPage/>}/>
-        <Route path='/regist' element={<Regist/>}/>
+        <Route path='/regist' element={<Registration/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
     </div>

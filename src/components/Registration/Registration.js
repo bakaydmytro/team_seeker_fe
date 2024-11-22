@@ -4,37 +4,37 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Routes , Route , Link} from 'react-router-dom'
 
-function Regist() {
+function Registration() {
   const [userName , setUserName] = useState('')
   const [email , setEmail] = useState('')
-  const [pass , setPass] = useState('')
-  const [confirmPass , setConfirmPass] = useState('')
+  const [password , setPassword] = useState('')
+  const [confirmPassword , setConfirmPassword] = useState('')
 
-  const [userNameDirty , setUserNameDirty] = useState(false)
-  const [emailDirty , setEmailDirty] = useState(false)
-  const [passDirty , setPassDirty] = useState(false)
-  const [confPassDirty , setConfPassDirty] = useState(false)
+  const [userNameValid , setUserNameValid] = useState(false)
+  const [emailValid , setEmailValid] = useState(false)
+  const [passwordValid , setPasswordValid] = useState(false)
+  const [confPasswordValid , setConfPassValid] = useState(false)
 
-  const  [userError , setUserError] = useState('Ім\'я не може бути пустим')
-  const [emailEror , setEmailEror] = useState('Емеїл не може бути пустим')
-  const [passEror , setPassEror] = useState('Пароль не може бути пустим')
-  const  [confPassEror , setConfPassEror] = useState('Пароль не може бути пустим')
+  const  [userError , setUserError] = useState('Name cannot be empty')
+  const [emailError , setemailError] = useState('Email cannot be empty')
+  const [passwordError , setPasswordError] = useState('Password cannot be empty')
+  const  [confPasswordError , setConfPasswordError] = useState('Password cannot be empty')
 
   const [formValid , setFormValid] = useState(false)
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(emailEror || userError || passEror || confPassEror){
+    if(emailError || userError || passwordError || confPasswordError){
       setFormValid(false)
     }else{
       setFormValid(true)
     }
-  } , [emailEror,userError,passEror,confPassEror])
+  } , [emailError,userError,passwordError,confPasswordError])
 
     const userHandler = e =>{
       setUserName(e.target.value)
       if (e.target.value.length < 2 || e.target.value.length > 50) {
-        setUserError('Ім’я повинно бути від 2 до 50 символів');
+        setUserError('The name must be between 2 and 50 characters long');
     } else {
         setUserError('');
     }
@@ -43,47 +43,46 @@ function Regist() {
       setEmail(e.target.value)
       const re =   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       if(!re.test(e.target.value)){
-        setEmailEror('неправильне значення')
+        setemailError('wrong value')
       }
       else{
-        setEmailEror('')
+        setemailError('')
       }
     }
-    const passHandler = e =>{
-      setPass(e.target.value)
+    const passwordHandler = e =>{
+      setPassword(e.target.value)
       const re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
       if(!re.test(e.target.value)){
-        setPassEror('неправильне значення')
+        setPasswordError('wrong value')
       }
       else{
-        setPassEror('')
+        setPasswordError('')
       }
     }
-    const confPassHandler = e =>{
+    const confPasswordHandler = e =>{
       const value = e.target.value;
-      setConfirmPass(value)
+      setConfirmPassword(value)
     
-      if(value !== pass){
-        setConfPassEror('паролі не збігаються')
+      if(value !== password){
+        setConfPasswordError('passwords don\'t match')
       }
       else{
-        setConfPassEror('')
+        setConfPasswordError('')
       }
     }
   
   const formData = async (e) => {
-    e.preventDefault(); // Потрібно завжди викликати preventDefault для уникнення перезавантаження сторінки
+    e.preventDefault(); 
 
-    // Перевірка чи форма валідна перед відправкою
     if (!formValid) {
-      console.log("Форма не пройшла валідацію");
-      return; // Якщо форма не валідна, просто не відправляти
+      console.log("The form did not pass validation.");
+      return; 
     }
 
     const userData = {
       username: userName,
       email: email,
-      password: pass,
+      password: password,
     };
 
     try {
@@ -96,17 +95,17 @@ function Regist() {
       });
 
       if (!response.ok) {
-        throw new Error('Помилка при відправці даних');
+        throw new Error('Error sending data');
       }
 
       const result = await response.json();
-      console.log('Форма відправлена успішно:', result);
+      console.log('Form submitted successfully:', result);
 
       localStorage.setItem('token', response);
       navigate('/')
     } catch (error) {
-      console.error('Помилка:', error);
-      alert('Помилка при відправці форми, спробуйте пізніше');
+      console.error('Error:', error);
+      alert('Error submitting form, please try again later.');
     }
   };
 
@@ -116,16 +115,16 @@ function Regist() {
   const blurHandler = (e) => {
     switch(e.target.name){
       case 'username':
-        setUserNameDirty(true)
+        setUserNameValid(true)
         break
       case 'email':
-        setEmailDirty(true)
+        setEmailValid(true)
         break
       case 'password':
-        setPassDirty(true)
+        setPasswordValid(true)
         break
       case 'confirmPassword':
-        setConfPassDirty(true)
+        setConfPassValid(true)
         break
     }
       
@@ -139,7 +138,7 @@ function Regist() {
         </div>
         <div className={style.have_account}>
           <p>Already have an account? </p>
-          <p><Link className={style.custom_link} to='/1'>Click</Link></p>
+          <p><Link className={style.custom_link} to='/login'>Click</Link></p>
         </div>
         <form onSubmit={formData}>
           <div className={style.input_block}>
@@ -154,9 +153,9 @@ function Regist() {
               onBlur={e => {blurHandler(e)}}
               value={userName}
             />
-            {userNameDirty && userError && <div className={style.error}>{userError}</div>}
+            {userNameValid && userError && <div className={style.error}>{userError}</div>}
           </div>
-          <div className="input_block">
+          <div className={style.input_block}>
             <label>Email</label>
             <input
               name="email"
@@ -168,7 +167,7 @@ function Regist() {
               onChange={e => emailHandler(e)}
               required
             />
-            {emailDirty && emailEror && <div className={style.error}>{emailEror}</div>}
+            {emailValid && emailError && <div className={style.error}>{emailError}</div>}
           </div>
           <div className={style.input_block}>
             <label>Password</label>
@@ -177,12 +176,12 @@ function Regist() {
               placeholder="Password"
               className={style.input}
               type="password"
-              onChange={e =>{passHandler(e)}}
+              onChange={e =>{passwordHandler(e)}}
               onBlur={e => {blurHandler(e)}}
-              value={pass}
+              value={password}
               required
             />
-            {passDirty && passEror && <div className={style.error}>{passEror}</div>}
+            {passwordValid && passwordError && <div className={style.error}>{passwordError}</div>}
           </div>
           <div className={style.input_block}>
             <label>Confirm Password</label>
@@ -192,11 +191,11 @@ function Regist() {
               className={style.input}
               type="password"
               onBlur={e => {blurHandler(e)}}
-              value={confirmPass}
-              onChange={e => {confPassHandler(e)}}
+              value={confirmPassword}
+              onChange={e => {confPasswordHandler(e)}}
               required
             />
-            {confPassDirty && confPassEror && <div className={style.error}>{confPassEror}</div>}
+            {confPasswordValid && confPasswordError && <div className={style.error}>{confPasswordError}</div>}
           </div>
 
           <div className={style.login_block}>
@@ -216,6 +215,6 @@ function Regist() {
   );
 }
 
-export default Regist;
+export default Registration;
 
 
