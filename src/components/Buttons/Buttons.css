@@ -7,8 +7,12 @@
 }
 
 .register-button:hover{
-    background-color: white;
-    color: #08042e;
+    background-color: rgb(255, 255, 255);
+    
+}
+.register-button:hover a{
+    color: #000;
+    
 }
 
 .log-in-button{

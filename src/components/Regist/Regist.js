@@ -1,7 +1,5 @@
 
-import '/Users/max/Desktop/project/src/reset.css';
-import '/Users/max/Desktop/project/src/Components/Loginn/Login.css';
-import Date from '/Users/max/Desktop/project/src/Components/Regist/Date.js';
+import style from '../Loginn/Login.module.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Routes , Route , Link} from 'react-router-dom'
@@ -66,7 +64,7 @@ function Regist() {
       setConfirmPass(value)
     
       if(value !== pass){
-        setConfPassEror('неправильне значення')
+        setConfPassEror('паролі не збігаються')
       }
       else{
         setConfPassEror('')
@@ -134,77 +132,77 @@ function Regist() {
   }
  
   return (
-    <div className="container">
-      <div className="login_wrapper">
-        <div className="title_block">
-          <h1 className="title">Sign Up</h1>
+    <div className={style.container}>
+      <div className={style.login_wrapper}>
+        <div className={style.title_block}>
+          <h1 className={style.title}>Sign Up</h1>
         </div>
-        <div className='have_account'>
+        <div className={style.have_account}>
           <p>Already have an account? </p>
-          <p><Link className='custom_link' to='/'>Click</Link></p>
+          <p><Link className={style.custom_link} to='/1'>Click</Link></p>
         </div>
         <form onSubmit={formData}>
-          <div className="input_block">
+          <div className={style.input_block}>
             <label>User Name</label>
             <input
               name="username"
               placeholder="Username"
-              className="input"
+              className={style.input}
               type="text"
               required
               onChange={e => {userHandler(e)}}
               onBlur={e => {blurHandler(e)}}
               value={userName}
             />
-            {userNameDirty && userError && <div className="error">{userError}</div>}
+            {userNameDirty && userError && <div className={style.error}>{userError}</div>}
           </div>
           <div className="input_block">
             <label>Email</label>
             <input
               name="email"
               placeholder="Email"
-              className="input"
+              className={style.input}
               type="text"
               onBlur={e => {blurHandler(e)}}
               value={email}
               onChange={e => emailHandler(e)}
               required
             />
-            {emailDirty && emailEror && <div className="error">{emailEror}</div>}
+            {emailDirty && emailEror && <div className={style.error}>{emailEror}</div>}
           </div>
-          <div className="input_block">
+          <div className={style.input_block}>
             <label>Password</label>
             <input
               name="password"
               placeholder="Password"
-              className="input"
+              className={style.input}
               type="password"
               onChange={e =>{passHandler(e)}}
               onBlur={e => {blurHandler(e)}}
               value={pass}
               required
             />
-            {passDirty && passEror && <div className="error">{passEror}</div>}
+            {passDirty && passEror && <div className={style.error}>{passEror}</div>}
           </div>
-          <div className="input_block">
+          <div className={style.input_block}>
             <label>Confirm Password</label>
             <input
               name="confirmPassword"
               placeholder="Confirm Password"
-              className="input"
+              className={style.input}
               type="password"
               onBlur={e => {blurHandler(e)}}
               value={confirmPass}
               onChange={e => {confPassHandler(e)}}
               required
             />
-            {confPassDirty && confPassEror && <div className="error">{confPassEror}</div>}
+            {confPassDirty && confPassEror && <div className={style.error}>{confPassEror}</div>}
           </div>
 
-          <div className="login_block">
+          <div className={style.login_block}>
             <button 
             disabled={!formValid} 
-            className="button_login" 
+            className={style.button_login}
             type="submit"
             style={{
               backgroundColor: !formValid ? '#D3D3D3' : '#4CAF50',
