@@ -15,7 +15,7 @@
 
 .container
     padding: 50px 0
-    height: 100vh
+    min-height: 100vh
     overflow: scroll
     background: #08042E
     display: flex
@@ -50,9 +50,10 @@
         form
             display: flex
             flex-direction: column
-            gap: 20px
+            gap: 10px
             .input_block
                 label ,  button
+                    padding-bottom: 5px
                     font: 700 28px 'Roboto'
                     color: #fff
                     display: block
@@ -91,7 +92,7 @@
 
                 
 .error
-    color: #fff
-    font: 400 14px 'Roboto'
+    color: #f50606
+    font: 700 16px 'Roboto'
 .button_login:disabled 
     background: black

@@ -10,8 +10,8 @@ export default function Main() {
     <main>
       <section className="scroll-section">
         <div className="first-main-block block">
-          <span>Find Your Perfect Teammate Today!</span>
-          <p>
+          <span className="span" > Find Your Perfect Teammate Today!</span>
+          <p className="p">
             Join Team Seeker to connect with like-minded individuals who share
             your passion. Start building your dream team effortlessly!
           </p>
@@ -29,8 +29,8 @@ export default function Main() {
           <a>
             <img src={CubeIcon} alt="" />
           </a>
-          <span>Medium length section heading goes here</span>
-          <p>
+          <span className="span">Medium length section heading goes here</span>
+          <p className="p">
             At Team Seeker, we connect you with the ideal teammates to elevate
             your projects. Our user-friendly platform simplifies the search
             process, making collaboration seamless and efficient.

@@ -1,5 +1,6 @@
 import reset from  '../../reset.css'
 import style from './Login.module.css';
+import { Link} from 'react-router-dom'
 
 
 import { useState, useEffect } from 'react';
@@ -12,41 +13,43 @@ function Login() {
   const [emailValid , setEmailValid] = useState(false)
   const [passwordValid , setPasswordValid] = useState(false)
   
-  const [emailEror , setEmailEror] = useState('Email cannot be empty')
-  const [passwordEror , setPasswordEror] = useState('Password cannot be empty')
+  const [emailError , setEmailError] = useState('Email cannot be empty')
+  const [passwordError , setPasswordError] = useState('Password cannot be empty')
 
   const [formValid , setFormValid] = useState(false)
   const navigate = useNavigate();
 
+  const [fetchErrorEmail , setFetchErrorEmail] = useState(false)
+  const [fetchErrorIncorrect , setFetchErrorIncorrect] = useState(false)
 
 
   useEffect(() => {
-    if(emailEror || passwordEror ){
+    if(emailError || passwordError ){
       setFormValid(false)
     }else{
       setFormValid(true)
     }
-  } , [emailEror,passwordEror])
+  } , [emailError,passwordError])
 
     
     const emailHandler = e =>{
       setEmail(e.target.value)
       const re =   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
       if(!re.test(e.target.value)){
-        setEmailEror('wrong value')
+        setEmailError('wrong value')
       }
       else{
-        setEmailEror('')
+        setEmailError('')
       }
     }
     const passwordHandler = e =>{
       setPassword(e.target.value)
       const re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
       if(!re.test(e.target.value)){
-        setPasswordEror('wrong value')
+        setPasswordError('wrong value')
       }
       else{
-        setPasswordEror('')
+        setPasswordError('')
       }
     }
   
@@ -62,11 +65,11 @@ function Login() {
 
     const userData = {
       email: email,
-      passwordword: password,
+      password: password,
     };
-
+    let response;
     try {
-      const response = await fetch('http://localhost:5001/api/users/login', {
+        response = await fetch('http://localhost:5001/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,13 +82,20 @@ function Login() {
       }
 
       const result = await response.json();
-      console.log('Form submitted successfully:', result);
-      
-      localStorage.setItem('token', response);
+      localStorage.setItem('token', response.token);
+      console.log(response.status)
+      setFetchErrorEmail(false)
+      setFetchErrorIncorrect(false)
       navigate('/')
     } catch (error) {
+      if(response.status == 404){
+        setFetchErrorEmail(true)
+      }
+      if(response.status == 400){
+        setFetchErrorIncorrect(true)
+      }
+      console.log(response.status)
       console.error('Error:', error);
-      alert('Error submitting form, please try again later.');
     }
   };
 
@@ -109,8 +119,12 @@ function Login() {
         <div className={style.title_block}>
           <h1 className={style.title}>Log in</h1>
         </div>
+        <div className={style.have_account}>
+          <p>Don't have an account yet? </p>
+          <p><Link className={style.custom_link} to='/registration'>Click</Link></p>
+        </div>
         <form onSubmit={formData}>
-          <div className={style.input_block}>
+          <div  style={{marginBottom: 10 + 'px'}} className={style.input_block}>
             <label>Email</label>
             <input
               name="email"
@@ -122,9 +136,9 @@ function Login() {
               onChange={e => emailHandler(e)}
               required
             />
-            {emailValid && emailEror && <div className={style.error}>{emailEror}</div>}
+            {emailValid && emailError && <div className={style.error}>{emailError}</div>}
           </div>
-          <div className={style.input_block}>
+          <div  style={{marginBottom: 10 + 'px'}} className={style.input_block}>
             <label>Password</label>
             <input
               name="password"
@@ -136,10 +150,10 @@ function Login() {
               value={password}            
               required
             />
-            {passwordValid && passwordEror && <div className={style.error}>{passwordEror}</div>}
+            {passwordValid && passwordError && <div className={style.error}>{passwordError}</div>}
           </div>
           
-          <div className={style.login_block}>
+          <div style={{marginBottom: 10 + 'px'}} className={style.login_block}>
           <button 
             disabled={!formValid} 
             className={style.button_login} 
@@ -149,7 +163,10 @@ function Login() {
               cursor: !formValid ? 'not-allowed' : 'pointer', 
               opacity: !formValid ? 0.6 : 1, 
             }}>Sign Up</button>
+            {fetchErrorEmail && <div style={{paddingTop: 10 + 'px'}} className={style.error}>This user email is already taken. Try another one.</div>}
+            {fetchErrorIncorrect && <div style={{paddingTop: 10 + 'px'}} className={style.error}>Incorrect login or password</div>}
           </div>
+
         </form>
       </div>
     </div>

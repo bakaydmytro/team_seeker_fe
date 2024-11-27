@@ -1,14 +1,18 @@
 
 import style from '../Loginn/Login.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Routes , Route , Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
+import Date from './Date'
 
 function Registration() {
   const [userName , setUserName] = useState('')
   const [email , setEmail] = useState('')
   const [password , setPassword] = useState('')
   const [confirmPassword , setConfirmPassword] = useState('')
+  const [birthday , setBirthday] = useState(null)
+
+  const [fetchEror , setFetchError] = useState(false)
 
   const [userNameValid , setUserNameValid] = useState(false)
   const [emailValid , setEmailValid] = useState(false)
@@ -19,17 +23,24 @@ function Registration() {
   const [emailError , setemailError] = useState('Email cannot be empty')
   const [passwordError , setPasswordError] = useState('Password cannot be empty')
   const  [confPasswordError , setConfPasswordError] = useState('Password cannot be empty')
+  const [birthdayError , setBirthdayError] = useState('Date cannot be empty')
 
+  const handleDateChange = useCallback((date) => {
+    setBirthday(date);
+    console.log(date)
+  }, []);
   const [formValid , setFormValid] = useState(false)
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(emailError || userError || passwordError || confPasswordError){
+    if(emailError || userError || passwordError || confPasswordError||birthdayError){
       setFormValid(false)
     }else{
       setFormValid(true)
     }
-  } , [emailError,userError,passwordError,confPasswordError])
+  } , [emailError,userError,passwordError,confPasswordError||birthdayError])
+
+  
 
     const userHandler = e =>{
       setUserName(e.target.value)
@@ -43,7 +54,7 @@ function Registration() {
       setEmail(e.target.value)
       const re =   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       if(!re.test(e.target.value)){
-        setemailError('wrong value')
+        setemailError('Invalid email')
       }
       else{
         setemailError('')
@@ -53,11 +64,12 @@ function Registration() {
       setPassword(e.target.value)
       const re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
       if(!re.test(e.target.value)){
-        setPasswordError('wrong value')
+        setPasswordError('The password must be at least 8 characters long, one uppercase letter and one symbol.')
       }
       else{
         setPasswordError('')
       }
+
     }
     const confPasswordHandler = e =>{
       const value = e.target.value;
@@ -70,7 +82,9 @@ function Registration() {
         setConfPasswordError('')
       }
     }
-  
+    
+    
+    
   const formData = async (e) => {
     e.preventDefault(); 
 
@@ -83,7 +97,9 @@ function Registration() {
       username: userName,
       email: email,
       password: password,
+      birthday: birthday ? birthday.toISOString() : null, 
     };
+    console.log(userData)
 
     try {
       const response = await fetch('http://localhost:5001/api/users/signup', {
@@ -97,21 +113,17 @@ function Registration() {
       if (!response.ok) {
         throw new Error('Error sending data');
       }
-
+      setFetchError(false)
       const result = await response.json();
       console.log('Form submitted successfully:', result);
-
-      localStorage.setItem('token', response);
+      localStorage.setItem('token', result.token);
       navigate('/')
     } catch (error) {
+      setFetchError(true)
       console.error('Error:', error);
-      alert('Error submitting form, please try again later.');
+      
     }
   };
-
-  
-
-  
   const blurHandler = (e) => {
     switch(e.target.name){
       case 'username':
@@ -132,6 +144,7 @@ function Registration() {
  
   return (
     <div className={style.container}>
+       <br />
       <div className={style.login_wrapper}>
         <div className={style.title_block}>
           <h1 className={style.title}>Sign Up</h1>
@@ -197,7 +210,10 @@ function Registration() {
             />
             {confPasswordValid && confPasswordError && <div className={style.error}>{confPasswordError}</div>}
           </div>
-
+          <div className={style.input_block}>
+            <label>Date</label>
+            <Date  onDateChange={handleDateChange}  BitdayError={setBirthdayError} />
+          </div>
           <div className={style.login_block}>
             <button 
             disabled={!formValid} 
@@ -208,6 +224,7 @@ function Registration() {
               cursor: !formValid ? 'not-allowed' : 'pointer', 
               opacity: !formValid ? 0.6 : 1, 
             }}>Sign Up</button>
+            {fetchEror && <div style={{paddingTop: 10 + 'px'}} className={style.error}>This user email is already taken. Try another one.</div>}
           </div>
         </form>
       </div>
