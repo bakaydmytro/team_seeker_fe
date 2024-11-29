@@ -1,18 +1,18 @@
 import './App.css';
-import Header from './components/MainPage/Header/Header'
-import Main from './components/MainPage/Main/Main'
-import Footer from './components/MainPage/Footer/Footer'
+import Login from './components/Loginn/Login.js'
+import Registration from './components/Registration/Registration'
+import MainPage from './components/MainPage/MainPage';
+import {Routes , Route , Link} from 'react-router-dom'
 
 
 function App() {
   return (
-    <div>
-      <div className="container">
-      <Header/>
-      <Main/>
-      <Footer/>
-      </div>
-      
+    <div className="App">
+      <Routes>
+        <Route path='/' element={<MainPage/>}/>
+        <Route path='/registration' element={<Registration/>}/>
+        <Route path='/login' element={<Login/>}/>
+      </Routes>
     </div>
   );
 }
