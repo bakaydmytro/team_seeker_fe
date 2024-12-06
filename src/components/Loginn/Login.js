@@ -82,7 +82,7 @@ function Login() {
       }
 
       const result = await response.json();
-      localStorage.setItem('token', response.token);
+      localStorage.setItem('token', result.token);
       console.log(response.status)
       setFetchErrorEmail(false)
       setFetchErrorIncorrect(false)
