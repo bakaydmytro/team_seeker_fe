@@ -2,6 +2,7 @@ import './App.css';
 import Login from './components/Loginn/Login.js'
 import Registration from './components/Registration/Registration'
 import MainPage from './components/MainPage/MainPage';
+import ChooseGamePage from './components/ChooseGamePage/ChooseGamePage.js';
 import {Routes , Route , Link} from 'react-router-dom'
 
 
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<MainPage/>}/>
+        <Route path='/ChooseGamePage' element={<ChooseGamePage/>}/>
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>

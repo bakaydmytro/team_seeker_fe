@@ -14,7 +14,6 @@ const images = {
   myImage5,
   myImage6,
 };
- let stop = 1;
 
 export default function ScrollPhotos() {
   return (
@@ -27,7 +26,7 @@ export default function ScrollPhotos() {
                 key={index}
                 src={imgSrc}
                 alt={`Image ${index + 1}`}
-                className={`main-img ${index + 1}`}
+                className={`main-img ${index + 1} , main-img`}
               />
             )
         )}

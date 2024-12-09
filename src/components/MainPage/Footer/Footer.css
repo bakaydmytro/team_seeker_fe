@@ -36,6 +36,8 @@ footer > img {
 .footer-links {
   text-decoration: none;
   cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
 }
 
 .footer-links:hover {
