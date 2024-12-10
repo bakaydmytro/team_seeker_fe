@@ -23,7 +23,7 @@ export default function Menu() {
                 <div className="profile-icon">
                     <img src={ProfileIcon} alt="Profile" />
                     <p className="user-name">User name</p></div>
-                <Link to="/edit-profile" className="menu-item">
+                <Link to="/ProfilePage" className="menu-item">
                     Edit profile
                 </Link>
                 <Link to="/link-steam" className="menu-item link-steam">
