@@ -1,45 +1,21 @@
-
-import {Routes , Route , Link,useNavigate} from 'react-router-dom'
-import axios from 'axios';
-import { useEffect } from 'react';
-
-const setupAxiosInterceptors = (navigate) => {
-  axios.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (error) => {
-      const token = localStorage.getItem('token');
-      if (!token || error.response.status === 401) {
-        localStorage.removeItem('token');
-        navigate('/login');
-      }
-      return Promise.reject(error);
-    }
-  );
-};
+import React from 'react';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { initializeAxios } from './axiosService.js'; 
 
 function AxiosInterceptors() {
-
   const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
-    setupAxiosInterceptors(navigate);
-    const token = localStorage.getItem('token');
-    if(!token){
-      navigate('/login')
-    }
+  initializeAxios(navigate);
 
-  }, []);
-  return (
-    <div >
+  const token = localStorage.getItem('token');
 
-    </div>
-  );
+  if (!token && location.pathname !== '/login' && location.pathname !== '/registration') {
+    return <Navigate to="/login" replace />;
+
+  }
+
+  return null;
 }
 
 export default AxiosInterceptors;

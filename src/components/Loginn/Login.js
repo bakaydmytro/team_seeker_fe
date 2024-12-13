@@ -36,7 +36,7 @@ function Login() {
       setEmail(e.target.value)
       const re =   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
       if(!re.test(e.target.value)){
-        setEmailError('wrong value')
+        setEmailError('Invalid email')
       }
       else{
         setEmailError('')
@@ -44,9 +44,9 @@ function Login() {
     }
     const passwordHandler = e =>{
       setPassword(e.target.value)
-      const re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
+      const re =  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
       if(!re.test(e.target.value)){
-        setPasswordError('wrong value')
+        setPasswordError('The password must be at least 8 characters long, one uppercase letter and one symbol.')
       }
       else{
         setPasswordError('')
