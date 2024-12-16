@@ -10,7 +10,7 @@
     background-color: rgb(255, 255, 255);
     
 }
-.register-button:hover a{
+.Link .register-button:hover {
     color: #000;
     
 }
@@ -23,7 +23,7 @@
     cursor:pointer;
 }
 
-.log-in-button:hover{
+.Link .log-in-button:hover{
     background-color: #c32121;
     color: #08042e;
 }

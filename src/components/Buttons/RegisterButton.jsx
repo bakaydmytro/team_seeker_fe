@@ -3,6 +3,6 @@ import {Link} from 'react-router-dom'
 
 export default function RegisterButton(){
     return(
-        <button className="register-button"><Link to='registration'>Sing Up</Link></button>
+        <Link className='Link' to='registration'><button className="register-button">Sing Up</button></Link>
     )
 }
