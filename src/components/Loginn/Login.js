@@ -82,21 +82,25 @@ function Login() {
       }
 
       const result = await response.json();
+      console.log(result)
       localStorage.setItem('token', result.token);
       console.log(response.status)
       setFetchErrorEmail(false)
       setFetchErrorIncorrect(false)
       navigate('/')
-    } catch (error) {
+    } 
+    catch (error) {
       if(response.status == 404){
         setFetchErrorEmail(true)
+        setFetchErrorIncorrect(false)
       }
       if(response.status == 400){
         setFetchErrorIncorrect(true)
+        setFetchErrorEmail(false)
       }
       console.log(response.status)
       console.error('Error:', error);
-    }
+     }
   };
 
   
@@ -159,11 +163,11 @@ function Login() {
             className={style.button_login} 
             type="submit"
             style={{
-              backgroundColor: !formValid ? '#D3D3D3' : '#4CAF50',
+              backgroundColor: !formValid ? '#D3D3D3' : '#BA1F33',
               cursor: !formValid ? 'not-allowed' : 'pointer', 
               opacity: !formValid ? 0.6 : 1, 
-            }}>Sign Up</button>
-            {fetchErrorEmail && <div style={{paddingTop: 10 + 'px'}} className={style.error}>This user email is already taken. Try another one.</div>}
+            }}>Log in</button>
+            {fetchErrorEmail && <div style={{paddingTop: 10 + 'px'}} className={style.error}>Users not found</div>}
             {fetchErrorIncorrect && <div style={{paddingTop: 10 + 'px'}} className={style.error}>Incorrect login or password</div>}
           </div>
 
