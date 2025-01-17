@@ -62,7 +62,7 @@ function Registration() {
     }
     const passwordHandler = e =>{
       setPassword(e.target.value)
-      const re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
+      const re =  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
       if(!re.test(e.target.value)){
         setPasswordError('The password must be at least 8 characters long, one uppercase letter and one symbol.')
       }
