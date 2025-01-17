@@ -1,6 +1,7 @@
 import "./Main.css";
+import { Button } from "antd";
+import {Link} from 'react-router-dom'
 import RegisterButton from "../../Buttons/RegisterButton";
-import LearnMoreButton from "../../Buttons/LearnMoreButton";
 import ScrollPhotos from "../Items/ScrollPhotos";
 import QueteBlock from "../Items/QuoteBlock";
 import QuoteLogo from "../../../img/icons/gamepad-solid.svg"
@@ -17,7 +18,7 @@ export default function Main() {
           </p>
           <div className="button-block">
             <RegisterButton />
-            <LearnMoreButton />
+            <Link to='ChooseGamePage'><Button className="learn-more-button " >Learn More</Button></Link>
           </div>
         </div>
         <div className="second-main-block">

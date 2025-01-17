@@ -43,13 +43,14 @@ button{
     height: 45px;
     background-color: #ba1f33;
     border: 1px solid #ba1f33;
-    cursor:pointer;
+    border-radius:0 !important; 
+    cursor:pointer; 
 }
 
-.learn-more-button:hover{
-    background-color: #c32121;
-    border-color: #c32121;
-    color: #08042e;
+.ant-btn.learn-more-button:hover{
+    background-color: #c32121 !important;
+    border-color: #c32121 !important;
+    color: #08042e !important;
 }
 
 /* More Info Button */
@@ -161,8 +162,9 @@ button{
 
   .apply-button{
     background-color: #c32121;
+    border: 1px solid #ba1f33;
     color: white;
-    border-radius: 12px;
+    border-radius: 10px;
     width: 70px;
     height: 50px;
     cursor: pointer;
@@ -178,6 +180,7 @@ button{
 
   .steam-button{
     background-color: #c32121;
+    border: 1px solid #ba1f33;
     color: white;
     display: flex;align-items: center;
     justify-content: center;

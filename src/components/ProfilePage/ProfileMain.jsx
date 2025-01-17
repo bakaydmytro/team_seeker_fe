@@ -1,11 +1,12 @@
-import './ProfilePage.css';
-import SteamButton from '../Buttons/SteamButton';
-
+import './ProfilePage.css'
+import { Button } from "antd";
+import { Link } from 'react-router-dom'
 import ProfileIcon from '../../img/icons/image 18.svg';
 import CancelIcon from '../../img/icons/CancelIcon.svg';
 import OkIcon from '../../img/icons/OkIcon.svg';
 import RenameIcon from '../../img/icons/RenameIcon.svg';
-import ApplyButton from '../Buttons/ApplyButton';
+import { ReactComponent as SteamIcon } from '../../img/icons/Vector.svg';
+
 
 export default function ProfileMain() {
     return (
@@ -39,7 +40,7 @@ export default function ProfileMain() {
                                 placeholder="Email"
                                 className="input"
                             />
-                            <ApplyButton />
+                            <Button className='apply-button'>Apply</Button>
                         </form>
                     </div>
 
@@ -53,17 +54,17 @@ export default function ProfileMain() {
                         </div>
                         <form className='change-profile-form'>
                             <h5>enter your new password :</h5>
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            className="input"
-                        />
-                        <ApplyButton />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                className="input"
+                            />
+                            <Button className='apply-button'>Apply</Button>
                         </form>
                     </div>
                     <div className="form-block">
                         <h2>Link your Steam account:</h2>
-                            <SteamButton/>
+                        <Button className='steam-button' icon={<SteamIcon />}>Log in</Button>
                     </div>
                 </aside>
             </section>

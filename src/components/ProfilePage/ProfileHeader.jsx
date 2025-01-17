@@ -1,12 +1,13 @@
 import './ProfilePage.css';
-import CancelButton from '../Buttons/CancelButton';
+import { Button } from "antd";
+import { Link } from 'react-router-dom'
 
 export default function Header(){
     return(
         <header>
             <a className='logo' href="/">Team Seeker</a>
             <div className="button-block">
-                <CancelButton/>
+                <Link to='/ChooseGamePage'><Button className="learn-more-button" >X Cancel</Button></Link>
             </div>
         </header>
     )
