@@ -10,55 +10,55 @@ import React from 'react';
 
 
 function App() {
-  const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5001/api/users/me',
-});
+//   const axiosInstance = axios.create({
+//     baseURL: 'http://localhost:5001/api/users/me',
+// });
 
-const navigate = useNavigate()
-const location = useLocation()
-React.useEffect ( ()=>{
-  axiosInstance.interceptors.request.use(
-    function (config) {
-        const token = localStorage.getItem('token');
-        console.log('Intercepting request:', config); // Додано лог
-        if (token) {
-            console.log('Token added to headers:', token); // Лог для токена
-            config.headers['Authorization'] = `Bearer ${token}`;
-        }
-        return config;
-    },
-    function (error) {
-        console.error('Request error:', error.message); // Лог помилки
-        navigate('/login');
-        return Promise.reject(error);
-    }
-  );
+// const navigate = useNavigate()
+// const location = useLocation()
+// React.useEffect ( ()=>{
+//   axiosInstance.interceptors.request.use(
+//     function (config) {
+//         const token = localStorage.getItem('token');
+//         console.log('Intercepting request:', config); // Додано лог
+//         if (token) {
+//             console.log('Token added to headers:', token); // Лог для токена
+//             config.headers['Authorization'] = `Bearer ${token}`;
+//         }
+//         return config;
+//     },
+//     function (error) {
+//         console.error('Request error:', error.message); // Лог помилки
+//         navigate('/login');
+//         return Promise.reject(error);
+//     }
+//   );
 
-  axiosInstance.interceptors.response.use(
-    function (response) {
-      // Якщо відповідь успішна, просто повертаємо її
-      return response;
-    },
-    function (error) {
-      // Обробка помилок відповіді
-      console.error('Response error:', error.response?.status, error.message);
-      if (error.response?.status === 401) {
-        navigate('/login'); // Перенаправлення на сторінку логіну
-        localStorage.removeItem('token')
-      }
-      return Promise.reject(error);
-    }
-  );
+//   axiosInstance.interceptors.response.use(
+//     function (response) {
+//       // Якщо відповідь успішна, просто повертаємо її
+//       return response;
+//     },
+//     function (error) {
+//       // Обробка помилок відповіді
+//       console.error('Response error:', error.response?.status, error.message);
+//       if (error.response?.status === 401) {
+//         navigate('/login'); // Перенаправлення на сторінку логіну
+//         localStorage.removeItem('token')
+//       }
+//       return Promise.reject(error);
+//     }
+//   );
 
-  axiosInstance.get('')
-  .then(response => {
-    console.log('API call successful', response);
-  })
-  .catch(error => {
-    console.error('API call failed', error);
-  });
+//   axiosInstance.get('')
+//   .then(response => {
+//     console.log('API call successful', response);
+//   })
+//   .catch(error => {
+//     console.error('API call failed', error);
+//   });
   
-},[navigate])
+// },[navigate])
 
   return (
     <div className="App">
