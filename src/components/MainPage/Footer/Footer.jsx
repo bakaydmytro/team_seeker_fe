@@ -10,7 +10,7 @@ export default function Footer() {
     <footer>
       <section className="footer-container">
         <div className="first-footer-block">
-          <a className="logo">Team Seeker</a>
+          <a className="logo" href="/">Team Seeker</a>
           <div className="top-footer-block">
             <a className="footer-links">About Us</a>
             <a className="footer-links">Contact Support</a>
