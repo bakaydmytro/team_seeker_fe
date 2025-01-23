@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  
   const [email , setEmail] = useState('')
   const [password , setPassword] = useState('')
   
@@ -87,7 +88,7 @@ function Login() {
       console.log(response.status)
       setFetchErrorEmail(false)
       setFetchErrorIncorrect(false)
-      navigate('/')
+      navigate('/ChooseGamePage')
     } 
     catch (error) {
       if(response.status == 404){

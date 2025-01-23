@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5001/api/users/me',
+  baseURL: 'http://localhost:5001/api/users',
 });
 
 // Додаємо інтерцептори
@@ -19,7 +19,7 @@ export const setupAxiosInterceptors = (navigate) => {
     },
     (error) => {
       console.error('Request error:', error.message);
-      navigate('/login');
+      navigate('/');
       return Promise.reject(error);
     }
   );
@@ -29,7 +29,7 @@ export const setupAxiosInterceptors = (navigate) => {
     (error) => {
       console.error('Response error:', error.response?.status, error.message);
       if (error.response?.status === 401) {
-        navigate('/login');
+        navigate('/');
         localStorage.removeItem('token');
       }
       return Promise.reject(error);

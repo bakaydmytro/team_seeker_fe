@@ -133,7 +133,7 @@ function Registration() {
       const result = await response.json();
       console.log('Form submitted successfully:', result);
       localStorage.setItem('token', result.token);
-      navigate('/')
+      navigate('/ChooseGamePage')
     } catch (error) {
       setFetchError(true)
       console.error('Error:', error);

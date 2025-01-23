@@ -7,12 +7,10 @@ import ChooseGamePage from './components/ChooseGamePage/ChooseGamePage.js';
 import ProfilePage from './components/ProfilePage/ProfilePage.js';
 import {Routes , Route , Link} from 'react-router-dom'
 
-// import {Routes , Route , Link,useNavigate} from 'react-router-dom'
-// import AxiosInterceptors from './service/AxiosInterceptors.js';
-
-
+import React from 'react';
 
 function App() {
+  
 //   const axiosInstance = axios.create({
 //     baseURL: 'http://localhost:5001/api/users/me',
 // });
