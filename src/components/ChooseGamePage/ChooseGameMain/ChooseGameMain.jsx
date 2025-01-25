@@ -7,6 +7,8 @@ import TeamBrn from '../../../img/TEAM BTN.png';
 
 
 export default function () {
+
+    
     return (
         <section className="ChooseGame-section">
             <div className='container ChooseGame-container'>

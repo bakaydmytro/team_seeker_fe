@@ -123,6 +123,7 @@ button{
   .profile-icon {
     margin-bottom: 20px;
     display: flex;
+    flex-direction: column;
     gap: 6px;
     align-items: center;
     border-bottom:1px solid #ba1f33 ;

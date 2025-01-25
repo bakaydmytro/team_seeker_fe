@@ -114,3 +114,25 @@
 .cancel-icon{
     display: none;
 }
+
+.inputText::placeholder{
+    color: #fff;
+    
+    outline: none;
+    
+}
+.inputText{
+    color: #fff;
+    background: none;
+    width: 100%;
+    outline: none;
+}
+.name-button{
+    background: none;
+    border: none;
+}
+
+.error__color{
+    color: #c32121;
+    font-weight: 800;
+}

@@ -5,16 +5,14 @@ export const getUserData = () => {
 };
 
 
-
-export const changePassword = async (id,password) => {
-  return  axiosInstance.post( "/:id", {
-      id: id,
-      password: password,
-  }).then((response) => {
-      return response.data
-  });
+export const updateUserDataField = async (field, value, id) => {
+  try {
+    const response = await axiosInstance.put(`/${id}`, { [field]: value });
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to update user ${field}:`, error);
+    throw error;
+  }
 };
 
-export const changeEmail = () => {
-  return axiosInstance.post('/:id');
-};
+
