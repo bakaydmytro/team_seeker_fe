@@ -1,0 +1,138 @@
+.profile-container{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+}
+
+.profile-section{
+    display: flex;
+    align-items: center;
+    gap: 20%;
+    width: 100%;
+}
+
+.profile-container > h1{
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 54px;
+}
+
+.left-side-profile-block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-form{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    cursor: pointer;
+    border-radius:100% ;
+}
+
+.change-profile-img{
+    background-color: #ba1f33;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    position: relative;
+    right: 50px;
+}
+
+.profile-img{
+    width: 300px;
+}
+
+.rename{
+    display: flex;
+    gap: 15px;
+    width: 160px;
+    border-bottom: 1px solid white;
+    justify-content: center;
+}
+
+.rename-btn{
+    cursor: pointer;
+}
+
+.right-side-profile-block{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.form-block > h2{
+    margin-bottom: 10px;
+}
+
+.form-head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.change-profile-form{
+    background-color: #0B053B;
+    padding: 10px;
+}
+
+.change-profile-form > input {
+    border: 2px solid white;
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 350px;
+    color: white;
+    height: 50px;
+}
+
+.input::placeholder {
+    color: white; 
+    opacity: 0.8; 
+}
+
+.success-icon{
+    display: none;
+}
+
+.cancel-icon{
+    display: none;
+}
+
+.inputText::placeholder{
+    color: #fff;
+    
+    outline: none;
+    
+}
+.inputText{
+    color: #fff;
+    background: none;
+    width: 100%;
+    outline: none;
+}
+.name-button{
+    background: none;
+    border: none;
+}
+
+.error__color{
+    color: #c32121;
+    font-weight: 800;
+}

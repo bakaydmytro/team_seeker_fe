@@ -1,8 +1,8 @@
 .scroll-photo{
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
     width: 100%;
-    gap: 20px;
     
 }
 
@@ -14,14 +14,14 @@
     animation-duration: -0.3s;
 }
 
-.scroll-photo> img {
-    width: 100%;
-}
 
 .scroll-photo-block2{
     animation: 9s linear infinite running scrollUp;
 }
 
+.main-img{
+    width: 90%;
+}
 
 @keyframes scrollUp {
     0% {

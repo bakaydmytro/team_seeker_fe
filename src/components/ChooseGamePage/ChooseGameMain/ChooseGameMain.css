@@ -1,0 +1,39 @@
+.ChooseGame-section{
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.ChooseGame-block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.ChooseGame-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    gap: 40px;
+}
+
+.Choose-btn {
+    cursor: pointer;
+}
+
+.Choose-btn > img {
+    max-width: 450px;
+}
+
+.ChooseGame-container > p{
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 54px;
+}
+
+.Choose-btn > img:hover{
+    opacity: 60%;
+}

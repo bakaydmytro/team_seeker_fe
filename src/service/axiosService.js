@@ -1,27 +1,40 @@
+// services/axiosService.js
 import axios from 'axios';
 
-const setupAxiosInterceptors = (navigate) => {
-  axios.interceptors.request.use(
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:5001/api/users',
+});
+
+// Додаємо інтерцептори
+export const setupAxiosInterceptors = (navigate) => {
+  axiosInstance.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem('token');
+      console.log('Intercepting request:', config);
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        console.log('Token added to headers:', token);
+        config.headers['Authorization'] = `Bearer ${token}`;
       }
       return config;
     },
     (error) => {
-      const token = localStorage.getItem('token');
-      if (!token || error.response.status === 401) {
+      console.error('Request error:', error.message);
+      navigate('/');
+      return Promise.reject(error);
+    }
+  );
+
+  axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      console.error('Response error:', error.response?.status, error.message);
+      if (error.response?.status === 401) {
+        navigate('/');
         localStorage.removeItem('token');
-        navigate('/registration');
       }
       return Promise.reject(error);
     }
   );
 };
 
-const initializeAxios = (navigate) => {
-  setupAxiosInterceptors(navigate);
-};
-
-export { initializeAxios };
+export default axiosInstance;

@@ -60,28 +60,44 @@ function Registration() {
         setemailError('')
       }
     }
-    const passwordHandler = e =>{
-      setPassword(e.target.value)
-      const re =  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/
-      if(!re.test(e.target.value)){
-        setPasswordError('The password must be at least 8 characters long, one uppercase letter and one symbol.')
-      }
-      else{
-        setPasswordError('')
-      }
-
-    }
-    const confPasswordHandler = e =>{
-      const value = e.target.value;
-      setConfirmPassword(value)
     
-      if(value !== password){
-        setConfPasswordError('passwords don\'t match')
+    const validatePassword = (password) => {
+      const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+      return re.test(password);
+    };
+    
+    const passwordHandler = (e) => {
+      const value = e.target.value;
+      setPassword(value);
+    
+      if (!validatePassword(value)) {
+        setPasswordError(
+          "The password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special symbol."
+        );
+      } else {
+        setPasswordError("");
       }
-      else{
-        setConfPasswordError('')
+    
+      if (confirmPassword) {
+        if (value !== confirmPassword) {
+          setConfPasswordError("Passwords don't match.");
+        } else {
+          setConfPasswordError("");
+        }
       }
-    }
+    };
+    
+    const confPasswordHandler = (e) => {
+      const value = e.target.value;
+      setConfirmPassword(value);
+    
+      if (value !== password) {
+        setConfPasswordError("Passwords don't match.");
+      } else {
+        setConfPasswordError("");
+      }
+    };
+    
     
     
     
@@ -117,7 +133,7 @@ function Registration() {
       const result = await response.json();
       console.log('Form submitted successfully:', result);
       localStorage.setItem('token', result.token);
-      navigate('/')
+      navigate('/ChooseGamePage')
     } catch (error) {
       setFetchError(true)
       console.error('Error:', error);
@@ -220,7 +236,7 @@ function Registration() {
             className={style.button_login}
             type="submit"
             style={{
-              backgroundColor: !formValid ? '#D3D3D3' : '#4CAF50',
+              backgroundColor: !formValid ? '#D3D3D3' : '#BA1F33',
               cursor: !formValid ? 'not-allowed' : 'pointer', 
               opacity: !formValid ? 0.6 : 1, 
             }}>Sign Up</button>
