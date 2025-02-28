@@ -1,0 +1,133 @@
+/* Header */
+
+.back-button{
+    border-radius: 10px !important; 
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+/* Main */
+
+.search-section {
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
+.title {
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 54px;
+}
+
+.search-block{
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.player-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.search-input {
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ba1f33;
+    color: white;
+    outline: none;
+}
+input::placeholder {
+    color: white;
+  }
+
+.player-info-block {
+    display: flex;
+    align-items: center;
+    background-color: #12053f;
+    border: 1px solid white;
+    padding: 20px;
+    margin: 10px 0px 10px 0;
+    width: 100%;
+    height: 95px;
+    justify-content: space-between;
+}
+
+.player-avatar {
+    position: relative;
+}
+
+.player-avatar img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.player-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #12053f;
+}
+
+.status-indicator.online {
+    background-color: green;
+}
+
+.status-indicator.sleep {
+    background-color: orange;
+}
+
+.status-indicator.offline {
+    background-color: gray;
+}
+
+.player-name {
+    color: white;
+    font-weight: bold;
+}
+
+.player-hours, .player-status {
+    color: lightgray;
+    font-size: 14px;
+}
+
+.chat-button {
+    background-color: #ba1f33;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.show-more-button {
+    background-color: #ba1f33;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}

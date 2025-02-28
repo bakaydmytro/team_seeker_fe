@@ -13,5 +13,5 @@ export default function Header(){
                 <MoreInfoButton />
             </div>
         </header>
-    )
+    );
 }
