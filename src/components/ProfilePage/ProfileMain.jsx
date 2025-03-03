@@ -43,6 +43,7 @@ const handleChange = async (e, field, value, setValue) => {
     e.preventDefault();
     try {
       const userDataResponse = await getUserData();
+      console.log(userDataResponse)
       const userId = userDataResponse.data.id;
   
       const updateResponse = await updateUserDataField(field, value, userId)
@@ -117,10 +118,12 @@ const handleChange = async (e, field, value, setValue) => {
         }
           
       }
+      
+      
 
     return (
         <div className='container profile-container'>
-            <h1>Edit profile</h1>
+            <h1 >Edit profile</h1>
             <section className="profile-section">
                 <aside className="left-side-profile-block">
                     <form className='image-form'>
@@ -195,7 +198,7 @@ const handleChange = async (e, field, value, setValue) => {
                     </div>
                     <div className="form-block">
                         <h2>Link your Steam account:</h2>
-                        <Button className='steam-button' icon={<SteamIcon />}>Log in</Button>
+                        <Button  className='steam-button' icon={<SteamIcon />}>Log in</Button>
                     </div>
                 </aside>
             </section>

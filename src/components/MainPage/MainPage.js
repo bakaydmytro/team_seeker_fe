@@ -4,7 +4,7 @@ import Footer from './Footer/Footer'
 import {Routes , Route , Link} from 'react-router-dom'
 
 import { useNavigate, useLocation } from 'react-router-dom';
-import axiosInstance, { setupAxiosInterceptors } from '../../service/axiosService';
+import { setupAxiosInterceptors } from '../../service/axiosService';
 import { getUserData } from '../../service/apiService';
 import React from 'react';
 
@@ -13,7 +13,7 @@ function MainPage() {
   const location = useLocation();
 
   React.useEffect(() => {
-    setupAxiosInterceptors(navigate); // Ініціалізація інтерцепторів
+    setupAxiosInterceptors(navigate); 
 
     getUserData()
       .then((response) => {

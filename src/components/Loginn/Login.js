@@ -84,6 +84,7 @@ function Login() {
 
       const result = await response.json();
       console.log(result)
+      console.log(result.token)
       localStorage.setItem('token', result.token);
       console.log(response.status)
       setFetchErrorEmail(false)
@@ -116,6 +117,22 @@ function Login() {
     }
       
   }
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    if (token) {
+      localStorage.setItem("token", token);
+      window.history.replaceState(null, "", window.location.pathname);
+      navigate("/ProfilePage"); 
+    }
+  }, [navigate]);
+
+
+  const handleSteamLogin = () => {
+    window.location.href = "http://localhost:5001/api/users/steam";
+  };
      
 
   return (
@@ -171,6 +188,20 @@ function Login() {
             {fetchErrorEmail && <div style={{paddingTop: 10 + 'px'}} className={style.error}>Users not found</div>}
             {fetchErrorIncorrect && <div style={{paddingTop: 10 + 'px'}} className={style.error}>Incorrect login or password</div>}
           </div>
+          <div style={{marginBottom: 10 + 'px'}} className={style.login_block}>
+          <button 
+            onClick={()=>handleSteamLogin()}
+            className={style.button_login} 
+            type="submit"
+            style={{
+              backgroundColor: '#BA1F33',
+              cursor: 'pointer', 
+              opacity: 1, 
+            }}>Steam Login</button>
+            {fetchErrorEmail && <div style={{paddingTop: 10 + 'px'}} className={style.error}>Users not found</div>}
+            {fetchErrorIncorrect && <div style={{paddingTop: 10 + 'px'}} className={style.error}>Incorrect login or password</div>}
+          </div>
+
 
         </form>
       </div>
