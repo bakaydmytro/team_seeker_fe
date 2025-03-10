@@ -4,13 +4,11 @@ import './Buttons.css';
 import ProfileIcon from "../../img/icons/image 18.svg";
 import SteamIcon from "../../img/icons/Vector.svg";
 import { useNavigate } from "react-router-dom";
-import {setupAxiosInterceptors} from "../../service/axiosService"
-import {getUserData} from "../../service/apiService"
-export default function Menu() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [username , setUsername] = useState('')
-    const navigate = useNavigate();
 
+
+export default function Menu({info}) {
+    const [isOpen, setIsOpen] = useState(false);
+    console.log(info)
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -20,12 +18,6 @@ export default function Menu() {
         localStorage.removeItem('token')
     }
 
-    useEffect(  ()  =>{
-        setupAxiosInterceptors(navigate)
-        getUserData().then(response => setUsername(response.data.username))
-        
-        
-    },[])
 
 
     return (
@@ -37,8 +29,13 @@ export default function Menu() {
             </div>
             <div className={`menu-container ${isOpen ? 'open' : ''}`}>
                 <div className="profile-icon">
-                    <img src={ProfileIcon} alt="Profile" />
-                    <p className="user-name">{username}</p></div>
+                    <img
+                    style={{
+                        borderRadius:"20px",
+                        maxHeight: "50px"
+                    }}
+                     src = {info.data.avatar_url}alt="Profile" />
+                    <p className="user-name">{info.data.username}</p></div>
                 <Link to="/ProfilePage" className="menu-item">
                     Edit profile
                 </Link>
