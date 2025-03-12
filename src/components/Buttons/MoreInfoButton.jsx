@@ -5,8 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import ProfileIcon from "../../img/icons/image 18.svg";
 import SteamIcon from "../../img/icons/Vector.svg";
-import { getUserData } from "../../service/apiService";
-import { setupAxiosInterceptors } from "../../service/axiosService";
+import { getUserData } from "../../service/UserService";
 
 export default function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +21,6 @@ export default function Menu() {
   };
 
   useEffect(() => {
-    setupAxiosInterceptors(navigate);
     getUserData().then((response) => setUsername(response.data.username));
   }, []);
 
