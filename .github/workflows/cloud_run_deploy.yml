@@ -2,11 +2,10 @@ name: Deploy to Cloud run
 
 on:
   push:
-    branches: [ dev ]
+    branches: [dev]
   pull_request:
-    branches: [ dev ]
+    branches: [dev]
   workflow_dispatch:
-      
 
 jobs:
   build-and-deploy:
@@ -25,7 +24,7 @@ jobs:
       - name: Configure Docker and gcloud
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
-      
+
       - name: Build and Push Docker Image
         run: |
           IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/images/ui:${{ github.sha }}
@@ -34,7 +33,7 @@ jobs:
 
       - name: Deploy UI to Cloud Run
         run: |
-          gcloud run deploy my-ui \
+          gcloud run deploy team-seeker \
             --image=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/images/ui:${{ github.sha }} \
             --region=us-central1 \
             --platform=managed \
