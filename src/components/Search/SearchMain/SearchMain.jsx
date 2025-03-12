@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import ProfileIcon from '../../../img/icons/image 18.svg';
-import usersData from '../users.json';
+import React, { useEffect, useState } from "react";
+
+import ProfileIcon from "../../../img/icons/image 18.svg";
+import usersData from "../users.json";
 // import axios from 'axios';
 
 // Фільтрація користувачів
@@ -12,9 +13,9 @@ const filterUsers = (searchText, listOfUsers) => {
 };
 
 export default function SearchMain() {
-  const [userList] = useState(usersData);  // Використовуємо локальні дані
+  const [userList] = useState(usersData); // Використовуємо локальні дані
   const [filteredUsers, setFilteredUsers] = useState(usersData);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [visibleCount, setVisibleCount] = useState(5); // Кількість видимих користувачів
 
   // Дебаунс-фільтрація пошуку

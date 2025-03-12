@@ -1,8 +1,7 @@
-import style from "./Login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import style from "./Login.module.css";
 
 function Login() {
   const [email, setEmail] = useState("");

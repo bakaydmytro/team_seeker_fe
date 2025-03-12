@@ -1,16 +1,19 @@
+import "./Footer.css";
+
 import FacebookIcon from "../../../img/icons/Facebook.png";
 import InstagramIcon from "../../../img/icons/Instagram.png";
 import LinkedInIcon from "../../../img/icons/LinkedIn.png";
 import XIcon from "../../../img/icons/X.png";
 import YoutubeIcon from "../../../img/icons/Youtube.png";
-import "./Footer.css";
 
 export default function Footer() {
   return (
     <footer>
       <section className="footer-container">
         <div className="first-footer-block">
-          <a className="logo" href="/">Team Seeker</a>
+          <a className="logo" href="/">
+            Team Seeker
+          </a>
           <div className="top-footer-block">
             <a className="footer-links">About Us</a>
             <a className="footer-links">Contact Support</a>

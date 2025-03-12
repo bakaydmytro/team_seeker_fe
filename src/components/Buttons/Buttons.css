@@ -1,202 +1,197 @@
-button{
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-  }
-
-.register-button{
-    width: 95px;
-    height: 40px;
-    border: 1px solid white;
-    background-color: #08042e;
-    cursor: pointer;
+button {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
 }
 
-.register-button:hover{
-    background-color: rgb(255, 255, 255);
-    
+.register-button {
+  width: 95px;
+  height: 40px;
+  border: 1px solid white;
+  background-color: #08042e;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background-color: rgb(255, 255, 255);
 }
 .Link .register-button:hover {
-    color: #000;
-    
+  color: #000;
 }
 
-.log-in-button{
-    width: 85px;
-    height: 40px;   
-    background-color: #ba1f33;
-    border: 1px solid #ba1f33;
-    cursor:pointer;
+.log-in-button {
+  width: 85px;
+  height: 40px;
+  background-color: #ba1f33;
+  border: 1px solid #ba1f33;
+  cursor: pointer;
 }
 
-.Link .log-in-button:hover{
-    background-color: #c32121;
-    color: #08042e;
+.Link .log-in-button:hover {
+  background-color: #c32121;
+  color: #08042e;
 }
 
-.log-in-button , .register-button , .learn-more-button{
-    color: white;
-    font-size: 16px;
+.log-in-button,
+.register-button,
+.learn-more-button {
+  color: white;
+  font-size: 16px;
 }
 
-.learn-more-button{
-    width: 125px;
-    height: 45px;
-    background-color: #ba1f33;
-    border: 1px solid #ba1f33;
-    border-radius:0 !important; 
-    cursor:pointer; 
+.learn-more-button {
+  width: 125px;
+  height: 45px;
+  background-color: #ba1f33;
+  border: 1px solid #ba1f33;
+  border-radius: 0 !important;
+  cursor: pointer;
 }
 
-.ant-btn.learn-more-button:hover{
-    background-color: #c32121 !important;
-    border-color: #c32121 !important;
-    color: #08042e !important;
+.ant-btn.learn-more-button:hover {
+  background-color: #c32121 !important;
+  border-color: #c32121 !important;
+  color: #08042e !important;
 }
 
 /* More Info Button */
 
 /* Стилі для бургер-меню */
 .burger {
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-    display: block;
-    width: 40px;
-    height: 26px;
-  }
-  
-  .burger-line {
-    content: '';
-    left: 0;
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 4px;
-    border-radius: 10px;
-    background: #ba1f33; /* червоний колір */
-    transition: transform 0.3s, top 0.3s, bottom 0.3s;
-  }
-  
-  .burger-line:nth-child(1) {
-    top: 0;
-  }
-  
-  .burger-line:nth-child(2) {
-    top: 10px;
-  }
-  
-  .burger-line:nth-child(3) {
-    bottom: 0;
-  }
-  
-  .burger-line.open:nth-child(1) {
-    transform: rotate(45deg);
-    top: 11px;
-  }
-  
-  .burger-line.open:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .burger-line.open:nth-child(3) {
-    transform: rotate(-45deg);
-    bottom: 11px;
-  }
-  
-  /* Анімації для меню */
-  .menu-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 235px;
-    background-color: #0B053B;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 70px;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    border-radius: 0px 0px 30px 30px;
-  }
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  display: block;
+  width: 40px;
+  height: 26px;
+}
 
+.burger-line {
+  content: "";
+  left: 0;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 10px;
+  background: #ba1f33; /* червоний колір */
+  transition: transform 0.3s, top 0.3s, bottom 0.3s;
+}
 
-  .profile-icon {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: center;
-    border-bottom:1px solid #ba1f33 ;
-    padding-bottom: 10px;
-  }
-  
-  .user-name {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-  }
+.burger-line:nth-child(1) {
+  top: 0;
+}
 
-  .link-steam{
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  
-  .menu-container.open {
-    transform: translateX(0);
-  }
-  
-  .menu-item {
-    padding: 12px;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    color: gray;
-  }
-  
-  .menu-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Apply button */
+.burger-line:nth-child(2) {
+  top: 10px;
+}
 
-  .apply-button{
-    background-color: #c32121;
-    border: 1px solid #ba1f33;
-    color: white;
-    border-radius: 10px;
-    width: 70px;
-    height: 50px;
-    cursor: pointer;
-  }
+.burger-line:nth-child(3) {
+  bottom: 0;
+}
 
-  .apply-button:hover{
-    background-color: #ba1f33;
-    border-color: #ba1f33;
-    color: #08042e;
-  }
+.burger-line.open:nth-child(1) {
+  transform: rotate(45deg);
+  top: 11px;
+}
 
-  /* steam button */
+.burger-line.open:nth-child(2) {
+  opacity: 0;
+}
 
-  .steam-button{
-    background-color: #c32121;
-    border: 1px solid #ba1f33;
-    color: white;
-    display: flex;align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 5px 20px 5px 20px;
-    border-radius: 12px;
-  }
-  
+.burger-line.open:nth-child(3) {
+  transform: rotate(-45deg);
+  bottom: 11px;
+}
 
-  .steam-button:hover{
-    background-color: #ba1f33;
-    border-color: #ba1f33;
-    color: #08042e;
-  }
+/* Анімації для меню */
+.menu-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 235px;
+  background-color: #0b053b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 70px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  border-radius: 0px 0px 30px 30px;
+}
 
-  
-  
-  
+.profile-icon {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  border-bottom: 1px solid #ba1f33;
+  padding-bottom: 10px;
+}
+
+.user-name {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.link-steam {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-container.open {
+  transform: translateX(0);
+}
+
+.menu-item {
+  padding: 12px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  color: gray;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Apply button */
+
+.apply-button {
+  background-color: #c32121;
+  border: 1px solid #ba1f33;
+  color: white;
+  border-radius: 10px;
+  width: 70px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.apply-button:hover {
+  background-color: #ba1f33;
+  border-color: #ba1f33;
+  color: #08042e;
+}
+
+/* steam button */
+
+.steam-button {
+  background-color: #c32121;
+  border: 1px solid #ba1f33;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 12px;
+}
+
+.steam-button:hover {
+  background-color: #ba1f33;
+  border-color: #ba1f33;
+  color: #08042e;
+}

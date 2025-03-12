@@ -1,14 +1,15 @@
 import "./ProfilePage.css";
+
+import React, { useEffect, useState } from "react";
+import { getUserData, updateUserDataField } from "../../service/UserService";
+
 import { Button } from "antd";
-import ProfileIcon from "../../img/icons/image 18.svg";
 import CancelIcon from "../../img/icons/CancelIcon.svg";
 import OkIcon from "../../img/icons/OkIcon.svg";
+import ProfileIcon from "../../img/icons/image 18.svg";
 import RenameIcon from "../../img/icons/RenameIcon.svg";
 import { ReactComponent as SteamIcon } from "../../img/icons/Vector.svg";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import React from "react";
-import { getUserData, updateUserDataField } from "../../service/UserService";
 
 export default function ProfileMain() {
   const [email, setEmail] = useState("");

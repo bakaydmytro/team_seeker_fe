@@ -1,9 +1,10 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
+import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
-import Footer from "./Footer/Footer";
-import { useNavigate, useLocation } from "react-router-dom";
-import { getUserData } from "../../service/UserService";
 import React from "react";
+import { getUserData } from "../../service/UserService";
 
 function MainPage() {
   const navigate = useNavigate();

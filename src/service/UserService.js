@@ -1,4 +1,4 @@
-import { fetchRequest, API_URL } from "./FetchRequest";
+import { API_URL, fetchRequest } from "./FetchRequest";
 
 export const getUserData = () => {
   return fetchRequest

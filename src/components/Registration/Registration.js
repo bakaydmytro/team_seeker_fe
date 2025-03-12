@@ -1,9 +1,8 @@
-import style from "../Loginn/Login.module.css";
-import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+
 import Date from "./Date";
-import { API_URL } from "../../service/axiosService";
+import style from "../Login/Login.module.css";
 
 function Registration() {
   const [userName, setUserName] = useState("");
