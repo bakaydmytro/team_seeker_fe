@@ -66,8 +66,10 @@ function Login() {
       password: password,
     };
 
+    let response;
+
     try {
-      const response = await loginUser(userData);
+      response = await loginUser(userData);
 
       if (!response || response.status >= 400) {
         throw new Error("Error sending data");
