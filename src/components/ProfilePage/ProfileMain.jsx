@@ -27,7 +27,6 @@ export default function ProfileMain() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setupAxiosInterceptors(navigate);
     getUserData();
   }, [navigate]);
 

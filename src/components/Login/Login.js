@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { loginUser } from "../../service/UserService";
 import style from "./Login.module.css";
 
 function Login() {

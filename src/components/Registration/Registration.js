@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 
 import Date from "./Date";
+import { signupUser } from "../../service/UserService";
 import style from "../Login/Login.module.css";
 
 function Registration() {
