@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import { loginUser } from "../../service/UserService";
 import style from "./Login.module.css";
@@ -118,7 +118,18 @@ function Login() {
             </Link>
           </p>
         </div>
-        <form onSubmit={formData}>
+        <form
+          onSubmit={(e) =>
+            formData(
+              e,
+              email,
+              password,
+              setFetchErrorEmail,
+              setFetchErrorIncorrect,
+              navigate
+            )
+          }
+        >
           <div
             style={{ marginBottom: 10 + "px" }}
             className={style.input_block}
