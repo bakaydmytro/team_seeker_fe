@@ -1,29 +1,56 @@
 import { API_URL, fetchRequest } from "./FetchRequest";
 
-export const getUserData = () => {
-  return fetchRequest
-    .get(`${API_URL}/api/me`)
-    .then((response) => response.data)
-    .catch((error) => error.response);
+export const getUserData = async () => {
+  console.log("GET Request to:", `${API_URL}/api/users/me`);
+
+  try {
+    const response = await fetchRequest.get(`${API_URL}/api/users/me`);
+    console.log("API Response (getUserData):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (getUserData):", error.response);
+    return error.response;
+  }
 };
 
 export const updateUserDataField = async (field, value, id) => {
-  return fetchRequest
-    .put(`${API_URL}/api/${id}`, { [field]: value })
-    .then((response) => response.data)
-    .catch((error) => error.response);
+  console.log("PUT Request to:", `${API_URL}/api/${id}`);
+  console.log("Payload:", JSON.stringify({ [field]: value }));
+
+  try {
+    const response = await fetchRequest.put(`${API_URL}/api/${id}`, { [field]: value });
+    console.log("API Response (updateUserDataField):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (updateUserDataField):", error.response);
+    return error.response;
+  }
 };
 
 export const signupUser = async (userData) => {
-  return fetchRequest
-    .post(`${API_URL}/api/users/signup`, userData)
-    .then((response) => response.data)
-    .catch((error) => error.response);
+  console.log("POST Request to:", `${API_URL}/api/users/signup`);
+  console.log("Payload:", JSON.stringify(userData));
+
+  try {
+    const response = await fetchRequest.post(`${API_URL}/api/users/signup`, userData);
+    console.log("API Response (signupUser):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (signupUser):", error.response);
+    return error.response;
+  }
 };
 
 export const loginUser = async (userData) => {
-  return fetchRequest
-    .post(`${API_URL}/api/users/login`, userData)
-    .then((response) => response.data)
-    .catch((error) => error.response);
+  console.log("POST Request to:", `${API_URL}/api/users/login`);
+  console.log("Payload:", JSON.stringify(userData));
+
+  try {
+    const response = await fetchRequest.post(`${API_URL}/api/users/login`, userData);
+    console.log("API Response (loginUser):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (loginUser):", error.response);
+    return error.response;
+  }
 };
