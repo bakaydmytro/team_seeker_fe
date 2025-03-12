@@ -28,7 +28,7 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/images/ui:${{ github.sha }}
-          docker build -t $IMAGE_NAME .
+          docker build --build-arg REACT_APP_API_URL=https://team-seeker-api.space -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
       - name: Deploy UI to Cloud Run
@@ -38,5 +38,4 @@ jobs:
             --region=us-central1 \
             --platform=managed \
             --allow-unauthenticated \
-            --set-env-vars "REACT_APP_API_URL=https://team-seeker-api.space"
             
