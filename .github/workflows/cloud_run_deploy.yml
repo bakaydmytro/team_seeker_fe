@@ -38,3 +38,5 @@ jobs:
             --region=us-central1 \
             --platform=managed \
             --allow-unauthenticated
+            --set-env-vars "REACT_APP_API_URL=https://team-seeker-api.space"
+            
