@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.container-chat .main .main_section-title {
+  padding: 0 40px 0 40px;
+}
+.container-chat .main .main_section-title .section-title_wrapper {
+  padding: 0 0 10px 20px;
+  display: flex;
+  border-bottom: 2px solid #BA1F33;
+}
+.container-chat .main .main_section-title .section-title_wrapper .section-title_block-title {
+  margin-right: 200px;
+}
+.container-chat .main .main_section-title .section-title_wrapper .section-title_block-title h1 {
+  font: 400 32px "Rubik Glitch";
+  color: #ba1f33;
+}
+.container-chat .main .main_section-title .section-title_wrapper .section-title_block-profile-info {
+  display: flex;
+  align-items: center;
+}
+.container-chat .main .main_section-title .section-title_wrapper .section-title_block-profile-info img {
+  margin-right: 10px;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient {
+  width: 600px;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_block-text {
+  width: 200px;
+  background-color: red;
+  border-radius: 20px;
+  padding: 10px;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_block-text .section-chat_name-recipient {
+  font: 600 20px "Roboto";
+  margin-bottom: 20px;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_block-text .section-chat_text-recipient {
+  font: 400 20px "Roboto";
+}
+.container-chat .main .main_section-chat .flex {
+  display: flex;
+  justify-content: end;
+}/*# sourceMappingURL=ChatMain.css.map */

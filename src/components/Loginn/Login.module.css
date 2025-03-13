@@ -62,6 +62,9 @@
   color: #fff;
   display: block;
 }
+.container .login_wrapper form .login_block:hover .button_login {
+  font-size: 40px !important;
+}
 .container .login_wrapper form .login_block .button_login {
   background: rgb(186, 31, 51);
   width: 100%;
@@ -69,6 +72,9 @@
   border-radius: 10px;
   font: 400 28px "Roboto";
   color: #fff;
+}
+.container .login_wrapper form .login_block .button_login:hover {
+  font-size: 40px !important;
 }
 .container .login_wrapper form .switch_block {
   display: flex;

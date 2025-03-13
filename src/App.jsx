@@ -3,6 +3,7 @@ import Login from './components/Loginn/Login.js';
 import Registration from './components/Registration/Registration';
 import MainPage from './components/MainPage/MainPage';
 import Search from './components/Search/Search.js';
+import Chat from './components/Chat/Chat.js'
 
 import ChooseGamePage from './components/ChooseGamePage/ChooseGamePage.js';
 import ProfilePage from './components/ProfilePage/ProfilePage.js';
@@ -12,6 +13,34 @@ import React from 'react';
 
 function App() {
   
+
+
+  return (
+    <div className="App">
+      <Routes>
+        <Route path='/' element={<MainPage/>}/>
+        <Route path='/ChooseGamePage' element={<ChooseGamePage/>}/>
+        <Route path='/ProfilePage' element={<ProfilePage/>}/>
+        <Route path='/registration' element={<Registration/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/Search' element={<Search/>}/>
+        <Route path='/Chat' element={<Chat/>}/>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
 //   const axiosInstance = axios.create({
 //     baseURL: 'http://localhost:5001/api/users/me',
 // });
@@ -61,19 +90,3 @@ function App() {
 //   });
   
 // },[navigate])
-
-  return (
-    <div className="App">
-      <Routes>
-        <Route path='/' element={<MainPage/>}/>
-        <Route path='/ChooseGamePage' element={<ChooseGamePage/>}/>
-        <Route path='/ProfilePage' element={<ProfilePage/>}/>
-        <Route path='/registration' element={<Registration/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/Search' element={<Search/>}/>
-      </Routes>
-    </div>
-  );
-}
-
-export default App;
