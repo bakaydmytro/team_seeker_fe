@@ -120,13 +120,12 @@ button {
 }
 
 .profile-icon {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
   align-items: center;
   border-bottom: 1px solid #ba1f33;
-  padding-bottom: 10px;
 }
 
 .user-name {
@@ -152,6 +151,7 @@ button {
   font-family: "Roboto", sans-serif;
   font-style: normal;
   color: gray;
+  text-decoration: none;
 }
 
 .menu-item:hover {
