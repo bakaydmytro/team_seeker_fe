@@ -1,72 +1,28 @@
-// import { io } from "socket.io-client";
+import { API_URL, fetchRequest } from "./FetchRequest";
+import { getAccessToken } from "./StorageService";
 
-// const SOCKET_URL = "http://localhost:5001"; // Замініть на ваш сервер
-// const token =  localStorage.getItem('token')
-// class SocketService {
-//   constructor() {
-//     this.socket = null;
-//   }
-
-//   connect(token) {
-//     this.socket = io(SOCKET_URL, {
-//       query: { token },
-//     });
-
-//     this.socket.on("connect", () => {
-//       console.log("Connected to WebSocket server");
-//     });
-
-//     this.socket.on("disconnect", () => {
-//       console.log("Disconnected from WebSocket server");
-//     });
-
-//     this.socket.on("connect_error", (err) => {
-//       console.error("WebSocket connection error:", err);
-//     });
-//   }
-
-//   onNewMessage(callback) {
-//     if (!this.socket) return;
-//     this.socket.on("newMessage", (newMessage) => {
-//       callback(newMessage);
-//     });
-//   }
-
-//   sendMessage(chat_id, content) {
-//     if (!this.socket) return;
-//     this.socket.emit("sendMessage", { chat_id, content });
-//   }
-
-//   joinChat(chat_id) {
-//     if (!this.socket) return;
-//     this.socket.emit("joinChat", { chat_id });
-//   }
-
-//   leaveChat(chat_id) {
-//     if (!this.socket) return;
-//     this.socket.emit("leaveChat", { chat_id });
-//   }
-
-//   disconnect() {
-//     if (this.socket) {
-//       this.socket.disconnect();
-//       this.socket = null;
-//     }
-//   }
-// }
-
-// const socketService = new SocketService();
-// export default socketService;
 
 
 import { io } from "socket.io-client";
 import axios from "axios";
 let socket = null;
-const API_URL = "http://localhost:5001/api/chats/create"; 
 
-export const connectSocket = (token) => {
-  socket = io("http://localhost:5001", {
-    query: { token },
+export const getUserData = async () => {
+  console.log("GET Request to:", `${API_URL}/api/users/me`);
+
+  try {
+    const response = await fetchRequest.get(`${API_URL}/api/users/me`);
+    console.log("API Response (getUserData):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (getUserData):", error.response);
+    return error.response;
+  }
+};
+
+export const connectSocket = () => {
+  socket = io(API_URL, {
+    query: { token: getAccessToken() },
   });
 
   socket.on("connect", () => {
@@ -114,12 +70,22 @@ export const onNewMessage = (callback) => {
     });
   }
 };
-
-
+//http://localhost:5001/api/chats/${chat_id}/messages
+export const getMessagesAll = async (chatId) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/chats/${chatId}/messages`, {
+      headers: { Authorization: `Bearer ${getAccessToken()}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error getting messages:", error.response?.data || error.message);
+    throw error;
+  }
+};
 export const createChat = async (recipientId, token) => {
   try {
     const response = await axios.post(
-      `${API_URL}`,
+      `${API_URL}/api/chats/create`,
       { recipientId },
       { headers: { Authorization: `Bearer ${token}` } }
     );

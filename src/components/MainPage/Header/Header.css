@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap");
 
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
 
-.button-block{
-    display: flex;
-    gap: 16px;
+.button-block {
+  display: flex;
+  gap: 16px;
 }
 
-.logo{
-    color: #ba1f33;
-    font-family: "Rubik Glitch", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 2em;
-    cursor: pointer;
-    text-decoration: none;
+.logo {
+  color: #ba1f33;
+  font-family: "Rubik Glitch", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2em;
+  cursor: pointer;
+  text-decoration: none;
 }

@@ -22,23 +22,42 @@
 .container-chat .main .main_section-title .section-title_wrapper .section-title_block-profile-info img {
   margin-right: 10px;
 }
-.container-chat .main .main_section-chat .section-chat_block-recipient {
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper {
+  max-height: 400px;
+  overflow: scroll;
   width: 600px;
 }
-.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_block-text {
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .my-message {
+  display: flex;
+  justify-content: end;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .my-message .section-chat_block-text {
   width: 200px;
   background-color: red;
   border-radius: 20px;
   padding: 10px;
 }
-.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_block-text .section-chat_name-recipient {
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .my-message .section-chat_block-text .section-chat_name-recipient {
   font: 600 20px "Roboto";
   margin-bottom: 20px;
 }
-.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_block-text .section-chat_text-recipient {
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .my-message .section-chat_block-text .section-chat_text-recipient {
   font: 400 20px "Roboto";
 }
-.container-chat .main .main_section-chat .flex {
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .other-message {
   display: flex;
-  justify-content: end;
+  justify-content: start;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .other-message .section-chat_block-text {
+  width: 200px;
+  background-color: red;
+  border-radius: 20px;
+  padding: 10px;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .other-message .section-chat_block-text .section-chat_name-recipient {
+  font: 600 20px "Roboto";
+  margin-bottom: 20px;
+}
+.container-chat .main .main_section-chat .section-chat_block-recipient .section-chat_wrapper .other-message .section-chat_block-text .section-chat_text-recipient {
+  font: 400 20px "Roboto";
 }/*# sourceMappingURL=ChatMain.css.map */

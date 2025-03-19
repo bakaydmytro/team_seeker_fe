@@ -24,24 +24,41 @@
                     align-items: center
                     img
                         margin-right: 10px
-                    p
         .main_section-chat
             .section-chat_block-recipient
-                width: 600px
-                .section-chat_block-text
-                    width: 200px
-                    background-color: red
-                    border-radius: 20px
-                    padding: 10px
-                    .section-chat_name-recipient
-                        font: 600 20px 'Roboto'
-                        margin-bottom: 20px
-                    .section-chat_text-recipient
-                        font: 400 20px 'Roboto'
-                .section-chat_date
-            .flex
-                display: flex
-                justify-content: end
+                .section-chat_wrapper
+                    max-height: 400px
+                    overflow: scroll
+                    width: 600px
+                    .my-message 
+                        display: flex
+                        justify-content: end
+                        .section-chat_block-text
+                            width: 200px
+                            background-color: red
+                            border-radius: 20px
+                            padding: 10px
+                            .section-chat_name-recipient
+                                font: 600 20px 'Roboto'
+                                margin-bottom: 20px
+                            .section-chat_text-recipient
+                                font: 400 20px 'Roboto'
+                    .other-message
+                        display: flex
+                        justify-content: start
+                        .section-chat_block-text
+                            
+                            width: 200px
+                            background-color: red
+                            border-radius: 20px
+                            padding: 10px
+                            .section-chat_name-recipient
+                                font: 600 20px 'Roboto'
+                                margin-bottom: 20px
+                            .section-chat_text-recipient
+                                font: 400 20px 'Roboto'
+                    
+
 
 
 

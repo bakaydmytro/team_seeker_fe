@@ -1,36 +1,32 @@
-import Header from './Header/Header'
-import Main from './Main/Main'
-import Footer from './Footer/Footer'
-import {Routes , Route , Link} from 'react-router-dom'
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { useNavigate, useLocation } from 'react-router-dom';
-import axiosInstance, { setupAxiosInterceptors } from '../../service/axiosService';
-import { getUserData } from '../../service/apiService';
-import React from 'react';
+import Footer from "./Footer/Footer";
+import Header from "./Header/Header";
+import Main from "./Main/Main";
+import React from "react";
+import { getUserData } from "../../service/UserService";
 
 function MainPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
   React.useEffect(() => {
-    setupAxiosInterceptors(navigate); // Ініціалізація інтерцепторів
-
     getUserData()
       .then((response) => {
-        console.log('API call successful', response);
+        console.log("API call successful", response);
       })
       .catch((error) => {
-        console.error('API call failed', error);
+        console.error("API call failed", error);
       });
   }, [navigate]);
+
   return (
     <div>
       <div className="container">
-      <Header/>
-      <Main/>
-      <Footer/>
+        <Header />
+        <Main />
+        <Footer />
       </div>
-      
     </div>
   );
 }
