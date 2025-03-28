@@ -169,7 +169,7 @@ function ChatMain() {
     const [message, setMessage] = useState('');
     const [userId, setUserId] = useState('');
     const token = localStorage.getItem('token');
-    const chat_id = 3;
+    const chat_id = 1;
     const navigate = useNavigate();
     useEffect(() => {
         getUserData().then(response => setUserId(response.id))
@@ -233,7 +233,7 @@ function ChatMain() {
     
 
     const handleCreateChat = () => {
-        const recipientId = 6;
+        const recipientId = 1;
         createChat(recipientId, token)
             .then(chat => console.log("Chat created:", chat))
             .catch(error => console.error("Failed to create chat", error));
