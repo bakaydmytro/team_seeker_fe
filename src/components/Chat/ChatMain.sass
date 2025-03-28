@@ -1,15 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
 
+:where(.css-dev-only-do-not-override-1a3rktk).ant-btn-color-primary
+    height: 40px
 
-
-
+:where(.css-dev-only-do-not-override-1a3rktk).ant-input
+    width: 100%
+:where(.css-dev-only-do-not-override-1a3rktk).ant-space-vertical 
+    width: 100%
 
 .container-chat
 
     .main
+        padding: 0 40px
         .main_section-title
-            padding: 0 40px 0 40px
+            margin-bottom: 30px
             .section-title_wrapper
                 padding: 0 0 10px 20px
                 display: flex
@@ -25,38 +30,32 @@
                     img
                         margin-right: 10px
         .main_section-chat
-            .section-chat_block-recipient
+            display: flex
+            justify-content: end
+            .section-chat_block
+                width: 60%
                 .section-chat_wrapper
                     max-height: 400px
                     overflow: scroll
-                    width: 600px
-                    .my-message 
+                    .section-chat_block-info
                         display: flex
                         justify-content: end
+                        margin-bottom: 20px
                         .section-chat_block-text
                             width: 200px
-                            background-color: red
-                            border-radius: 20px
+                            background-color: #ba1f33
+                            border-radius: 20px 0 20px 20px
                             padding: 10px
-                            .section-chat_name-recipient
+                            .section-chat_content
                                 font: 600 20px 'Roboto'
-                                margin-bottom: 20px
-                            .section-chat_text-recipient
-                                font: 400 20px 'Roboto'
+                                margin-bottom: 10px
+                            .section-chat_date
+                                font: 400 14px 'Roboto'
                     .other-message
-                        display: flex
                         justify-content: start
                         .section-chat_block-text
-                            
-                            width: 200px
-                            background-color: red
-                            border-radius: 20px
-                            padding: 10px
-                            .section-chat_name-recipient
-                                font: 600 20px 'Roboto'
-                                margin-bottom: 20px
-                            .section-chat_text-recipient
-                                font: 400 20px 'Roboto'
+                            background-color: #130a66
+                 
                     
 
 
