@@ -312,7 +312,7 @@ function ChatMain() {
     const [userId, setUserId] = useState('');
     const token = localStorage.getItem('token');
     const [check , setCheck] = useState("")
-    const chat_id = 10;
+    const chat_id = 20;
     const navigate = useNavigate();
     // useEffect(()=>{
     //     const recipientId = 3;
@@ -322,65 +322,102 @@ function ChatMain() {
     // },[])
    
 
+    // useEffect(() => {
+    //     getUserData().then(response => setUserId(response.id))
+    //     connectSocket()
+    //     .then(response => {
+    //         if(response == 200){
+    //             setCheck(200)
+    //         } })
+            
+    //     joinChat(chat_id);
+    //     getMessagesAll(chat_id)
+    //     .then(response => {
+    //         console.log(response.messages)
+    //         if(response.messages)
+    //         setMessages(response.messages)
+    //     }).catch(error => {throw error})
+    //     return () => {
+    //         leaveChat(chat_id);
+    //         disconnectSocket();
+    //     };
+    // }, []); 
+
     useEffect(() => {
-        getUserData().then(response => setUserId(response.id))
+        getUserData().then(response => setUserId(response.id));
+    
         connectSocket()
-        .then(response => {
-            if(response == 200){
-                setCheck(200)
-            } })
+            .then(response => {
+                if (response === 200) {
+                    setCheck(200);
+                }
+            });
     
         joinChat(chat_id);
-        getMessagesAll(chat_id)
-        .then(response => {
-            console.log(response.messages)
-            if(response.messages)
-            setMessages(response.messages)
-        }).catch(error => {throw error})
     
-        onNewMessage((newMessage) => {
-            console.log("New message received:", newMessage);
-            console.log(`Current userId: ${userId}, Message senderId: ${newMessage.senderId}`);
-     
-           setMessages(prevMessages => [...prevMessages, newMessage]);
-        });
+        getMessagesAll(chat_id)
+            .then(response => {
+                if (response.messages) setMessages(response.messages);
+            })
+            .catch(error => console.error("Error fetching messages:", error));
+        
+            const handleNewMessage = (newMessage) => {
+                console.log("New message received:", newMessage);
+        
+                // Оновлюємо стан через функціональний підхід
+                setMessages(prevMessages => {
+                    const updatedMessages = [...prevMessages, newMessage];
+                    console.log("Updated messages:", updatedMessages); 
+                    return updatedMessages;
+                });
+            };
+    
+        onNewMessage(handleNewMessage);
     
         return () => {
             leaveChat(chat_id);
             disconnectSocket();
         };
-    }, [message]); 
-
+    }, []);
+    
  
+    // const handleSendMessage = () => {
+    //     if (message.trim() === '') return; 
+        
+    //     if (!userId) {
+    //         console.error("User ID is missing.");
+    //         return;
+    //     }
+    
+    //     const newMessage = {
+    //         chat_id,
+    //         content: message,
+    //         sender_id: userId, 
+    //         createdAt: new Date().toISOString(),
+    //     };
+
+    //     console.log("Sending message:", newMessage);
+    //     // setMessages(prevMessages => [...prevMessages, newMessage]);
+    
+    //     sendMessage(chat_id, message);
+    
+    //     setMessage(""); 
+    // };
     const handleSendMessage = () => {
         if (message.trim() === '') return; 
-        
-        if (!userId) {
-            console.error("User ID is missing.");
-            return;
-        }
+        if (!userId) return console.error("User ID is missing.");
     
-        const newMessage = {
-            chat_id,
-            content: message,
-            sender_id: userId, 
-            createdAt: new Date().toISOString(),
-        };
-
-        console.log("Sending message:", newMessage);
-        setMessages(prevMessages => [...prevMessages, newMessage]);
-    
-        sendMessage(chat_id, message);
-    
-        setMessage(""); 
+        sendMessage(chat_id, message); // Відправляємо повідомлення на сервер
+        setMessage("");  // Очищаємо поле вводу
     };
+    
     
     
     
     
 
     const handleCreateChat = () => {
-        const recipientId = 3;
+        const recipientId = 5;
         createChat(recipientId, token)
             .then(chat => console.log("Chat created:", chat))
             .catch(error => console.error("Failed to create chat", error));
@@ -412,11 +449,12 @@ function ChatMain() {
                         <div className='section-chat_wrapper'>
                         {messages.map((msg, index) => {
                             
-                            console.log(`Message ${index}: sender_id =`, msg.sender_id, "userId =", userId);
+                            // console.log(`Message ${index}: sender_id =`, msg.sender_id, "userId =", userId);
                             return (
-                                <div key={index} className={msg.sender_id === userId ? "section-chat_block-info my-message" : "section-chat_block-info other-message"}>
+                                <div key={index} className={msg.senderId === userId ? "section-chat_block-info my-message" : "section-chat_block-info other-message"}>
                                     <div className='section-chat_block-text'>
                                         <div className='section-chat_content'>{msg.content}</div> 
+                                        <div className='section-chat_content'>{msg.senderId}</div> 
                                         <div className='section-chat_date'>{new Date(msg.createdAt).toLocaleTimeString()}</div>
                                     </div>
                                 </div>

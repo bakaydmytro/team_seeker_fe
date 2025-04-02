@@ -21,21 +21,26 @@ export const getUserData = async () => {
 };
 
 export const connectSocket = () => {
-  socket = io(API_URL, {
-    query: { token: getAccessToken() },
-  });
-
-  socket.on("connect", () => {
-    console.log("Connected to WebSocket server");
-  });
-
-  socket.on("disconnect", () => {
-    console.log("Disconnected from WebSocket server");
-  });
-
-  socket.on("connect_error", (err) => {
-    console.error("WebSocket connection error:", err);
-  });
+  return new Promise ((resolve ,reject) => {
+    socket = io(API_URL, {
+      query: { token: getAccessToken() },
+    });
+  
+  
+    socket.on("connect", (e) => {
+      console.log("Connected to WebSocket server");
+      resolve(socket)
+    });
+  
+    socket.on("disconnect", () => {
+      console.log("Disconnected from WebSocket server");
+    });
+  
+    socket.on("connect_error", (err) => {
+      console.error("WebSocket connection error:", err);
+    });
+  })
+  
 };
 
 export const disconnectSocket = () => {
@@ -60,16 +65,21 @@ export const leaveChat = (chat_id) => {
 export const sendMessage = (chat_id, content) => {
   if (socket) {
     socket.emit("sendMessage", { chat_id, content });
+
   }
 };
 
 export const onNewMessage = (callback) => {
   if (socket) {
-    socket.on("newMessage", (newMessage) => {
-      callback(newMessage);
-    });
+      socket.on("newMessage", (newMessage) => {
+          console.log("Received new message:", newMessage);
+          if (callback) callback(newMessage); 
+      });
   }
 };
+
+
+
 //http://localhost:5001/api/chats/${chat_id}/messages
 export const getMessagesAll = async (chatId) => {
   try {

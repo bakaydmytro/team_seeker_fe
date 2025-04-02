@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ProfileIcon from "../../../img/icons/image 18.svg";
 import { getAllUsersData } from "../../../service/UserService";
+import {createChat} from "../../../service/webSSocket"
+import { Link } from "react-router-dom";
+
 
 //! Фільтрація користувачів
 const filterUsers = (searchText, listOfUsers) => {
@@ -15,6 +18,14 @@ export default function SearchMain() {
   const [filteredUsers, setFilteredUsers] = useState([]); // Відфільтровані користувачі
   const [searchTerm, setSearchTerm] = useState(""); // Текст пошуку
   const [visibleCount, setVisibleCount] = useState(5); // Видимі користувачі
+  const token = localStorage.getItem('token');
+
+
+  const handleCreateChat = (recipientId) => {
+    createChat(recipientId, token)
+        .then(chat => console.log("Chat created:", chat))
+        .catch(error => console.error("Failed to create chat", error));
+  };
 
   //! Завантаження користувачів
   useEffect(() => {
@@ -90,7 +101,9 @@ export default function SearchMain() {
                       <p>{user.status}</p>
                     </div>
                   </div>
-                  <button className="chat-button">Chat</button>
+                  <Link to="/Chat">
+                    <button onClick={()=>handleCreateChat(user.id)} className="chat-button">Chat</button>
+                  </Link>
                 </div>
               ))
             ) : (

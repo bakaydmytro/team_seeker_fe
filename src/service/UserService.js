@@ -30,11 +30,11 @@ export const getAllUsersData = async (username = "") => {
 
 
 export const updateUserDataField = async (field, value, id) => {
-  console.log("PUT Request to:", `${API_URL}/api/${id}`);
+  console.log("PUT Request to:", `${API_URL}/api/users/${id}`);
   console.log("Payload:", JSON.stringify({ [field]: value }));
 
   try {
-    const response = await fetchRequest.put(`${API_URL}/api/${id}`, { [field]: value });
+    const response = await fetchRequest.put(`${API_URL}/api/users/${id}`, { [field]: value });
     console.log("API Response (updateUserDataField):", response.data);
     return response.data;
   } catch (error) {
@@ -43,12 +43,28 @@ export const updateUserDataField = async (field, value, id) => {
   }
 };
 
+
+
 export const signupUser = async (userData) => {
   console.log("POST Request to:", `${API_URL}/api/users/signup`);
   console.log("Payload:", JSON.stringify(userData));
 
   try {
     const response = await fetchRequest.post(`${API_URL}/api/users/signup`, userData);
+    console.log("API Response (signupUser):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (signupUser):", error.response);
+    return error.response;
+  }
+};
+
+export const UpdateUserAvatar = async (userData) => {
+  console.log("POST Request to:", `${API_URL}/api/users/avatar`);
+  console.log("Payload:", JSON.stringify(userData));
+
+  try {
+    const response = await fetchRequest.put(`${API_URL}/api/users/avatar`, userData);
     console.log("API Response (signupUser):", response.data);
     return response.data;
   } catch (error) {
