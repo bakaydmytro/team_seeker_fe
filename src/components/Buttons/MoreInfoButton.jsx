@@ -1,6 +1,8 @@
+import "./Buttons.css";
+
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import './Buttons.css';
+
 import ProfileIcon from "../../img/icons/image 18.svg";
 import SteamIcon from "../../img/icons/Vector.svg";
 import { useNavigate } from "react-router-dom";

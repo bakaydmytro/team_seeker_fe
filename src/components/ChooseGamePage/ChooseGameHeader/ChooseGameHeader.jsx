@@ -1,4 +1,3 @@
-import MoreInfoButton from '../../Buttons/MoreInfoButton'
 import { Button } from "antd";
 import { Link } from 'react-router-dom'
 import ProfileImg from '../../../img/icons/image 18.svg'

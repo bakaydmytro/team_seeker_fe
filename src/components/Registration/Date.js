@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styles from './Date.module.css'
+import React, { useEffect, useState } from "react";
 
-const DatePickerOL = ({onDateChange,BitdayError}) => {
+import styles from "./Date.module.css";
+
+const DatePickerOL = ({ onDateChange, BitdayError }) => {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
@@ -9,17 +10,26 @@ const DatePickerOL = ({onDateChange,BitdayError}) => {
   const [isYearOpen, setYearOpen] = useState(false);
   const [isMonthOpen, setMonthOpen] = useState(false);
   const [isDayOpen, setDayOpen] = useState(false);
-  const [dayError, setDayError] = useState('Enter year and month');
+  const [dayError, setDayError] = useState("Enter year and month");
   const [error, setError] = useState(false);
 
   const currentYear = new Date().getFullYear();
 
-  const years = Array.from({ length: 90 }, (_, i) => (currentYear - 16) - i);
+  const years = Array.from({ length: 90 }, (_, i) => currentYear - 16 - i);
 
   const months = [
-    "January", "February", "March", "April",
-    "May", "June", "July", "August",
-    "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const getDaysInMonth = (year, monthIndex) => {
@@ -28,27 +38,28 @@ const DatePickerOL = ({onDateChange,BitdayError}) => {
     return Array.from({ length: daysInMonth }, (_, i) => i + 1);
   };
 
-
-
   useEffect(() => {
     if (year && month !== "" && day) {
       const selectedDate = new Date(year, month, day);
       onDateChange(selectedDate);
-      BitdayError('')
-    } else{
-        BitdayError('error')
+      BitdayError("");
+    } else {
+      BitdayError("error");
     }
-    
-    if(year && month !== "" ){
-        setError(false);
-        setDayError('')
+
+    if (year && month !== "") {
+      setError(false);
+      setDayError("");
     }
   }, [year, month, day]);
-  
+
   return (
-    <div className={ styles.container }>
+    <div className={styles.container}>
       <div className={styles.wrraper}>
-        <div className={styles.selectBox} onClick={() => setYearOpen(!isYearOpen)}>
+        <div
+          className={styles.selectBox}
+          onClick={() => setYearOpen(!isYearOpen)}
+        >
           {year || "Year"}
         </div>
         {isYearOpen && (
@@ -70,7 +81,10 @@ const DatePickerOL = ({onDateChange,BitdayError}) => {
       </div>
 
       <div className={styles.wrraper}>
-        <div className={styles.selectBox} onClick={() => setMonthOpen(!isMonthOpen)}>
+        <div
+          className={styles.selectBox}
+          onClick={() => setMonthOpen(!isMonthOpen)}
+        >
           {months[month] || "Month"}
         </div>
         {isMonthOpen && (
@@ -93,15 +107,14 @@ const DatePickerOL = ({onDateChange,BitdayError}) => {
 
       <div className={styles.wrraper}>
         <div
-        className={styles.selectBox}
-          
+          className={styles.selectBox}
           onClick={() => {
             if (!year || !month) {
-              setError(true); 
-              
-            } if(year  && month !== ""){
-                setDayOpen(!isDayOpen)
-            } 
+              setError(true);
+            }
+            if (year && month !== "") {
+              setDayOpen(!isDayOpen);
+            }
           }}
         >
           {day || "Day"}
@@ -122,13 +135,10 @@ const DatePickerOL = ({onDateChange,BitdayError}) => {
             ))}
           </ol>
         )}
-        { error && <div className={styles.error}>{dayError} </div>}
+        {error && <div className={styles.error}>{dayError} </div>}
       </div>
     </div>
   );
-
-}
-
-
+};
 
 export default DatePickerOL;

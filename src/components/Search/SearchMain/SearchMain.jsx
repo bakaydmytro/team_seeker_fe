@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ProfileIcon from '../../../img/icons/image 18.svg';
-import usersData from '../users.json';
-// import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import ProfileIcon from "../../../img/icons/image 18.svg";
+import { getAllUsersData } from "../../../service/UserService";
 
-// Фільтрація користувачів
+//! Фільтрація користувачів
 const filterUsers = (searchText, listOfUsers) => {
   if (!searchText) return listOfUsers;
   return listOfUsers.filter(({ username }) =>
@@ -12,38 +11,46 @@ const filterUsers = (searchText, listOfUsers) => {
 };
 
 export default function SearchMain() {
-  const [userList] = useState(usersData);  // Використовуємо локальні дані
-  const [filteredUsers, setFilteredUsers] = useState(usersData);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [visibleCount, setVisibleCount] = useState(5); // Кількість видимих користувачів
+  const [userList, setUserList] = useState([]); // Динамічні дані з API
+  const [filteredUsers, setFilteredUsers] = useState([]); // Відфільтровані користувачі
+  const [searchTerm, setSearchTerm] = useState(""); // Текст пошуку
+  const [visibleCount, setVisibleCount] = useState(5); // Видимі користувачі
 
+  //! Завантаження користувачів
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const usersData = await getAllUsersData(searchTerm.trim() ? searchTerm : "", 1, 100);
 
-   // Завантаження користувачів з серверу
-//   useEffect(() => {
-//     axios.get('http://localhost:5000/users') 
-//       .then((response) => {
-//         console.log('Data from API:', response.data);  // Лог даних з API
-//         setUserList(response.data);
-//         setFilteredUsers(response.data);
-//       })
-//       .catch((error) => {
-//         setError("Помилка отримання користувачів.");
-//         console.error("Помилка отримання користувачів:", error);
-//       });
-//   }, []);
+        if (usersData?.data && Array.isArray(usersData.data)) {
+          setUserList(usersData.data);
+          setFilteredUsers(usersData.data);
+        } else {
+          console.error("Unexpected API response format:", usersData);
+          setUserList([]);
+          setFilteredUsers([]);
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setUserList([]);
+        setFilteredUsers([]);
+      }
+    };
 
+    fetchUsers();
+  }, [searchTerm]); 
 
-  // Дебаунс-фільтрація пошуку
+  //! Дебаунс-фільтрація пошуку
   useEffect(() => {
     const debounce = setTimeout(() => {
       setFilteredUsers(filterUsers(searchTerm, userList));
-      setVisibleCount(5); // Скидаємо видимих користувачів при новому пошуку
     }, 300);
 
     return () => clearTimeout(debounce);
   }, [searchTerm, userList]);
 
-  // Обробник кнопки "Show more"
+  //! Обробник кнопки "Show more"
+  console.log("Total Users:", filteredUsers.length, "Visible Count:", visibleCount);
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
   };

@@ -1,87 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap");
 
 .scroll-section {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .first-main-block {
-    width: 42%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 42%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .second-main-block {
-    width: 60%;
-    overflow: hidden;
-    height: 500px;
+  width: 60%;
+  overflow: hidden;
+  height: 500px;
 }
 
 .scroll-section-print,
 .quote-section-print {
-    font-family: "Rubik Glitch", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 54px;
+  font-family: "Rubik Glitch", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 54px;
 }
 
-
-
 .p {
-    font-size: 16px;
-    text-align: justify;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    padding: 24px 0 24px 0;
+  font-size: 16px;
+  text-align: justify;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  padding: 24px 0 24px 0;
 }
 
 .button-block {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .register {
-    width: 85px;
-    height: 40px;
-    background-color: #ba1f33;
-    border: 1px solid #ba1f33;
+  width: 85px;
+  height: 40px;
+  background-color: #ba1f33;
+  border: 1px solid #ba1f33;
 }
 
-a>img {
-    max-width: 80px;
+a > img {
+  max-width: 80px;
 }
 
 .main-info {
-    display: flex;
-    justify-content: space-between;
-    gap: 150px;
-    margin: 100px 0 200px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 150px;
+  margin: 150px 0 200px 0;
 }
 
 .first-main-info-block {
-    display: flex;
-    flex-direction: column;
-    padding-top: 50px;
-    width: 38%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  width: 38%;
 }
 
 .second-main-info-block {
-    width: 60%;
+  width: 60%;
 }
 
 .qoute-icon {
-    padding-bottom: 20px;
-    max-width: 40px;
-    filter: invert(17%) sepia(79%) saturate(3746%) hue-rotate(340deg) brightness(91%) contrast(98%);
+  padding-bottom: 20px;
+  max-width: 40px;
+  filter: invert(17%) sepia(79%) saturate(3746%) hue-rotate(340deg)
+    brightness(91%) contrast(98%);
 }
 
-
 .quote-section-print {
-    font-size: 46px;
+  font-size: 46px;
 }
 
 .first-qoute-block {
-    width: 64%;
+  width: 64%;
 }

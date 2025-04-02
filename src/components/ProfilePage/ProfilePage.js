@@ -1,15 +1,15 @@
-import ProfileHeader from './ProfileHeader';
-import ProfileMain from './ProfileMain';
 import Footer from "../MainPage/Footer/Footer";
+import ProfileHeader from "./ProfileHeader";
+import ProfileMain from "./ProfileMain";
 
 export default function ChooseGamePage() {
-    return (
-        <>
-            <div className="container">
-                <ProfileHeader />
-                <ProfileMain />
-                <Footer />
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="container">
+        <ProfileHeader />
+        <ProfileMain />
+        <Footer />
+      </div>
+    </>
+  );
 }

@@ -1,10 +1,14 @@
 import "./ScrollPhotos.css";
+
+import {
+  default as myImage5,
+  default as myImage6,
+} from "../../../img/Main-photo5.png";
+
 import myImage1 from "../../../img/Main-photo1.png";
 import myImage2 from "../../../img/Main-photo2.png";
 import myImage3 from "../../../img/Main-photo3.png";
 import myImage4 from "../../../img/Main-photo4.png";
-import myImage5 from "../../../img/Main-photo5.png";
-import myImage6 from "../../../img/Main-photo5.png";
 
 const images = {
   myImage1,

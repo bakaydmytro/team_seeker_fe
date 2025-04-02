@@ -17,20 +17,20 @@ function MainPage() {
 
     getUserData()
       .then((response) => {
-        console.log('API call successful', response);
+        console.log("API call successful", response);
       })
       .catch((error) => {
-        console.error('API call failed', error);
+        console.error("API call failed", error);
       });
   }, [navigate]);
+
   return (
     <div>
       <div className="container">
-      <Header/>
-      <Main/>
-      <Footer/>
+        <Header />
+        <Main />
+        <Footer />
       </div>
-      
     </div>
   );
 }
