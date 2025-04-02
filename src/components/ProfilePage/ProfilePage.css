@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   gap: 20%;
+  margin-bottom: 50px;
   width: 100%;
 }
 
@@ -94,11 +95,10 @@
   border-radius: 12px;
   background-color: transparent;
   padding: 10px;
-  margin-top: 10px;
   margin-bottom: 10px;
   width: 350px;
   color: white;
-  height: 50px;
+  height: 27px;
 }
 
 .input::placeholder {

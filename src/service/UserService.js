@@ -13,6 +13,22 @@ export const getUserData = async () => {
   }
 };
 
+export const getAllUsersData = async (username = "") => {
+  console.log("GET Request to:", `${API_URL}/api/users/search?query=${username}`);
+
+  try {
+    const encodedUsername = encodeURIComponent(username);  
+    const response = await fetchRequest.get(`${API_URL}/api/users/search?query=${encodedUsername}`);
+
+    console.log("API Response (getAllUsersData):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (getAllUsersData):", error.response);
+    return { data: [] };  
+  }
+};
+
+
 export const updateUserDataField = async (field, value, id) => {
   console.log("PUT Request to:", `${API_URL}/api/${id}`);
   console.log("Payload:", JSON.stringify({ [field]: value }));
