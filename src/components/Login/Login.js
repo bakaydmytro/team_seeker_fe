@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { loginUser } from "../../service/UserService";
+import { loginUser,steamRedirect } from "../../service/UserService";
 import style from "./Login.module.css";
 
 function Login() {
@@ -104,6 +104,29 @@ function Login() {
     }
   };
 
+
+  // useEffect(() => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   const token = params.get("token");
+
+  //   if (token) {
+  //     localStorage.setItem("token", token);
+  //     window.history.replaceState(null, "", window.location.pathname);
+  //     navigate("/ProfilePage"); 
+  //   }
+  // }, [navigate]);
+
+
+  // const handleSteamLogin = () => {
+  //   window.location.href = "http://localhost:5001/api/users/steam";
+  // };
+
+
+  
+  const steamLogin = ()=> {
+    steamRedirect()
+  }
+
   return (
     <div className={style.container}>
       <div className={style.login_wrapper}>
@@ -191,6 +214,15 @@ function Login() {
             >
               Log in
             </button>
+            <button 
+            onClick={()=>steamLogin()}
+            className={style.button_login} 
+            type="submit"
+            style={{
+              backgroundColor: '#BA1F33',
+              cursor: 'pointer', 
+              opacity: 1, 
+            }}>Steam Login</button>
             {fetchErrorEmail && (
               <div style={{ paddingTop: 10 + "px" }} className={style.error}>
                 Users not found
