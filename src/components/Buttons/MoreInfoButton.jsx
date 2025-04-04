@@ -1,11 +1,10 @@
 import "./Buttons.css";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import ProfileIcon from "../../img/icons/image 18.svg";
 import SteamIcon from "../../img/icons/Vector.svg";
-import { useNavigate } from "react-router-dom";
 
 
 export default function Menu({info}) {
@@ -36,8 +35,8 @@ export default function Menu({info}) {
                         borderRadius:"20px",
                         maxHeight: "50px"
                     }}
-                     src = {info.data.avatar_url}alt="Profile" />
-                    <p className="user-name">{info.data.username}</p></div>
+                     src = {info.avatar_url}alt="Profile" />
+                    <p className="user-name">{info.username}</p></div>
                 <Link to="/ProfilePage" className="menu-item">
                     Edit profile
                 </Link>

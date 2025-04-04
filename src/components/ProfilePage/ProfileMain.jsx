@@ -1,7 +1,7 @@
 import "./ProfilePage.css";
 
 import React, { useEffect, useState } from "react";
-import { getUserData, updateUserDataField } from "../../service/UserService";
+import { getUserData, updateUserDataField , steamRedirect } from "../../service/UserService";
 
 import { Button } from "antd";
 import CancelIcon from "../../img/icons/CancelIcon.svg";
@@ -15,6 +15,7 @@ export default function ProfileMain() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
+  const [id, setID] = useState("");
 
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
@@ -34,10 +35,10 @@ export default function ProfileMain() {
     e.preventDefault();
     try {
       const userDataResponse = await getUserData();
-      console.log(userDataResponse)
-      const userId = userDataResponse.data.id;
-  
-      const updateResponse = await updateUserDataField(field, value, userId)
+      setID(userDataResponse.id)
+      const userId = userDataResponse.id;
+      console.log(id)
+      const updateResponse = await updateUserDataField(field, value, id)
 
       if (updateResponse) setValue("");
 
@@ -219,7 +220,7 @@ export default function ProfileMain() {
           </div>
           <div className="form-block">
             <h2>Link your Steam account:</h2>
-            <Button className="steam-button" icon={<SteamIcon />}>
+            <Button onClick={() => steamRedirect()} className="steam-button" icon={<SteamIcon />}>
               Log in
             </Button>
           </div>
