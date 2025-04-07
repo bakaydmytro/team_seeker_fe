@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ProfileIcon from "../../../img/icons/image 18.svg";
 import { getAllUsersData } from "../../../service/UserService";
+import { io } from "socket.io-client";
+
+
+
+const socket = io("http://localhost:5000", {
+  query: { token: localStorage.getItem("token") },
+});
+
 
 //! Фільтрація користувачів
 const filterUsers = (searchText, listOfUsers) => {
@@ -15,6 +23,21 @@ export default function SearchMain() {
   const [filteredUsers, setFilteredUsers] = useState([]); // Відфільтровані користувачі
   const [searchTerm, setSearchTerm] = useState(""); // Текст пошуку
   const [visibleCount, setVisibleCount] = useState(5); // Видимі користувачі
+
+  // Статус
+  useEffect(() => {
+    socket.on("userStatusChanged", ({ userId, status }) => {
+      setUserList((prevList) =>
+        prevList.map((user) =>
+          user.id === userId ? { ...user, status } : user
+        )
+      );
+    });
+  
+    return () => {
+      socket.off("userStatusChanged");
+    };
+  }, []);
 
   //! Завантаження користувачів
   useEffect(() => {
@@ -40,6 +63,7 @@ export default function SearchMain() {
     fetchUsers();
   }, [searchTerm]); 
 
+  
   //! Дебаунс-фільтрація пошуку
   useEffect(() => {
     const debounce = setTimeout(() => {
