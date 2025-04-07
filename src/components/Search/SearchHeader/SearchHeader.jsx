@@ -11,7 +11,7 @@ export default function Header() {
       <div className="button-block">
         <Link to="/ChooseGamePage">
           <Button className="learn-more-button back-button">
-            <img src={BackIcon} /> BACK
+            <img src={BackIcon} /> <p>BACK</p>
           </Button>
         </Link>
       </div>

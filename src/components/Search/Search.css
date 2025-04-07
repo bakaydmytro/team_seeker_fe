@@ -67,6 +67,10 @@ input::placeholder {
   position: relative;
 }
 
+.player-name{
+  max-width: 25px;
+}
+
 .player-avatar img {
   width: 70px;
   height: 70px;
