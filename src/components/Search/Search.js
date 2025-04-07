@@ -1,5 +1,4 @@
 import "./Search.css";
-
 import Footer from "../MainPage/Footer/Footer";
 import SearchHeader from "./SearchHeader/SearchHeader.jsx";
 import SearchMain from "./SearchMain/SearchMain.jsx";
