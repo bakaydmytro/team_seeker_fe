@@ -29,34 +29,75 @@
                     align-items: center
                     img
                         margin-right: 10px
-        .main_section-chat
+        .container_chat
             display: flex
-            justify-content: end
-            .section-chat_block
-                width: 60%
-                .section-chat_wrapper
-                    max-height: 400px
-                    overflow: scroll
-                    .section-chat_block-info
+            gap: 30px
+            .main_section-usersChat
+                flex-basis: 40%
+                .section-usersChat_block
+                    .section-usersChat_userBlock
+                        gap: 10px
                         display: flex
-                        justify-content: end
-                        margin-bottom: 20px
-                        .section-chat_block-text
-                            width: 200px
-                            background-color: #ba1f33
-                            border-radius: 20px 0 20px 20px
-                            padding: 10px
-                            .section-chat_content
-                                font: 600 20px 'Roboto'
-                                margin-bottom: 10px
-                            .section-chat_date
-                                font: 400 14px 'Roboto'
-                    .other-message
-                        justify-content: start
-                        .section-chat_block-text
-                            background-color: #130a66
-                 
+                        flex-direction: column
+                        .section-usersChat_blockAvatar
+                            width: min-content
+                            position: relative
+                            .section-usersChat_avatar
+                            .section-usersChat_online
+                                right: 0px
+                                bottom: 5px
+                                position: absolute
+                                height: 15px
+                                width: 15px
+                                background-color: green
+                                border-radius: 30px
+                        .section-usersChat_infoUsers
+                            width: 100%
+                            display: flex
+                            flex-direction: column
+                            justify-content: center
+                            gap: 10px
+                            .section-usersChat_blockText
+                                display: flex
+                                justify-content: space-between
+                                p
+
+
+
+
+
+
+
+
+            .main_section-chat
+                flex-basis: 60%
+                display: flex
+                justify-content: end
+                .section-chat_block
+                    width: 100%
+                    .section-chat_wrapper
+                        max-height: 400px
+                        overflow: scroll
+                        .section-chat_block-info
+                            display: flex
+                            justify-content: end
+                            margin-bottom: 20px
+                            .section-chat_block-text
+                                width: 200px
+                                background-color: #ba1f33
+                                border-radius: 20px 0 20px 20px
+                                padding: 10px
+                                .section-chat_content
+                                    font: 600 20px 'Roboto'
+                                    margin-bottom: 10px
+                                .section-chat_date
+                                    font: 400 14px 'Roboto'
+                        .other-message
+                            justify-content: start
+                            .section-chat_block-text
+                                background-color: #130a66
                     
+                        
 
 
 
