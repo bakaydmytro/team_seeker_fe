@@ -50,7 +50,7 @@
   font-weight: 400;
   font-style: normal;
   position: relative;
-  right: 50px;
+  /* right: 50px; */
 }
 
 .profile-img {
@@ -92,7 +92,6 @@
 }
 
 .change-profile-form {
-  background-color: #0b053b;
   padding: 10px;
 }
 
@@ -104,7 +103,7 @@
   margin-bottom: 10px;
   width: 350px;
   color: white;
-  height: 27px;
+  margin-right: 10px;
 }
 
 .input::placeholder {
@@ -139,4 +138,20 @@
 .error__color {
   color: #c32121;
   font-weight: 800;
+}
+
+h5{
+  margin-bottom: 5px;
+}
+
+.anticon svg{
+  display: none;
+}
+:where(.css-dev-only-do-not-override-tjsggz).ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload.ant-upload-select {
+  width: 52px;
+  height: 52px;
+  border: 3px solid #c32121;
+}
+:where(.css-dev-only-do-not-override-tjsggz).ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload.ant-upload-select:not(.ant-upload-disabled):hover{
+  border-color: #ffff
 }

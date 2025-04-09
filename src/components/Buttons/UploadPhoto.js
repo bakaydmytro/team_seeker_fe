@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { Flex, message, Upload } from 'antd';
-import axios from 'axios';
 import {API_URL, fetchRequest} from "../../service/FetchRequest"
 
 const UploadPhoto = ({ setAvatar }) => {

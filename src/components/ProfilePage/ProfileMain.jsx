@@ -10,6 +10,7 @@ import OkIcon from "../../img/icons/OkIcon.svg";
 import ProfileIcon from "../../img/icons/image 18.svg";
 import RenameIcon from "../../img/icons/RenameIcon.svg";
 import { useNavigate } from "react-router-dom";
+import UploadPhoto from "../Buttons/UploadPhoto"
 
 export default function ProfileMain() {
   const [email, setEmail] = useState("");
@@ -24,6 +25,7 @@ export default function ProfileMain() {
   const [emailError, setEmailError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [avatar, setAvatar] = useState(null);
 
   const navigate = useNavigate();
 
@@ -60,9 +62,14 @@ export default function ProfileMain() {
     if (!emailError && email) handleChange(e, "email", email, setEmail);
   };
   const changeUserName = (e) => {
-    if (!usernameError && username)
+    if (!usernameError && username) 
       handleChange(e, "username", username, setUserName);
   };
+
+
+  // const changeAvatar = (avatar)=>{
+  //   UpdateUserAvatar(avatar)
+  // }
 
   const usernameHandler = (e) => {
     const value = e.target.value;
@@ -122,11 +129,12 @@ export default function ProfileMain() {
           <form className="image-form">
             <input
               type="image"
-              src={ProfileIcon}
+              src={avatar}
               alt="Profile Icon"
               className="profile-img"
             />
-            <span className="change-profile-img">+</span>
+            {/* <span className="change-profile-img">+</span> */}
+            <UploadPhoto setAvatar={setAvatar} />
           </form>
           <div className="rename">
             <input
@@ -142,6 +150,7 @@ export default function ProfileMain() {
             <Button className="name-button" onClick={(e) => changeUserName(e)}>
               <img src={RenameIcon} alt="Rename Icon" className="rename-btn" />
             </Button>
+            
           </div>
           {usernameValid && usernameError && (
             <div className="error__color">{usernameError}</div>
