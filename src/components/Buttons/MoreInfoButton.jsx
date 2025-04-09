@@ -19,9 +19,6 @@ export default function Menu({info}) {
     localStorage.removeItem("token");
   };
 
-  useEffect(() => {
-    getUserData().then((response) => setUsername(response.username));
-  }, []);
 
     return (
         <div>

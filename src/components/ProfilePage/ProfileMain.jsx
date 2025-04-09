@@ -67,9 +67,9 @@ export default function ProfileMain() {
   };
 
 
-  const changeAvatar = (avatar)=>{
-    UpdateUserAvatar(avatar)
-  }
+  // const changeAvatar = (avatar)=>{
+  //   UpdateUserAvatar(avatar)
+  // }
 
   const usernameHandler = (e) => {
     const value = e.target.value;

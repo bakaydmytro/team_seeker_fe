@@ -1,5 +1,7 @@
+
+import "/Users/max/Desktop/ref/team_seeker_fe/src/reset.css"
 import './App.css';
-import Login from './components/Loginn/Login.js';
+import Login from './components/Login/Login.js';
 import Registration from './components/Registration/Registration';
 import MainPage from './components/MainPage/MainPage';
 import Search from './components/Search/Search.js';
