@@ -29,6 +29,21 @@ export const getAllUsersData = async (username = "") => {
 };
 
 
+export const getUserDotaHours = async (playtime_forever = "") => {
+  console.log("GET Request to:", `${API_URL}/api/games/dotahours?query=${playtime_forever}`);
+
+  try {
+    const encodedUsername = encodeURIComponent(playtime_forever);  
+    const response = await fetchRequest.get(`${API_URL}/api/games/dotahours?query=${encodedUsername}`);
+
+    console.log("API Response (getUserDotaHours):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (getUserDotaHours):", error.response);
+    return { data: [] };  
+  }
+};
+
 export const updateUserDataField = async (field, value, id) => {
   console.log("PUT Request to:", `${API_URL}/api/users/${id}`);
   console.log("Payload:", JSON.stringify({ [field]: value }));
@@ -86,3 +101,29 @@ export const loginUser = async (userData) => {
     return error.response;
   }
 };
+
+
+export const steamRedirect = async () => {
+  window.location.href = `${API_URL}/api/users/steam`;
+  const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+  try {
+    const response = await fetchRequest.get(`${API_URL}/api/users/steam`);
+    console.log("API Response (steam):", response.data);
+    if (token) {
+      localStorage.setItem("token", token);
+      window.history.replaceState(null, "", window.location.pathname);
+      // navigate("/ProfilePage"); 
+    }
+    return response.data;
+  } catch (error) {
+    console.error("API Error (steam):", error.response);
+    return error.response;
+  }
+};
+
+// export  const handleSteamLogin = () => {
+
+//   window.location.href = `${API_URL}/api/users/steam`;
+// };

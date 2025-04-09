@@ -93,14 +93,14 @@ export default function SearchMain() {
               filteredUsers.slice(0, visibleCount).map((user) => (
                 <div className="player-info-block" key={user.id}>
                   <div className="player-avatar">
-                    <img src={ProfileIcon} alt="User avatar" />
+                  <img src={user.avatar_url || ProfileIcon} alt="User avatar" onError={(e) => e.target.src = ProfileIcon} />
                     <span className={`status-indicator ${user.status}`}></span>
                   </div>
                   <div className="player-details">
                     <p className="player-name">{user.username}</p>
                     <div className="player-hours-block">
-                      <p>Email: </p>
-                      <p>{user.email}</p>
+                    <p>Hours played: </p>
+                    <p>{Math.floor((user.playtime_forever || 0) / 60)}h</p>
                     </div>
                     <div className="player-status-block">
                       <p>Status: </p>
