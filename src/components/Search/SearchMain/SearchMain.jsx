@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ProfileIcon from "../../../img/icons/image 18.svg";
 import { getAllUsersData } from "../../../service/UserService";
-import { io } from "socket.io-client";
-
-
-
-const socket = io("http://localhost:5000", {
-  query: { token: localStorage.getItem("token") },
-});
+import {createChat} from "../../../service/webSocket"
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 //! Фільтрація користувачів
@@ -23,6 +19,19 @@ export default function SearchMain() {
   const [filteredUsers, setFilteredUsers] = useState([]); // Відфільтровані користувачі
   const [searchTerm, setSearchTerm] = useState(""); // Текст пошуку
   const [visibleCount, setVisibleCount] = useState(5); // Видимі користувачі
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate()
+
+
+  const handleCreateChat = (recipientId) => {
+    createChat(recipientId, token)
+        .then(chat => {
+          localStorage.setItem("chat_id" , chat.id)
+          navigate("/Chat")
+          console.log("Chat created:",chat)
+        })
+        .catch(error => console.error("Failed to create chat", error));
+  };
 
   // Статус
   useEffect(() => {
@@ -114,7 +123,7 @@ export default function SearchMain() {
                       <p>{user.status}</p>
                     </div>
                   </div>
-                  <button className="chat-button">Chat</button>
+                    <button onClick={()=>handleCreateChat(user.id)} className="chat-button">Chat</button>
                 </div>
               ))
             ) : (

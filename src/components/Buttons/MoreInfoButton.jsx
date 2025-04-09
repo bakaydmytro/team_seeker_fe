@@ -15,10 +15,9 @@ export default function Menu({info}) {
         setIsOpen(!isOpen);
     };
 
-    const logOut = ()=>{
-        localStorage.removeItem('token')
-    }
-
+  const logOut = () => {
+    localStorage.removeItem("token");
+  };
 
 
     return (
