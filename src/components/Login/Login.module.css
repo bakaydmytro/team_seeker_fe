@@ -112,12 +112,8 @@
 
 .button_login:disabled {
   background: black;
-<<<<<<< HEAD
-}/*# sourceMappingURL=Login.module.css.map */
-=======
 } /*# sourceMappingURL=Login.module.css.map */
 
 .have_account{
   flex-wrap: wrap;
 }
->>>>>>> feat/77-remake-steam-btn-and-bugfix
