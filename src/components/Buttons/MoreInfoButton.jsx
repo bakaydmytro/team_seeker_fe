@@ -1,9 +1,10 @@
 import "./Buttons.css";
 
-import { Link , useNavigate} from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import {steamRedirect } from "../../service/UserService";
+import { Link} from "react-router-dom";
+import React, {useState } from "react";
 
-import ProfileIcon from "../../img/icons/image 18.svg";
+// import ProfileIcon from "../../img/icons/image 18.svg";
 import SteamIcon from "../../img/icons/Vector.svg";
 
 
@@ -39,7 +40,7 @@ export default function Menu({info}) {
                 <Link to="/ProfilePage" className="menu-item">
                     Edit profile
                 </Link>
-                <Link to="/link-steam" className="menu-item link-steam">
+                <Link onClick={() => steamRedirect()}  className="menu-item link-steam">
                     <img src={SteamIcon} alt="Steam" />
                     Link Steam
                 </Link>

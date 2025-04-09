@@ -195,3 +195,55 @@ button {
   border-color: #ba1f33;
   color: #08042e;
 }
+
+.steam-connect-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* !Steam connect button */
+.steam-connect-btn {
+  width: 220px;
+  height: 40px;
+  background: #ba1f33;
+  border: 1px solid #ba1f33;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.steam-connect-btn:hover{
+  background-color: #c32121;
+  border-color: #c32121;
+}
+
+.steam-text-normal {
+  color: white;
+  margin-right: 6px;
+  font-weight: normal;
+}
+
+.steam-text-bold {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.steam-text-bold > p{
+  margin-top: 0px;
+}
+
+.steam-disclaimer {
+  font-size: 10px;
+  margin-top: 2px;
+  color: #ccc;
+}

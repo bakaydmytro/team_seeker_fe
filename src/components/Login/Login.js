@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { loginUser,steamRedirect } from "../../service/UserService";
+import SteamConnect from "../Buttons/SteamConnect";
+import { loginUser} from "../../service/UserService";
 import style from "./Login.module.css";
 
 function Login() {
@@ -101,6 +102,8 @@ function Login() {
       case "password":
         setPasswordValid(true);
         break;
+        default:
+        break;
     }
   };
 
@@ -122,10 +125,6 @@ function Login() {
   // };
 
 
-  
-  const steamLogin = ()=> {
-    steamRedirect()
-  }
 
   return (
     <div className={style.container}>
@@ -140,6 +139,7 @@ function Login() {
               Click
             </Link>
           </p>
+          <SteamConnect/>
         </div>
         <form
           onSubmit={(e) =>
@@ -209,20 +209,13 @@ function Login() {
               style={{
                 backgroundColor: !formValid ? "#D3D3D3" : "#BA1F33",
                 cursor: !formValid ? "not-allowed" : "pointer",
+                marginLeft: '5px',
                 opacity: !formValid ? 0.6 : 1,
               }}
             >
               Log in
             </button>
-            <button 
-            onClick={()=>steamLogin()}
-            className={style.button_login} 
-            type="submit"
-            style={{
-              backgroundColor: '#BA1F33',
-              cursor: 'pointer', 
-              opacity: 1, 
-            }}>Steam Login</button>
+
             {fetchErrorEmail && (
               <div style={{ paddingTop: 10 + "px" }} className={style.error}>
                 Users not found
