@@ -1,14 +1,14 @@
 import "./ProfilePage.css";
 
 import React, { useEffect, useState } from "react";
-import { getUserData, updateUserDataField , steamRedirect } from "../../service/UserService";
+import { getUserData, updateUserDataField} from "../../service/UserService";
 
+import SteamConnect from "../Buttons/SteamConnect";
 import { Button } from "antd";
 import CancelIcon from "../../img/icons/CancelIcon.svg";
 import OkIcon from "../../img/icons/OkIcon.svg";
 import ProfileIcon from "../../img/icons/image 18.svg";
 import RenameIcon from "../../img/icons/RenameIcon.svg";
-import { ReactComponent as SteamIcon } from "../../img/icons/Vector.svg";
 import { useNavigate } from "react-router-dom";
 
 export default function ProfileMain() {
@@ -36,7 +36,7 @@ export default function ProfileMain() {
     try {
       const userDataResponse = await getUserData();
       setID(userDataResponse.id)
-      const userId = userDataResponse.id;
+      // const userId = userDataResponse.id;
       console.log(id)
       const updateResponse = await updateUserDataField(field, value, id)
 
@@ -95,19 +95,22 @@ export default function ProfileMain() {
     }
   };
 
-      const blurHandler = (e) => {
-        switch(e.target.name){
-          case 'username':
-            setUsernameValid(true)
-          case 'email':
-            setEmailValid(true)
-            break
-          case 'password':
-            setPasswordValid(true)
-            break
-        }
-          
-      }
+  const blurHandler = (e) => {
+    switch (e.target.name) {
+      case 'username':
+        setUsernameValid(true);
+        break;
+      case 'email':
+        setEmailValid(true);
+        break;
+      case 'password':
+        setPasswordValid(true);
+        break;
+      default:
+        break;
+    }
+  };
+  
       
       
 
@@ -220,9 +223,7 @@ export default function ProfileMain() {
           </div>
           <div className="form-block">
             <h2>Link your Steam account:</h2>
-            <Button onClick={() => steamRedirect()} className="steam-button" icon={<SteamIcon />}>
-              Log in
-            </Button>
+            <SteamConnect/>
           </div>
         </aside>
       </section>
