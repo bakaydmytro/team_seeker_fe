@@ -33,6 +33,21 @@ export default function SearchMain() {
         .catch(error => console.error("Failed to create chat", error));
   };
 
+  // Статус
+  useEffect(() => {
+    socket.on("userStatusChanged", ({ userId, status }) => {
+      setUserList((prevList) =>
+        prevList.map((user) =>
+          user.id === userId ? { ...user, status } : user
+        )
+      );
+    });
+  
+    return () => {
+      socket.off("userStatusChanged");
+    };
+  }, []);
+
   //! Завантаження користувачів
   useEffect(() => {
     const fetchUsers = async () => {
@@ -57,6 +72,7 @@ export default function SearchMain() {
     fetchUsers();
   }, [searchTerm]); 
 
+  
   //! Дебаунс-фільтрація пошуку
   useEffect(() => {
     const debounce = setTimeout(() => {
