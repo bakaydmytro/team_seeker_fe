@@ -22,7 +22,7 @@ export default function Main() {
           </p>
           <div className="button-block">
             <RegisterButton />
-            <Link to="ChooseGamePage">
+            <Link to="/">
               <Button className="learn-more-button ">Learn More</Button>
             </Link>
           </div>
@@ -36,7 +36,7 @@ export default function Main() {
           <img src={QuoteLogo} className="qoute-icon" alt="" />
 
           <span className="quote-section-print">
-            Medium length section heading goes here
+          Collaboration Starts Here
           </span>
           <p className="p qoute-p">
             At Team Seeker, we connect you with the ideal teammates to elevate

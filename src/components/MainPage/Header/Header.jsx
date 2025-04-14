@@ -6,9 +6,9 @@ import RegisterButton from "../../Buttons/RegisterButton";
 export default function Header() {
   return (
     <header>
-      <a className="logo" href="/">
+      <span className="logo">
         Team Seeker
-      </a>
+      </span>
       <div className="button-block">
         <RegisterButton />
         <LogInButton />
