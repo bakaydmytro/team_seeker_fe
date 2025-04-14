@@ -206,6 +206,7 @@ button {
 .steam-connect-btn {
   width: 220px;
   height: 40px;
+  margin-top: 20px;
   background: #ba1f33;
   border: 1px solid #ba1f33;
   border-radius: 4px;
@@ -239,7 +240,7 @@ button {
 }
 
 .steam-text-bold > p{
-  margin-top: 0px;
+  margin-bottom: 6px;
 }
 
 .steam-disclaimer {
