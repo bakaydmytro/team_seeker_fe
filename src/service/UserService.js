@@ -1,5 +1,5 @@
 import { API_URL, fetchRequest } from "./FetchRequest";
-
+import axios from "axios";
 export const getUserData = async () => {
   console.log("GET Request to:", `${API_URL}/api/users/me`);
 
@@ -74,19 +74,40 @@ export const signupUser = async (userData) => {
   }
 };
 
-export const UpdateUserAvatar = async (userData) => {
-  console.log("POST Request to:", `${API_URL}/api/users/avatar`);
-  console.log("Payload:", JSON.stringify(userData));
+// export const UpdateUserAvatar = async (userData) => {
+//   console.log("POST Request to:", `${API_URL}/api/users/avatar`);
+//   console.log("Payload:", JSON.stringify(userData));
+
+//   try {
+//     const response = await fetchRequest.put(`${API_URL}/api/users/avatar`, userData);
+//     console.log("API Response (signupUser):", response.data);
+//     return response.data;
+//   } catch (error) {
+//     console.error("API Error (signupUser):", error.response);
+//     return error.response;
+//   }
+// };
+
+export const UpdateUserAvatar = async (formData) => {
+  console.log("PUT Request to:", `${API_URL}/api/users/avatar`);
+  console.log("Payload: FormData");
 
   try {
-    const response = await fetchRequest.put(`${API_URL}/api/users/avatar`, userData);
-    console.log("API Response (signupUser):", response.data);
+    const response = await axios.put(`${API_URL}/api/users/avatar`, formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        // НЕ став `Content-Type`, Axios сам поставить multipart/form-data!
+      },
+    });
+    console.log("API Response (UpdateUserAvatar):", response.data);
     return response.data;
   } catch (error) {
-    console.error("API Error (signupUser):", error.response);
+    console.error("API Error (UpdateUserAvatar):", error.response);
     return error.response;
   }
 };
+
+
 
 export const loginUser = async (userData) => {
   console.log("POST Request to:", `${API_URL}/api/users/login`);

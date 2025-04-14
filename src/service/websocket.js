@@ -43,6 +43,18 @@ export const connectSocket = () => {
   
 };
 
+export const onUserStatusChanged = (callback) => {
+  if (socket) {
+    socket.on("userStatusChanged", callback);
+  }
+};
+
+export const removeUserStatusChangedListener = () => {
+  if (socket) {
+    socket.off("userStatusChanged");
+  }
+};
+
 export const disconnectSocket = () => {
   if (socket) {
     socket.disconnect();
@@ -127,3 +139,4 @@ export const createChat = async (recipientId, token) => {
     throw error;
   }
 };
+

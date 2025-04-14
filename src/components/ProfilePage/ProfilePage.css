@@ -7,7 +7,16 @@
   gap: 80px;
 }
 
+.img_block{
+  border-radius: 999px;
+  padding: 15px;
+  border: 2px solid #ba1f33;
+}
+.img_block img {
+  border-radius: 999px;
+}
 .profile-section {
+  justify-content: space-evenly;
   display: flex;
   align-items: center;
   gap: 20%;
@@ -30,6 +39,7 @@
 }
 
 .image-form {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -38,6 +48,8 @@
 }
 
 .change-profile-img {
+  position: absolute;
+  right: 0;
   background-color: #ba1f33;
   border-radius: 100%;
   width: 40px;
@@ -45,11 +57,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 45px;
-  font-family: "Rubik Glitch", system-ui;
-  font-weight: 400;
+  font: normal 400 45px "Rubik Glitch", system-ui;
   font-style: normal;
-  position: relative;
   /* right: 50px; */
 }
 

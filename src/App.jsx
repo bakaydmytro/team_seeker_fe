@@ -1,6 +1,4 @@
 
-import "/Users/max/Desktop/ref/team_seeker_fe/src/reset.css"
-import './App.css';
 import Login from './components/Login/Login.js';
 import Registration from './components/Registration/Registration';
 import MainPage from './components/MainPage/MainPage';
@@ -12,6 +10,8 @@ import ProfilePage from './components/ProfilePage/ProfilePage.js';
 import {Routes , Route , Link} from 'react-router-dom';
 
 import React from 'react';
+import './App.css';
+
 
 function App() {
   
