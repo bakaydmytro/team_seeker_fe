@@ -1,13 +1,13 @@
 import "./ProfilePage.css";
 
 import React, { useEffect, useState } from "react";
-import { getUserData, updateUserDataField} from "../../service/UserService";
+import { getUserData, updateUserDataField,  UpdateUserAvatar} from "../../service/UserService";
 
 import SteamConnect from "../Buttons/SteamConnect";
 import { Button } from "antd";
 import CancelIcon from "../../img/icons/CancelIcon.svg";
 import OkIcon from "../../img/icons/OkIcon.svg";
-import ProfileIcon from "../../img/icons/image 18.svg";
+import ProfileIcon from '../../img/icons/image 18.svg';
 import RenameIcon from "../../img/icons/RenameIcon.svg";
 import { useNavigate } from "react-router-dom";
 import UploadPhoto from "../Buttons/UploadPhoto"
@@ -29,9 +29,31 @@ export default function ProfileMain() {
 
   const navigate = useNavigate();
 
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
+    const formData = new FormData();
+    formData.append("avatar_url", file);
+  
+    try {
+      
+      const res = await UpdateUserAvatar(formData);
+      const getAvatar = await getUserData().then(response => setAvatar(response.avatar_url))
+
+      if(avatar) console.log(avatar)
+      
+      
+    } catch (err) {
+      console.error("Avatar upload error:", err);
+    }
+  };
+  
   useEffect(() => {
     getUserData();
-  }, [navigate]);
+  const getAvatar = getUserData().then(response => setAvatar(response.avatar_url))
+
+  }, []);
 
   const handleChange = async (e, field, value, setValue, setEmailError) => {
     e.preventDefault();
@@ -66,10 +88,6 @@ export default function ProfileMain() {
       handleChange(e, "username", username, setUserName);
   };
 
-
-  // const changeAvatar = (avatar)=>{
-  //   UpdateUserAvatar(avatar)
-  // }
 
   const usernameHandler = (e) => {
     const value = e.target.value;
@@ -127,14 +145,18 @@ export default function ProfileMain() {
       <section className="profile-section">
         <aside className="left-side-profile-block">
           <form className="image-form">
-            <input
-              type="image"
-              src={avatar}
-              alt="Profile Icon"
-              className="profile-img"
-            />
-            {/* <span className="change-profile-img">+</span> */}
-            <UploadPhoto setAvatar={setAvatar} />
+            <div className="img_block">
+              <img
+                type="image"
+                src={avatar || ProfileIcon}
+                alt="Profile Icon"
+                className="profile-img"
+              />
+            </div>
+            <label className="change-profile-img">
+              +
+              <input type="file" accept="image/*" onChange={onFileChange} hidden />
+            </label>
           </form>
           <div className="rename">
             <input

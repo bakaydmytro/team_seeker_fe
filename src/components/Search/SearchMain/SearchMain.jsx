@@ -1,12 +1,25 @@
+// import React, { useEffect, useState } from "react";
+// import ProfileIcon from "../../../img/icons/image 18.svg";
+// import { getAllUsersData } from "../../../service/UserService";
+// import {createChat} from "../../../service/webSocket"
+// import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+
+
+// //! Фільтрація користувачів
+// const filterUsers = (searchText, listOfUsers) => {
+//   if (!searchText) return listOfUsers;
+//   return listOfUsers.filter(({ username }) =>
+//     username.toLowerCase().includes(searchText.toLowerCase())
+//   );
+// };
+
 import React, { useEffect, useState } from "react";
 import ProfileIcon from "../../../img/icons/image 18.svg";
 import { getAllUsersData } from "../../../service/UserService";
-import {createChat} from "../../../service/webSocket"
-import { Link } from "react-router-dom";
+import { createChat, connectSocket, onUserStatusChanged, removeUserStatusChangedListener } from "../../../service/webSocket";
 import { useNavigate } from "react-router-dom";
 
-
-//! Фільтрація користувачів
 const filterUsers = (searchText, listOfUsers) => {
   if (!searchText) return listOfUsers;
   return listOfUsers.filter(({ username }) =>
@@ -15,40 +28,52 @@ const filterUsers = (searchText, listOfUsers) => {
 };
 
 export default function SearchMain() {
-  const [userList, setUserList] = useState([]); // Динамічні дані з API
-  const [filteredUsers, setFilteredUsers] = useState([]); // Відфільтровані користувачі
-  const [searchTerm, setSearchTerm] = useState(""); // Текст пошуку
-  const [visibleCount, setVisibleCount] = useState(5); // Видимі користувачі
+  const [userList, setUserList] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [visibleCount, setVisibleCount] = useState(5);
   const token = localStorage.getItem('token');
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const handleCreateChat = (recipientId) => {
     createChat(recipientId, token)
-        .then(chat => {
-          localStorage.setItem("chat_id" , chat.id)
-          navigate("/Chat")
-          console.log("Chat created:",chat)
-        })
-        .catch(error => console.error("Failed to create chat", error));
+      .then(chat => {
+        localStorage.setItem("chat_id", chat.id);
+        navigate("/Chat");
+      })
+      .catch(error => console.error("Failed to create chat", error));
   };
 
-  // Статус
   useEffect(() => {
-    socket.on("userStatusChanged", ({ userId, status }) => {
-      setUserList((prevList) =>
-        prevList.map((user) =>
-          user.id === userId ? { ...user, status } : user
-        )
-      );
-    });
-  
+    // Connect to socket and set up status listener
+    let isMounted = true;
+    
+    const setupSocket = async () => {
+      try {
+        await connectSocket();
+        
+        onUserStatusChanged(({ userId, status }) => {
+          if (isMounted) {
+            setUserList(prevList =>
+              prevList.map(user =>
+                user.id === userId ? { ...user, status } : user
+              )
+            );
+          }
+        });
+      } catch (error) {
+        console.error("Socket connection error:", error);
+      }
+    };
+
+    setupSocket();
+
     return () => {
-      socket.off("userStatusChanged");
+      isMounted = false;
+      removeUserStatusChangedListener();
     };
   }, []);
 
-  //! Завантаження користувачів
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -70,10 +95,8 @@ export default function SearchMain() {
     };
 
     fetchUsers();
-  }, [searchTerm]); 
+  }, [searchTerm]); // Changed dependency to searchTerm instead of navigate
 
-  
-  //! Дебаунс-фільтрація пошуку
   useEffect(() => {
     const debounce = setTimeout(() => {
       setFilteredUsers(filterUsers(searchTerm, userList));
@@ -82,12 +105,9 @@ export default function SearchMain() {
     return () => clearTimeout(debounce);
   }, [searchTerm, userList]);
 
-  //! Обробник кнопки "Show more"
-  console.log("Total Users:", filteredUsers.length, "Visible Count:", visibleCount);
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
   };
-
   return (
     <section className="search-section">
       <div className="container search-container">

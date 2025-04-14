@@ -2,7 +2,7 @@
 import { format } from 'date-fns';
 import ProfileIcon from '../../img/icons/image 18.svg';
 import './ChatMain.css';
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef, useCallback} from 'react';
 import { getUserData } from '../../service/UserService.js';
 import { useNavigate } from 'react-router-dom';
 import SendButton from '../Buttons/SendButton.js'
@@ -25,6 +25,8 @@ function ChatMain() {
     const [userInfo, setUserInfo] = useState('');
     const [usersChat, setUsersChat] = useState([]);
     const [chat_id, setChatId] = useState(null);
+    const [username , setUsername] = useState('')
+    const [avatar , setAvatar] = useState('')
     const token = localStorage.getItem('token');
     const [check , setCheck] = useState("")
     const [lastMessage , setLastMessage] = useState('')
@@ -44,11 +46,9 @@ function ChatMain() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            // 1. Отримуємо всі чати користувача (очікуємо результат)
             const chats = await getUserChats();
             console.log("User chats:", chats);
             
-            // 2. Для кожного чату отримуємо повідомлення та останнє повідомлення
             const chatsWithLastMessages = await Promise.all(
               chats.map(async chat => {
                 const messagesRes = await getMessagesAll(chat.id);
@@ -76,6 +76,7 @@ function ChatMain() {
         
         const chat_id = localStorage.getItem("chat_id")
         if (!chat_id) return 
+        
         setChatId(chat_id)
         initChat(chat_id)
         
@@ -95,7 +96,7 @@ function ChatMain() {
             getUsersAll(chat_id).then(response => console.log("DSXFCGHVBJKNML," ,response))
             getUserChats().then(response => {
                 setUsersChat(response)
-                console.log("1234567890-=" , response.map (data  => (console.log(data.Users))))
+                console.log("1234567890-=" , response.map (data  => (console.log(data))))
             })
             
             connectSocket()
@@ -142,12 +143,8 @@ function ChatMain() {
                     return updatedMessages;
                 });
              };
-        
-            onNewMessage(handleNewMessage);
-         
-            
-        
-            
+
+            onNewMessage(handleNewMessage);  
     }
     
  
@@ -182,8 +179,10 @@ function ChatMain() {
                             <h1>Message</h1>
                         </div>
                         <div className="section-title_block-profile-info">
-                            <img className='section-title_photo' src={userInfo.avatar_url || ProfileIcon} alt="Profile Icon" />
-                            <p className='section-title_userName'>Name</p>
+                            <img
+                                style={{width:"50px" ,  height: "51px" , borderRadius: "30px"}}
+                                className='section-title_photo' src={avatar || ProfileIcon} alt="Profile Icon" />
+                            <p className='section-title_userName'>{username}</p>
                             <div 
                                 className='section-title_checker'
                                 style={{
@@ -196,33 +195,6 @@ function ChatMain() {
                 <div className='container_chat'>
                     <section className='main_section-usersChat'>
                         <div className='section-usersChat_block'>
-                            {/* <div  className='section-usersChat_userBlock'> */}
-                                {/* <div className='section-usersChat_blockAvatar'>
-                                    <img className='section-usersChat_avatar' src={ProfileIcon}/>
-                                    <div className='section-usersChat_online'></div>
-                                </div> */}
-                                {/* {
-                                    usersChat.map((data) => {
-                                        {data.Users.map(data => {
-                                            console.log( data.id , data.username)
-                                            return (
-                                                <div className='section-usersChat_infoUsers'>
-                                                    <div className='section-usersChat_blockText'>
-                                                        <p>userName - {data.username}</p>
-                                                        <p>id - {data.id}</p>
-                                                        <p>4.20pm</p>
-                                                    </div>
-                                                    <div className='section-usersChat_blockText'>
-                                                        <p>ldfdkfndkfmkd</p>
-                                                        <p>1</p>
-                                                    </div>
-                                                </div>
-                                            )
-                                              
-                                            
-                                        })}
-                                    })
-                                } */}
                                 {usersChat.flatMap(chat => 
                                     chat.Users?.map(user => {
                                         
@@ -231,7 +203,10 @@ function ChatMain() {
                                                 key={`${chat.id}-${user.id}`} 
                                                 onClick={() => {
                                                     setChatId(chat.id); 
+                                                    setAvatar(user.avatar_url)
+                                                    setUsername(user.username)
                                                     localStorage.setItem("chat_id", chat.id);
+                                                    console.log("AVVATAR" ,user.avatar_url)
                                                 }} 
 
                                                 className={`section-usersChat_userBlock ${Number(chat.id) === Number(chat_id) ? 'active' : ''}`}                                            >
@@ -306,6 +281,13 @@ function ChatMain() {
 }
 
 export default ChatMain;
+
+
+
+
+
+
+
 
 // import ProfileIcon from '../../img/icons/image 18.svg';
 // import './ChatMain.css';

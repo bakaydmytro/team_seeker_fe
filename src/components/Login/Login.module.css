@@ -13,7 +13,8 @@
 .container {
   padding: 50px 0;
   min-height: 100vh;
-  background: #08042e;
+  overflow: scroll;
+  background: #08042E;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,8 +113,4 @@
 
 .button_login:disabled {
   background: black;
-}
-
-.have_account{
-  flex-wrap: wrap;
-}
+}/*# sourceMappingURL=Login.module.css.map */
