@@ -28,7 +28,7 @@ jobs:
       - name: Build, tag, and push image to ECR
         run: |
           IMAGE_UI_URL=639241976412.dkr.ecr.eu-central-1.amazonaws.com/team_seeker-ui:latest
-          docker build -t $IMAGE_UI_URL .
+          docker build --build-arg REACT_APP_API_URL=https://j9ixmzqpp3.eu-central-1.awsapprunner.com -t $IMAGE_UI_URL .
           docker push $IMAGE_UI_URL
 
       - name: Trigger App Runner deployment
