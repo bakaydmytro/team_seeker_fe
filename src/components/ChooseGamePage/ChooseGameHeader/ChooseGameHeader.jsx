@@ -41,7 +41,7 @@ export default function Header(){
 
     return(
         <header>
-            <a className='logo' href="/">Team Seeker</a>
+            <a className='logo'>Team Seeker</a>
             <div className="button-block">
             <Button className="Profile-btn" type="link" style={{ all: 'unset' }}>
                 { data && data && data.avatar_url?(
