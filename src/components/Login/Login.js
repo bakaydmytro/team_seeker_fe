@@ -42,7 +42,7 @@ function Login() {
   };
   const passwordHandler = (e) => {
     setPassword(e.target.value);
-    const re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    const re = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|_;+=~`<>-]).{8,}$/;
     if (!re.test(e.target.value)) {
       setPasswordError(
         "The password must be at least 8 characters long, one uppercase letter and one symbol."
@@ -106,23 +106,6 @@ function Login() {
         break;
     }
   };
-
-
-  // useEffect(() => {
-  //   const params = new URLSearchParams(window.location.search);
-  //   const token = params.get("token");
-
-  //   if (token) {
-  //     localStorage.setItem("token", token);
-  //     window.history.replaceState(null, "", window.location.pathname);
-  //     navigate("/ProfilePage"); 
-  //   }
-  // }, [navigate]);
-
-
-  // const handleSteamLogin = () => {
-  //   window.location.href = "http://localhost:5001/api/users/steam";
-  // };
 
 
 

@@ -28,11 +28,13 @@
 .friends_block{
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
+    gap: 15px;
+
 }
 
 .player_info_block{
     width: 49%;
+    margin: 0;
 }
 
 .active_button {

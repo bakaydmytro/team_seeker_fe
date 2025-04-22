@@ -10,13 +10,19 @@
     width: 100%
 :where(.css-dev-only-do-not-override-1d4w9r2).ant-space-vertical
     width: 80%
-.container-chat
+:where(.css-dev-only-do-not-override-1v5z42l).ant-space
+    width: 100%
 
+// .container
+//     width: 100% !important
+
+
+.container-chatMain
     .main
-        padding: 0 40px
-        height: 75vh
+        // padding: 0 40px
+        // height: 75vh
         .main_section-title
-            margin-bottom: 30px
+            background: #12053f
             .section-title_wrapper
                 padding: 0 0 10px 20px
                 display: flex
@@ -33,10 +39,21 @@
                         margin-right: 10px
         .container_chat
             display: flex
-            gap: 30px
             height: 100%
             .main_section-usersChat
                 flex-basis: 30%
+                // background: #12053f
+                border: 2px solid #ff000045
+                .section-title_block-title 
+                    padding: 20px 0 0 20px
+                    margin-bottom: 20px
+                    h1
+                        color: #ba1f33
+                        font-family: "Rubik Glitch", system-ui
+                        font-weight: 400
+                        font-style: normal
+                        font-size: 2em
+                        
                 .section-usersChat_block
                     .section-usersChat_userBlock
                         padding: 10px
@@ -65,20 +82,46 @@
                                 display: flex
                                 justify-content: space-between
                                 p
+                                    font: 400 16px  "Roboto"
                     .section-usersChat_userBlock.active
                         background: rgb(255, 0, 0,.3)
+                .main_section_search-block
+                    margin-bottom: 20px
+                    display: flex
+                    justify-content: center
+                    input
+                        width: 90%
 
             .main_section-chat
                 flex-basis: 70%
                 display: flex
+                flex-direction: column
                 justify-content: end
+                height: 100%
+                .section-title_block-profile-info
+                    display: flex
+                    padding: 10px
+                    align-items: center
+                    border: 2px solid #ff00004f
+                    border-left: 0px
+                    p
+                        font: 400 16px 'Roboto'
+                    img
+                        margin-right: 10px
+
                 .section-chat_block
                     width: 100%
                     display: flex
                     flex-direction: column
                     justify-content: space-between
+                    border-width: 0 2px 2px 0
+                    border-style: solid
+                    border-color: rgba(255, 0, 0, 0.2705882353)
+                    background-color: #12053f
+                    height: 78vh
                     .section-chat_wrapper
-                        max-height: 65vh
+                        
+                        padding: 20px
                         overflow: scroll
                         .section-chat_block-info
                             display: flex
@@ -100,6 +143,7 @@
                                 border-radius: 0px 20px 20px 20px
                                 background-color: #130a66
                     .section-chat_block-button
+                        padding: 20px
                         display: flex
                         justify-content: center
                     
