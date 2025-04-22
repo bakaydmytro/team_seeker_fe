@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from "react";
 import ProfileIcon from "../../../img/icons/image 18.svg";
 import { getAllUsersData } from "../../../service/UserService";
@@ -12,6 +11,9 @@ export const filterUsers = (searchText, listOfUsers) => {
     username.toLowerCase().includes(searchText.toLowerCase())
   );
 };
+
+// import { getUsersByGame } from "../../../service/UserService";
+
 
 export default function SearchMain() {
   const [userList, setUserList] = useState([]);
