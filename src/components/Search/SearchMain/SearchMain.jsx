@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProfileIcon from "../../../img/icons/image 18.svg";
 import { getAllUsersData } from "../../../service/UserService";
 import { createChat, connectSocket, onUserStatusChanged, removeUserStatusChangedListener } from "../../../service/webSocket";
-import { useNavigate , useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";  // Залишили один варіант імпорту
 
 export const filterUsers = (searchText, listOfUsers) => {
   if (!searchText) return listOfUsers;
@@ -12,9 +12,6 @@ export const filterUsers = (searchText, listOfUsers) => {
   );
 };
 
-// import { getUsersByGame } from "../../../service/UserService";
-
-
 export default function SearchMain() {
   const [userList, setUserList] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -22,12 +19,14 @@ export default function SearchMain() {
   const [visibleCount, setVisibleCount] = useState(5);
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
-
+  
+  // Отримуємо параметри з URL
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const appid = queryParams.get('appid');
+  const appid = queryParams.get('appid') || 730;  
 
-  // //! Фільтрація користувачів
+
+  // Фільтрація користувачів за ім'ям
   const filterUsers = (searchText, listOfUsers) => {
     if (!searchText) return listOfUsers;
     return listOfUsers.filter(({ username }) =>
@@ -45,8 +44,6 @@ export default function SearchMain() {
   };
 
   useEffect(() => {
-    // getUsersByGame();
-    // Connect to socket and set up status listener
     let isMounted = true;
 
     const setupSocket = async () => {
@@ -76,14 +73,9 @@ export default function SearchMain() {
   }, []);
 
   useEffect(() => {
-    console.log("Current appid:", appid); // Логуємо значення appid
-    // інший код...
-  }, [appid]);
-  
-  useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const usersData = await getAllUsersData(searchTerm.trim() ? searchTerm : "", 1, 100, appid);
+        const usersData = await getAllUsersData(searchTerm.trim() ? searchTerm : "", appid);  // Використовуємо appid з URL
         console.log('Users data from API:', usersData); // Логуємо всю відповідь
         if (usersData?.data && Array.isArray(usersData.data)) {
           setUserList(usersData.data);
@@ -101,7 +93,7 @@ export default function SearchMain() {
     };
 
     fetchUsers();
-  }, [searchTerm]); 
+  }, [searchTerm, appid]); // Виконуємо запит при зміні searchTerm або appid
 
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -114,7 +106,6 @@ export default function SearchMain() {
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
   };
-
 
   return (
     <section className="search-section">
