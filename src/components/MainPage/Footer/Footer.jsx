@@ -11,7 +11,7 @@ export default function Footer() {
     <footer>
       <section className="footer-container">
         <div className="first-footer-block">
-          <a className="logo" href="/">
+          <a className="logo" >
             Team Seeker
           </a>
           <div className="top-footer-block">
@@ -22,19 +22,19 @@ export default function Footer() {
             <a className="footer-links">User Reviews</a>
           </div>
           <div className="icon-footer-section">
-            <a href="" className="icon">
+            <a  className="icon">
               <img src={FacebookIcon} alt="" />
             </a>
-            <a href="" className="icon">
+            <a  className="icon">
               <img src={InstagramIcon} alt="" />
             </a>
-            <a href="" className="icon">
+            <a  className="icon">
               <img src={LinkedInIcon} alt="" />
             </a>
-            <a href="" className="icon">
+            <a className="icon">
               <img src={XIcon} alt="" />
             </a>
-            <a href="" className="icon">
+            <a  className="icon">
               <img src={YoutubeIcon} alt="" />
             </a>
           </div>

@@ -29,20 +29,41 @@ export const getAllUsersData = async (username = "") => {
 };
 
 
-export const getUserDotaHours = async (playtime_forever = "") => {
-  console.log("GET Request to:", `${API_URL}/api/games/dotahours?query=${playtime_forever}`);
+// export const getUsersByGame = async (appid, query = "", page = 1, limit = 10) => {
+//   // Перевірка на наявність appid
+//   if (!appid) {
+//     console.error("API Error: appid is required");
+//     return { data: [] };
+//   }
 
-  try {
-    const encodedUsername = encodeURIComponent(playtime_forever);  
-    const response = await fetchRequest.get(`${API_URL}/api/games/dotahours?query=${encodedUsername}`);
+//   const url = `${API_URL}/api/users/search?query=${encodeURIComponent(query)}&appid=${appid}&page=${page}&limit=${limit}`;
+  
+//   try {
+//     console.log(`GET Request to: ${url}`);
+//     const response = await fetchRequest.get(url);
+    
+//     // Перевірка наявності даних
+//     if (response.data && Array.isArray(response.data)) {
+//       // Для кожного користувача, додати поле playtime_forever
+//       const usersWithPlaytime = response.data.map(user => ({
+//         ...user,
+//         playtime_forever: user.playtime_forever || 0 // Якщо дані про години відсутні, ставимо 0
+//       }));
+//       console.log("playtime_forever", usersWithPlaytime);
+//       return usersWithPlaytime;
+//     } else {
+//       console.error("No valid user data found:", response.data);
+//       return { data: [] };
+//     }
+//   } catch (error) {
+//     console.error(`API Error (getUsersByGame appid=${appid}):`, error.response || error);
+//     return { data: [] };
+//   }
+// };
 
-    console.log("API Response (getUserDotaHours):", response.data);
-    return response.data;
-  } catch (error) {
-    console.error("API Error (getUserDotaHours):", error.response);
-    return { data: [] };  
-  }
-};
+
+
+
 
 export const updateUserDataField = async (field, value, id) => {
   console.log("PUT Request to:", `${API_URL}/api/users/${id}`);

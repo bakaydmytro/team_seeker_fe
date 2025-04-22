@@ -1,31 +1,10 @@
-// import React, { useEffect, useState } from "react";
-// import ProfileIcon from "../../../img/icons/image 18.svg";
-// import { getAllUsersData } from "../../../service/UserService";
-// import {createChat} from "../../../service/webSocket"
-// import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-
-
-// //! Фільтрація користувачів
-// const filterUsers = (searchText, listOfUsers) => {
-//   if (!searchText) return listOfUsers;
-//   return listOfUsers.filter(({ username }) =>
-//     username.toLowerCase().includes(searchText.toLowerCase())
-//   );
-// };
-
 import React, { useEffect, useState } from "react";
 import ProfileIcon from "../../../img/icons/image 18.svg";
 import { getAllUsersData } from "../../../service/UserService";
 import { createChat, connectSocket, onUserStatusChanged, removeUserStatusChangedListener } from "../../../service/webSocket";
 import { useNavigate } from "react-router-dom";
-
-const filterUsers = (searchText, listOfUsers) => {
-  if (!searchText) return listOfUsers;
-  return listOfUsers.filter(({ username }) =>
-    username.toLowerCase().includes(searchText.toLowerCase())
-  );
-};
+// import { getUsersByGame } from "../../../service/UserService";
+import { useLocation } from 'react-router-dom';
 
 export default function SearchMain() {
   const [userList, setUserList] = useState([]);
@@ -34,6 +13,18 @@ export default function SearchMain() {
   const [visibleCount, setVisibleCount] = useState(5);
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const appid = queryParams.get('appid');
+
+  // //! Фільтрація користувачів
+  const filterUsers = (searchText, listOfUsers) => {
+    if (!searchText) return listOfUsers;
+    return listOfUsers.filter(({ username }) =>
+      username.toLowerCase().includes(searchText.toLowerCase())
+    );
+  };
 
   const handleCreateChat = (recipientId) => {
     createChat(recipientId, token)
@@ -45,13 +36,14 @@ export default function SearchMain() {
   };
 
   useEffect(() => {
+    // getUsersByGame();
     // Connect to socket and set up status listener
     let isMounted = true;
-    
+
     const setupSocket = async () => {
       try {
         await connectSocket();
-        
+
         onUserStatusChanged(({ userId, status }) => {
           if (isMounted) {
             setUserList(prevList =>
@@ -75,10 +67,15 @@ export default function SearchMain() {
   }, []);
 
   useEffect(() => {
+    console.log("Current appid:", appid); // Логуємо значення appid
+    // інший код...
+  }, [appid]);
+  
+  useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const usersData = await getAllUsersData(searchTerm.trim() ? searchTerm : "", 1, 100);
-
+        const usersData = await getAllUsersData(searchTerm.trim() ? searchTerm : "", 1, 100, appid);
+        console.log('Users data from API:', usersData); // Логуємо всю відповідь
         if (usersData?.data && Array.isArray(usersData.data)) {
           setUserList(usersData.data);
           setFilteredUsers(usersData.data);
@@ -95,7 +92,7 @@ export default function SearchMain() {
     };
 
     fetchUsers();
-  }, [searchTerm]); // Changed dependency to searchTerm instead of navigate
+  }, [searchTerm]); 
 
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -108,6 +105,8 @@ export default function SearchMain() {
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
   };
+
+
   return (
     <section className="search-section">
       <div className="container search-container">
@@ -129,21 +128,25 @@ export default function SearchMain() {
               filteredUsers.slice(0, visibleCount).map((user) => (
                 <div className="player-info-block" key={user.id}>
                   <div className="player-avatar">
-                  <img src={user.avatar_url || ProfileIcon} alt="User avatar" onError={(e) => e.target.src = ProfileIcon} />
+                    <img src={user.avatar_url || ProfileIcon} alt="User avatar" onError={(e) => e.target.src = ProfileIcon} />
                     <span className={`status-indicator ${user.status}`}></span>
                   </div>
                   <div className="player-details">
                     <p className="player-name">{user.username}</p>
                     <div className="player-hours-block">
-                    <p>Hours played: </p>
-                    <p>{Math.floor((user.playtime_forever || 0) / 60)}h</p>
+                      <p>Hours played: </p>
+                      <p>
+                        {user.playtime_forever
+                          ? `${(Number(user.playtime_forever))}h`
+                          : "N/A"}
+                      </p>
                     </div>
                     <div className="player-status-block">
                       <p>Status: </p>
                       <p>{user.status}</p>
                     </div>
                   </div>
-                    <button onClick={()=>handleCreateChat(user.id)} className="chat-button">Chat</button>
+                  <button onClick={() => handleCreateChat(user.id)} className="chat-button">Chat</button>
                 </div>
               ))
             ) : (

@@ -3,11 +3,12 @@ import Login from './components/Login/Login.js';
 import Registration from './components/Registration/Registration';
 import MainPage from './components/MainPage/MainPage';
 import Search from './components/Search/Search.js';
-import Chat from './components/Chat/Chat.js'
+import Chat from './components/Chat/Chat.js';
+import FriendsPage from './components/ProfilePage/FriendsPage/FriendsPage.js';
 
 import ChooseGamePage from './components/ChooseGamePage/ChooseGamePage.js';
 import ProfilePage from './components/ProfilePage/ProfilePage.js';
-import {Routes , Route , Link} from 'react-router-dom';
+import {Routes , Route} from 'react-router-dom';
 
 import React from 'react';
 import './App.css';
@@ -27,6 +28,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/Search' element={<Search/>}/>
         <Route path='/Chat' element={<Chat/>}/>
+        <Route path='/FriendsPage' element={<FriendsPage/>}/>
       </Routes>
     </div>
   );
