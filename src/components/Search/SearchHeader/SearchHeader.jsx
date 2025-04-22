@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <header>
-      <a className="logo" href="/">
+      <a className="logo">
         Team Seeker
       </a>
       <div className="button-block">

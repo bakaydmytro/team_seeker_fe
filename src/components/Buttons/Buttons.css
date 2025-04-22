@@ -248,3 +248,9 @@ button {
   margin-top: 2px;
   color: #ccc;
 }
+
+.friends-btn:hover{
+  background-color: #c32121 !important;
+  border-color: #c32121 !important;
+  color: #08042e !important;
+}
