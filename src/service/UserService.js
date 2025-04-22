@@ -83,7 +83,6 @@ export const UpdateUserAvatar = async (formData) => {
     const response = await axios.put(`${API_URL}/api/users/avatar`, formData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-        // НЕ став `Content-Type`, Axios сам поставить multipart/form-data!
       },
     });
     console.log("API Response (UpdateUserAvatar):", response.data);

@@ -1,6 +1,7 @@
 import Footer from "../MainPage/Footer/Footer";
 import ProfileHeader from "./ProfileHeader";
 import ProfileMain from "./ProfileMain";
+import UserPage from "./UserPage"
 
 export default function ChooseGamePage() {
   return (

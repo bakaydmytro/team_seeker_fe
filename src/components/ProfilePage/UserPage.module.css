@@ -1,0 +1,20 @@
+
+.h1{
+    font: 400 54px "Rubik Glitch", system-ui;
+}
+.profile_section_username{
+    font: 400 32px "Roboto", system-ui;
+
+}
+.profile_container img{
+    width: 200px;
+}
+.profile_container{
+    gap: 20px !important;
+}
+.profile_section{
+    justify-content: start !important;
+}
+.left_side_profile_block{
+    flex-direction: row !important;
+}

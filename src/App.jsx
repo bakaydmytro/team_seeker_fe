@@ -6,6 +6,9 @@ import Search from './components/Search/Search.js';
 import Chat from './components/Chat/Chat.js';
 import FriendsPage from './components/ProfilePage/FriendsPage/FriendsPage.js';
 
+import UserPage from  "./components/ProfilePage/UserPage.jsx"
+import EditProfile from  "./components/ProfilePage/EditProfile.jsx"
+
 import ChooseGamePage from './components/ChooseGamePage/ChooseGamePage.js';
 import ProfilePage from './components/ProfilePage/ProfilePage.js';
 import {Routes , Route} from 'react-router-dom';
@@ -23,7 +26,10 @@ function App() {
       <Routes>
         <Route path='/' element={<MainPage/>}/>
         <Route path='/ChooseGamePage' element={<ChooseGamePage/>}/>
-        <Route path='/ProfilePage' element={<ProfilePage/>}/>
+          <Route path='/ProfilePage' element={<ProfilePage/>}/>
+          <Route path='/UserPage'  element={<UserPage/>}/>
+          <Route path='/EditProfile' element={<EditProfile/>}/>
+        
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/Search' element={<Search/>}/>

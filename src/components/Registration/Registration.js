@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import Date from "./Date";
 import { signupUser } from "../../service/UserService";
 import style from "../Login/Login.module.css";
-
 function Registration() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -73,10 +72,11 @@ function Registration() {
       setemailError("");
     }
   };
+  
 
   const validatePassword = (password) => {
     const re =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|_;+=~`<>-]).{8,}$/;
     return re.test(password);
   };
 
