@@ -1,0 +1,173 @@
+.profile-container {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+}
+
+.img_block{
+  border-radius: 999px;
+  padding: 15px;
+  border: 2px solid #ba1f33;
+}
+.img_block img {
+  border-radius: 999px;
+}
+.profile-section {
+  justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  gap: 20%;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.profile-container > h1 {
+  font-family: "Rubik Glitch", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 54px;
+}
+
+.left-side-profile-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.image-form {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.change-profile-img {
+  position: absolute;
+  right: 0;
+  background-color: #ba1f33;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: normal 400 45px "Rubik Glitch", system-ui;
+  font-style: normal;
+  /* right: 50px; */
+}
+.change-profile-img:hover {
+  background-color: #a72839;
+  cursor: pointer;
+  
+
+}
+.profile-img {
+  width: 300px;
+}
+
+.rename {
+  display: flex;
+  gap: 15px;
+  width: 160px;
+  border-bottom: 1px solid white;
+  justify-content: center;
+}
+
+.rename-btn {
+  cursor: pointer;
+}
+
+.right-side-profile-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-block{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-block > h2 {
+  margin-bottom: 10px;
+}
+
+.form-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.change-profile-form {
+  padding: 10px 10px 10px 0;
+  width: min-content;
+}
+
+.change-profile-form  input {
+  border: 2px solid white;
+  border-radius: 12px;
+  background-color: transparent;
+  padding: 10px;
+  width: 350px;
+  color: white;
+  margin-right: 10px;
+}
+.change-profile-form_block {
+  display: flex;
+  margin-bottom: 10px;
+}
+.input::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
+.success-icon {
+  display: none;
+}
+
+.cancel-icon {
+  display: none;
+}
+
+.inputText::placeholder {
+  color: #fff;
+
+  outline: none;
+}
+.inputText {
+  color: #fff;
+  background: none;
+  width: 100%;
+  outline: none;
+}
+.name-button {
+  background: none;
+  border: none;
+}
+
+.error__color {
+  color: #c32121;
+  font-weight: 800;
+}
+
+h5{
+  margin-bottom: 5px;
+}
+
+/* .anticon svg{
+  display: none;
+} */
+:where(.css-dev-only-do-not-override-tjsggz).ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload.ant-upload-select {
+  width: 52px;
+  height: 52px;
+  border: 3px solid #c32121;
+}
+:where(.css-dev-only-do-not-override-tjsggz).ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload.ant-upload-select:not(.ant-upload-disabled):hover{
+  border-color: #ffff
+}

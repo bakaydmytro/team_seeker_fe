@@ -1,0 +1,58 @@
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Або інша висота, яка підходить */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.img1 {
+  transform: translate(65px, 0px);
+  z-index: 1;
+}
+
+.img2 {
+  transform: translate(50px, -85px);
+  z-index: 2;
+}
+
+.img3 {
+  z-index: 3;
+  transform: translate(35px, -170px);
+}
+
+.quote-image-section {
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-circles-block {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.scroll-circles {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ba1f33;
+  transition: background-color 0.3s ease;
+}
+
+.circle-active {
+  background-color: #ff2c2c;
+}

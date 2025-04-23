@@ -1,0 +1,65 @@
+.friends-block{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.profile_section{
+    gap: 0px !important; 
+    width: 120%;
+    align-items: normal !important;
+}
+
+.image_form{
+ align-items: center !important;
+ display: flex;
+ justify-content: center;
+ gap: 10px;
+ flex-direction: column;
+}
+
+.image_bob{
+    max-width:150px ;
+}
+
+.right_side_profile_block{
+    padding-top: 40px;
+    width: 60%;
+}
+
+.friends_block{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+}
+
+.player_info_block{
+    width: 47%;
+    margin: 0;
+}
+
+.player_name{
+  margin: 0 auto;
+}
+
+.active_button {
+    background-color: #f02929 !important;
+    color: white;
+    border: none;
+  }
+  
+  .placeholder_text {
+    padding: 20px;
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  .show_more_button{
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .profile_container{
+    gap: 20px !important;
+  }

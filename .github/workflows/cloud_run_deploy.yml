@@ -1,0 +1,41 @@
+name: Deploy to Cloud run
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy UI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      - name: Configure Docker and gcloud
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_NAME=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/images/ui:${{ github.sha }}
+          docker build --build-arg REACT_APP_API_URL=https://team-seeker-api.space -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
+
+      - name: Deploy UI to Cloud Run
+        run: |
+          gcloud run deploy team-seeker \
+            --image=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/images/ui:${{ github.sha }} \
+            --region=us-central1 \
+            --platform=managed \
+            --allow-unauthenticated \
+            
