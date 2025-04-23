@@ -79,7 +79,7 @@ export default function UserPage() {
             </div>
             <div className={style.profile_section_username}>
                 <p>{username}</p>
-                <p onClick={() => friennds()}>Add friend</p>
+                {/* <p onClick={() => friennds()}>Add friend</p> */}
               </div>
         </aside>
         <div className={style.navigate_userProfile_block}>

@@ -17,7 +17,6 @@ export default function Header(){
         if (token) {
           localStorage.setItem("token", token);
           window.history.replaceState(null, "", window.location.pathname);
-          navigate("/ProfilePage"); 
         }
       }, [navigate]);
 

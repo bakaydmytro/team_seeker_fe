@@ -20,6 +20,10 @@
   width: 100%;
 }
 
+.container_chat {
+  width: 100% !important;
+}
+
 .container-chatMain .main .main_section-title {
   background: #12053f;
 }
@@ -139,7 +143,6 @@
 .container-chatMain .main .container_chat .main_section-chat .section-chat_block .section-chat_wrapper {
   padding: 20px;
   overflow: scroll;
-  scrollbar-width: none;
 }
 .container-chatMain .main .container_chat .main_section-chat .section-chat_block .section-chat_wrapper .section-chat_block-info {
   display: flex;

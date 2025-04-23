@@ -392,16 +392,35 @@ function ChatMain() {
 
     }, [chat_id]);
 
+    useEffect(()=>{
+        getUserChats().then(response => {
+            setUsersChat(response)
+          })
+          
+    },[])
+
+    useEffect(() => {
+        if (!chat_id || !userId || usersChat.length === 0) return;
+      
+        const currentChat = usersChat.find(chat => Number(chat.id) === Number(chat_id));
+        if (!currentChat || !currentChat.Users) return;
+      
+        const otherUser = currentChat.Users.find(user => user.id !== userId);
+        if (otherUser) {
+          setAvatar(otherUser.avatar_url);
+          setUsername(otherUser.username);
+        }
+      }, [chat_id, userId, usersChat]);
+      
     const initChat = (chat_id) => {
         getUserData().then(response => {
             setUserId(response.id)            
         })
         console.log("id ----" , userId)
             getUsersAll(chat_id).then(response => console.log("DSXFCGHVBJKNML," ,response))
-            getUserChats().then(response => {
-                setUsersChat(response)
-                console.log("1234567890-=" , response.map (data  => (console.log(data))))
-            })
+            // getUserChats().then(response => {
+            //     setUsersChat(response)
+            // })
             
             connectSocket()
                 .then(response => {
@@ -477,25 +496,6 @@ function ChatMain() {
     return (
         <div className="container-chatMain">
             <div className="main">
-                {/* <section className="main_section-title">
-                    <div className='section-title_wrapper'> 
-                        <div className="section-title_block-title">
-                            <h1>Message</h1>
-                        </div>
-                        <div className="section-title_block-profile-info">
-                            <img
-                                style={{width:"50px" ,  height: "51px" , borderRadius: "30px"}}
-                                className='section-title_photo' src={avatar || ProfileIcon} alt="Profile Icon" />
-                            <p className='section-title_userName'>{username}</p>
-                            <div 
-                                className='section-title_checker'
-                                style={{
-                                    backgroundColor: check == 200? "green" : "red"
-                                }}
-                            ></div>
-                        </div>
-                    </div>
-                </section> */}
                 <div className='container_chat'>
                     <section className='main_section-usersChat'>
                         <div className="section-title_block-title">
