@@ -55,3 +55,7 @@
     max-width: 200px;
     margin: 0 auto;
   }
+
+  .profile_container{
+    gap: 20px !important;
+  }

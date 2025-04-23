@@ -119,9 +119,7 @@ export default function SearchMain() {
             className="search-input"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-          />
-
-          {/* Список гравців */}
+          />          {/* Список гравців */}
           <div className="player-list">
             {filteredUsers.length > 0 ? (
               filteredUsers.slice(0, visibleCount).map((user) => (

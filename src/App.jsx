@@ -4,7 +4,7 @@ import Registration from './components/Registration/Registration';
 import MainPage from './components/MainPage/MainPage';
 import Search from './components/Search/Search.js';
 import Chat from './components/Chat/Chat.js';
-import FriendsPage from './components/ProfilePage/FriendsPage/FriendsPage.js';
+import FriendsPage from './components/ProfilePage/FriendsPage/FriendsPageMain.jsx';
 
 import UserPage from  "./components/ProfilePage/UserPage.jsx"
 import EditProfile from  "./components/ProfilePage/EditProfile.jsx"
@@ -26,9 +26,15 @@ function App() {
       <Routes>
         <Route path='/' element={<MainPage/>}/>
         <Route path='/ChooseGamePage' element={<ChooseGamePage/>}/>
-          <Route path='/ProfilePage' element={<ProfilePage/>}/>
+          {/* <Route path='/ProfilePage' element={<ProfilePage/>}/>
           <Route path='/UserPage'  element={<UserPage/>}/>
-          <Route path='/EditProfile' element={<EditProfile/>}/>
+          <Route path='/EditProfile' element={<EditProfile/>}/> */}
+          <Route path="/ProfilePage/*" element={<ProfilePage />}>
+            <Route index element={<UserPage />} /> {/* <-- це дефолт */}
+            <Route path="edit" element={<EditProfile />} />
+            <Route path='friends' element={<FriendsPage/>}/>
+          </Route>
+
         
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/login' element={<Login/>}/>

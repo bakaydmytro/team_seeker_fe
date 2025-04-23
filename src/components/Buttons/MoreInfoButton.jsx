@@ -38,7 +38,7 @@ export default function Menu({info}) {
                      src = {info.avatar_url}alt="Profile" />
                     <p className="user-name">{info.username}</p></div>
                 <Link to="/ProfilePage" className="menu-item">
-                    Edit profile
+                    User Profile
                 </Link>
                 <Link onClick={() => steamRedirect()}  className="menu-item link-steam">
                     <img src={SteamIcon} alt="Steam" />

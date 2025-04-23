@@ -109,6 +109,82 @@ export const loginUser = async (userData) => {
 };
 
 
+export const sendRequestFriend = async (addresseeId) => {
+  console.log("POST Request to:", `${API_URL}/api/friends/request`);
+  try {
+    const response = await fetchRequest.post(`${API_URL}/api/friends/request`, 
+      {
+        addressee_id: addresseeId
+      }
+    );
+    console.log("API Response (sendRequestFriend):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (sendRequestFriend):", error.response);
+    return error.response;
+  }
+};
+
+export const getAllFriends = async () => {
+  console.log("POST Request to:", `${API_URL}/api/users/friends`);
+
+  try {
+    const response = await fetchRequest.get(`${API_URL}/api/users/friends`
+    );
+    console.log("API Response (getAllFriends):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (getAllFriends):", error.response);
+    return error.response;
+  }
+};
+
+
+export const getRequestFriend = async () => {
+  console.log("POST Request to:", `${API_URL}/api/users/requests`);
+
+  try {
+    const response = await fetchRequest.get(`${API_URL}/api/users/requests`
+    );
+    console.log("API Response (sendRequestFriend):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (sendRequestFriend):", error.response);
+    return error.response;
+  }
+};
+
+export const acceptRequestFriend = async (requester_id) => {
+  console.log("POST Request to:", `${API_URL}/api/friends/request`);
+  try {
+    const response = await fetchRequest.post(`${API_URL}/api/friends/accept`, 
+      {
+        requester_id
+      }
+    );
+    console.log("API Response (acceptRequestFriend):", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error (acceptRequestFriend):", error.response);
+    return error.response;
+  }
+};
+
+export const rejectRequestFriend = async (requester_id) => {
+  try {
+    const response = await fetchRequest.delete(
+      `${API_URL}/api/friends/reject?requester_id=${requester_id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("API Error (rejectRequestFriend):", error.response);
+    return error.response;
+  }
+};
+
+
+
+
 export const steamRedirect = async () => {
   window.location.href = `${API_URL}/api/users/steam`;
   const params = new URLSearchParams(window.location.search);
@@ -129,7 +205,3 @@ export const steamRedirect = async () => {
   }
 };
 
-// export  const handleSteamLogin = () => {
-
-//   window.location.href = `${API_URL}/api/users/steam`;
-// };
