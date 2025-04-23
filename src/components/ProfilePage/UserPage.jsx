@@ -1,8 +1,12 @@
 import style from "./UserPage.module.css";
 
 import React, { useEffect, useState } from "react";
-import { getUserData, updateUserDataField,  UpdateUserAvatar,  sendRequestFriend} from "../../service/UserService";
+import { getUserData, getAllUsersData,  sendRequestFriend} from "../../service/UserService";
+import {fetchRequest , API_URL } from "../../service/FetchRequest"
 import dota from "../../img/dota.jpg"
+import csgo from "../../img/csgo.jpg" 
+import rust from "../../img/rust.jpg"
+import teamfortness from "../../img/team.jpg"
 import SteamConnect from "../Buttons/SteamConnect";
 import { Button } from "antd";
 import CancelIcon from "../../img/icons/CancelIcon.svg";
@@ -12,18 +16,53 @@ import RenameIcon from "../../img/icons/RenameIcon.svg";
 import { useNavigate } from "react-router-dom";
 import AlertMessage from "./AlertMessage"
 
+
+
 export default function UserPage() {
+  const [games, setGames] = useState([]);
 
   const [id, setID] = useState("");
   const [avatar, setAvatar] = useState(null);
+  const [username, setUsername] = useState(null);
   const navigate = useNavigate();
+  
+  const getGameHours = (appid) => {
+    const game = games.find(g => g.appid === appid);
+    return game ? Math.round(game.playtime_forever) : 0;
+  };
+  
 
  
  
     const friennds =  () => {
         sendRequestFriend(20)
     }
+
+     const getAllUsersData = async ( appid) => {
+      console.log("GET Request to:", `${API_URL}/api/users/search`);
     
+      try {
+        const response = await fetchRequest.get(`${API_URL}/api/users/search`);
+        console.log(response)
+        console.log("API Response (getAllUsersData):", response.data);
+        return response.data;
+      } catch (error) {
+        console.error("API Error (getAllUsersData):", error.response);
+        return { data: [] };  
+      }
+    };
+    
+    useEffect(() => {
+      getUserData().then(res => {
+        setUsername(res.username)
+        setAvatar(res.avatar_url)
+        console.log("User data:", res);
+        setGames(res.games || []);
+      });
+    }, []);
+    
+   
+   
   
   return (
     <div  className={`${style.profile_container} container profile-container`}>
@@ -39,24 +78,51 @@ export default function UserPage() {
               />
             </div>
             <div className={style.profile_section_username}>
-                <p>KOKOS</p>
+                <p>{username}</p>
+                <p onClick={() => friennds()}>Add friend</p>
               </div>
         </aside>
-        <div className="">
-            <a onClick={()=> navigate("/ProfilePage/edit")}>Change Profile</a>
-            
-        </div>
-        <a onClick={()=> navigate("/ProfilePage/friends")}>Friends</a>
-        <button onClick={() => friennds()}>Send friens requesr</button>
+        <div className={style.navigate_userProfile_block}>
+            <div className={style.navigate_userProfile} onClick={()=> navigate("/ProfilePage/edit")}><p>Change Profile</p></div>
+            <div className={style.navigate_userProfile} onClick={()=> navigate("/ProfilePage/friends")}><p>Friends</p></div>
+        </div>        
 
       </section>
-      <section className="section-activity">
-        <div className="section_activity_title-block">
+      <section  className={style.section_activity}  >
+        <div className={style.section_activity_title_block}>
             <p>Недавня активність</p>
         </div>
-        <div className="section-activity_gameHourseInfo">
-            <img src={dota} alt="" />
+        <div className={style.section_activity_gameHourseBlock} >
+            <div className={style.section_activity_gameHourseInfo}>
+                <img src={dota} alt="" />
+                <div className={style.houreGame_block}>
+                    <p>Кількість годин</p>
+                    <p>{getGameHours(570)}</p>
+                </div>
+            </div>
+            <div className={style.section_activity_gameHourseInfo}>
+                <img src={rust} alt="" />
+                <div className={style.houreGame_block}>
+                    <p>Кількість годин</p>
+                    <p>{getGameHours(252490)}</p>
+                </div>
+            </div>
+            <div className={style.section_activity_gameHourseInfo}>
+                <img src={csgo} alt="" />
+                <div className={style.houreGame_block}>
+                    <p>Кількість годин</p>
+                    <p>{getGameHours(730)}</p>
+                </div>
+            </div>
+            <div className={style.section_activity_gameHourseInfo}>
+                <img src={teamfortness} alt="" />
+                <div className={style.houreGame_block} >
+                    <p>Кількість годин</p>
+                    <p>{getGameHours(440)}</p>
+                </div>
+            </div>
         </div>
+        
       </section>
     </div>
   );

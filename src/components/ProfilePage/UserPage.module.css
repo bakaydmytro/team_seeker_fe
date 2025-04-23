@@ -18,3 +18,58 @@
 .left_side_profile_block{
     flex-direction: row !important;
 }
+.section_activity_gameHourseBlock{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+
+.section_activity_gameHourseInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 49%;
+    border: 2px solid grey;
+    padding: 10px;
+    background-color: #000000
+}
+.section_activity_gameHourseInfo img {
+    max-width: 350px;
+}
+.section_activity{
+    width: 100%;
+}
+.houreGame_block{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.section_activity_title_block{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.section_activity_title_block p {
+    font: 400 32px "Roboto";;
+}
+
+.navigate_userProfile{
+    border: 1px solid red;
+    padding: 10px;
+    width: 150px;
+    background: #c32121 !important;
+}
+.navigate_userProfile:hover{
+    cursor: pointer;
+    color: #000000;
+}
+.navigate_userProfile p {
+    text-align: center
+
+}
+.navigate_userProfile_block{
+    display: flex;
+    gap: 20px;
+}

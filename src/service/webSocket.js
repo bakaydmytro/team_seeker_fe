@@ -4,7 +4,6 @@ import { getAccessToken } from "./StorageService";
 
 
 import { io } from "socket.io-client";
-import axios from "axios";
 let socket = null;
 
 export const getUserData = async () => {
