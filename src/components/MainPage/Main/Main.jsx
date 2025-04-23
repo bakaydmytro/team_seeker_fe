@@ -22,7 +22,7 @@ export default function Main() {
           </p>
           <div className="button-block">
             <RegisterButton />
-            <Link to="/FriendsPage">
+            <Link>
               <Button className="learn-more-button ">Learn More</Button>
             </Link>
           </div>

@@ -30,7 +30,6 @@ export const getAllUsersData = async (username = "", appid) => {
 
 
 
-
 export const updateUserDataField = async (field, value, id) => {
   console.log("PUT Request to:", `${API_URL}/api/users/${id}`);
   console.log("Payload:", JSON.stringify({ [field]: value }));
