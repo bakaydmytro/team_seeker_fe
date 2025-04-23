@@ -21,6 +21,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function FriendsPageMain() {
+    // ===== СТЕЙТИ =====
     const [avatar, setAvatar] = useState(null);
     const [username, setUsername] = useState("");
     const [activeTab, setActiveTab] = useState("friends");
@@ -30,22 +31,26 @@ export default function FriendsPageMain() {
     const [visibleCount, setVisibleCount] = useState(4);
     const [visibleAddCount, setVisibleAddCount] = useState(4);
     const [allUsers, setAllUsers] = useState([]);
+    const [sentRequests, setSentRequests] = useState([]);
+    const [friendsIds, setFriendsIds] = useState([]);
+
 
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
+    // ===== ЗАВАНТАЖЕННЯ ДАНИХ ПРО КОРИСТУВАЧА ТА ДРУЗІВ =====
     useEffect(() => {
         getUserData().then((res) => {
             setAvatar(res.avatar_url);
             setUsername(res.username);
         });
 
-        // Завантаження друзів
         const fetchFriends = async () => {
             try {
                 const res = await getAllFriends();
                 if (res?.friends) {
                     setFriendsList(res.friends);
+                    setFriendsIds(res.friends.map((friend) => friend.id));
                 }
             } catch (err) {
                 console.error("Failed to load friends:", err);
@@ -53,18 +58,34 @@ export default function FriendsPageMain() {
         };
 
         fetchFriends();
+
+        getRequestFriend()
+            .then((res) => {
+                if (res?.sent_requests) {
+                    setSentRequests(res.sent_requests.map((req) => req.receiver.id));
+                }
+            })
+            .catch((err) => console.error("Failed to load sent requests", err));
     }, []);
 
+    // ===== ЗАВАНТАЖЕННЯ ЗАПИТІВ У ВКЛАДЦІ "ЗАПИТИ" =====
     useEffect(() => {
         if (activeTab === "requests") {
             getRequestFriend()
                 .then((res) => {
-                    if (res?.requests) setFriendRequests(res.requests);
+                    if (res?.requests) {
+                        const filteredRequests = res.requests.filter(
+                            (req) => !friendsIds.includes(req.requester.id)
+                        );
+                        setFriendRequests(filteredRequests);
+                    }
                 })
                 .catch((err) => console.error("Failed to load requests", err));
         }
-    }, [activeTab]);
+    }, [activeTab, friendsIds]); // Додано friendsIds як залежність
 
+
+    // ===== ПІДКЛЮЧЕННЯ ДО SOCKET.IO ТА ОНОВЛЕННЯ СТАТУСУ ДРУЗІВ =====
     useEffect(() => {
         let isMounted = true;
 
@@ -93,6 +114,7 @@ export default function FriendsPageMain() {
         };
     }, []);
 
+    // ===== СТВОРЕННЯ ЧАТУ З ДРУГОМ =====
     const handleCreateChat = (recipientId) => {
         createChat(recipientId, token)
             .then((chat) => {
@@ -102,12 +124,14 @@ export default function FriendsPageMain() {
             .catch((err) => console.error("Failed to create chat", err));
     };
 
+    // ===== ОБРОБНИКИ ПРИЙНЯТТЯ І ВІДМОВИ ЗАПИТІВ =====
     const handleAccept = async (id) => {
         try {
             await acceptRequestFriend(id);
             setFriendRequests((prev) =>
                 prev.filter((req) => req.requester.id !== id)
             );
+            setFriendsIds((prev) => [...prev, id]);
         } catch (err) {
             console.error("Error accepting request", err);
         }
@@ -119,12 +143,13 @@ export default function FriendsPageMain() {
             setFriendRequests((prev) =>
                 prev.filter((req) => req.requester.id !== id)
             );
+            setSentRequests((prev) => prev.filter((uid) => uid !== id)); 
         } catch (err) {
             console.error("Error rejecting request", err);
         }
     };
-
-    // Фільтрація користувачів
+    
+    // ===== ФІЛЬТРАЦІЯ КОРИСТУВАЧІВ ЗА ІМ'ЯМ =====
     const filterUsers = (searchText, listOfUsers) => {
         if (!searchText) return listOfUsers;
         return listOfUsers.filter(({ username }) =>
@@ -135,14 +160,11 @@ export default function FriendsPageMain() {
     const filteredFriends = filterUsers(searchTerm, friendsList);
     const filteredUsers = filterUsers(searchTerm, allUsers);
 
-    const handleShowMore = () => {
-        setVisibleCount((prev) => prev + 4);
-    };
+    // ===== ПАГІНАЦІЯ ДРУЗІВ І ВСІХ КОРИСТУВАЧІВ =====
+    const handleShowMore = () => setVisibleCount((prev) => prev + 4);
+    const handleShowAddMore = () => setVisibleAddCount((prev) => prev + 4);
 
-    const handleShowAddMore = () => {
-        setVisibleAddCount((prev) => prev + 4);
-    };
-
+    // ===== ЗАВАНТАЖЕННЯ ВСІХ КОРИСТУВАЧІВ У ВКЛАДЦІ "ДОДАТИ" =====
     useEffect(() => {
         if (activeTab === "add") {
             getAllUsersData(searchTerm).then((res) => {
@@ -151,6 +173,17 @@ export default function FriendsPageMain() {
         }
     }, [activeTab, searchTerm]);
 
+    // ===== ВІДПРАВКА ЗАПИТУ В ДРУЗІ =====
+    const handleSendRequest = async (userId) => {
+        try {
+            await sendRequestFriend(userId);
+            setSentRequests((prev) => [...prev, userId]);
+        } catch (err) {
+            console.error("Failed to send friend request:", err);
+        }
+    };
+
+    // ===== РЕНДЕР ВМІСТУ ВКЛАДОК =====
     const renderContent = () => {
         switch (activeTab) {
             case "friends":
@@ -180,7 +213,7 @@ export default function FriendsPageMain() {
                                         ></span>
                                     </div>
                                     <div className="player-details">
-                                        <p className="player-name">{user.username}</p>
+                                        <p className={`${style.player_name} player-name`}>{user.username}</p>
                                     </div>
                                     <button
                                         className="chat-button"
@@ -207,47 +240,43 @@ export default function FriendsPageMain() {
                         You don’t have any friend requests yet.
                     </p>
                 ) : (
-                    <>
-                        <div className={style.friends_block}>
-                            {friendRequests.map((req) => (
-                                <div
-                                    className={`${style.player_info_block} player-info-block`}
-                                    key={req.requester.id}
-                                >
-                                    <div style={{ marginRight: "5px" }} className="player-avatar">
-                                        <img
-                                            src={req.requester.avatar_url || ProfileIcon}
-                                            alt="User avatar"
-                                            onError={(e) => (e.target.src = ProfileIcon)}
-                                        />
-                                        <span
-                                            className={`status-indicator ${req.requester.status}`}
-                                        ></span>
-                                    </div>
-                                    <div className="player-details">
-                                        <p className="player-name">{req.requester.username}</p>
-                                    </div>
-                                    <div
-                                        style={{ display: "flex", gap: "10px" }}
-                                        className="div_button-block">
-                                        <button
-                                            style={{ backgroundColor: "green" }}
-                                            className="chat-button"
-                                            onClick={() => handleAccept(req.requester.id)}
-                                        >
-                                            Accept
-                                        </button>
-                                        <button
-                                            className="chat-button"
-                                            onClick={() => handleReject(req.requester.id)}
-                                        >
-                                            Reject
-                                        </button>
-                                    </div>
+                    <div className={style.friends_block}>
+                        {friendRequests.map((req) => (
+                            <div
+                                className={`${style.player_info_block} player-info-block`}
+                                key={req.requester.id}
+                            >
+                                <div className="player-avatar">
+                                    <img
+                                        src={req.requester.avatar_url || ProfileIcon}
+                                        alt="User avatar"
+                                        onError={(e) => (e.target.src = ProfileIcon)}
+                                    />
+                                    <span
+                                        className={`status-indicator ${req.requester.status}`}
+                                    ></span>
                                 </div>
-                            ))}
-                        </div>
-                    </>
+                                <div className="player-details">
+                                    <p className="player-name">{req.requester.username}</p>
+                                </div>
+                                <div style={{ display: "flex", gap: "10px" }}>
+                                    <button
+                                        style={{ backgroundColor: "green" }}
+                                        className="chat-button"
+                                        onClick={() => handleAccept(req.requester.id)}
+                                    >
+                                        Accept
+                                    </button>
+                                    <button
+                                        className="chat-button"
+                                        onClick={() => handleReject(req.requester.id)}
+                                    >
+                                        Reject
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 );
             case "add":
                 return (
@@ -260,30 +289,41 @@ export default function FriendsPageMain() {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <div className={style.friends_block}>
-                            {filteredUsers.slice(0, visibleAddCount).map((user) => (
-                                <div
-                                    className={`${style.player_info_block} player-info-block`}
-                                    key={user.id}
-                                >
-                                    <div className="player-avatar">
-                                        <img
-                                            src={user.avatar_url || ProfileIcon}
-                                            alt="User avatar"
-                                            onError={(e) => (e.target.src = ProfileIcon)}
-                                        />
-                                        <span className={`status-indicator ${user.status}`}></span>
-                                    </div>
-                                    <div className="player-details">
-                                        <p className="player-name">{user.username}</p>
-                                    </div>
-                                    <button
-                                        className="chat-button"
-                                        onClick={() => sendRequestFriend(user.id)}
+                            {filteredUsers.slice(0, visibleAddCount).map((user) => {
+                                const isFriend = friendsIds.includes(user.id);
+                                const isRequested = sentRequests.includes(user.id);
+
+                                return (
+                                    <div
+                                        className={`${style.player_info_block} player-info-block`}
+                                        key={user.id}
                                     >
-                                        Request
-                                    </button>
-                                </div>
-                            ))}
+                                        <div className="player-avatar">
+                                            <img
+                                                src={user.avatar_url || ProfileIcon}
+                                                alt="User avatar"
+                                                onError={(e) => (e.target.src = ProfileIcon)}
+                                            />
+                                            <span className={`status-indicator ${user.status}`}></span>
+                                        </div>
+                                        <div className="player-details">
+                                            <p className={`${style.player_name} player-name`}>{user.username}</p>
+                                        </div>
+                                        {isFriend ? (
+                                            <span className="status-label">Friend</span>
+                                        ) : isRequested ? (
+                                            <span className="status-label">sending...</span>
+                                        ) : (
+                                            <button
+                                                className="chat-button"
+                                                onClick={() => handleSendRequest(user.id)}
+                                            >
+                                                Request
+                                            </button>
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
                         {visibleAddCount < filteredUsers.length && (
                             <button
@@ -317,16 +357,14 @@ export default function FriendsPageMain() {
                     </form>
 
                     <Button
-                        className={`friends-btn search-input ${activeTab === "friends" ? style.active_button : ""
-                            }`}
+                        className={`friends-btn search-input ${activeTab === "friends" ? style.active_button : ""}`}
                         onClick={() => setActiveTab("friends")}
                     >
                         <img src={FriendsIcon} alt="FriendIcon" />
                         Your friends
                     </Button>
                     <Button
-                        className={`friends-btn search-input ${activeTab === "requests" ? style.active_button : ""
-                            }`}
+                        className={`friends-btn search-input ${activeTab === "requests" ? style.active_button : ""}`}
                         onClick={() => setActiveTab("requests")}
                     >
                         <img src={FriendsIcon} alt="FriendIcon" />
@@ -336,16 +374,14 @@ export default function FriendsPageMain() {
                         className={`friends-btn search-input ${activeTab === "add" ? style.active_button : ""}`}
                         onClick={() => setActiveTab("add")}
                     >
-                        <img src={FriendsIcon} alt="FriendIcon" />Add friends
+                        <img src={FriendsIcon} alt="FriendIcon" />
+                        Add friends
                     </Button>
                 </aside>
 
-                <aside
-                    className={`${style.right_side_profile_block} right-side-profile-block`}
-                >
+                <aside className={`${style.right_side_profile_block} right-side-profile-block`}>
                     {renderContent()}
                 </aside>
-
             </section>
         </div>
     );

@@ -39,6 +39,10 @@
     margin: 0;
 }
 
+.player_name{
+  margin: 0 auto;
+}
+
 .active_button {
     background-color: #f02929 !important;
     color: white;
