@@ -11,12 +11,8 @@ const options = [
   },
 ];
 const SendButton = ({message,setMessage,handleSendMessage}) => (
-  <Space direction="vertical" size="middle">
-    <Space.Compact
-      style={{
-        width: '100%',
-      }}
-    >
+  <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+    <Space.Compact style={{ width: '100%' }}>
       <Input
         allowClear
         placeholder= "Write"
