@@ -1,8 +1,8 @@
 import style from "./UserPage.module.css";
 
 import React, { useEffect, useState } from "react";
-import { getUserData, updateUserDataField,  UpdateUserAvatar} from "../../service/UserService";
-
+import { getUserData, updateUserDataField,  UpdateUserAvatar,  sendRequestFriend} from "../../service/UserService";
+import dota from "../../img/dota.jpg"
 import SteamConnect from "../Buttons/SteamConnect";
 import { Button } from "antd";
 import CancelIcon from "../../img/icons/CancelIcon.svg";
@@ -13,48 +13,17 @@ import { useNavigate } from "react-router-dom";
 import AlertMessage from "./AlertMessage"
 
 export default function UserPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUserName] = useState("");
+
   const [id, setID] = useState("");
-
-  const [emailValid, setEmailValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [usernameValid, setUsernameValid] = useState(false);
-
-
-  const [emailError, setEmailError] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [closeAlert, setCloseAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
   const [avatar, setAvatar] = useState(null);
-
   const navigate = useNavigate();
 
  
  
-
-  const handleChange = async (e, field, value, setValue, setEmailError) => {
-    e.preventDefault();
-    try {
-      const userDataResponse = await getUserData();
-      setID(userDataResponse.id)
-      console.log(id)
-      const updateResponse = await updateUserDataField(field, value, id)
-
-      if (updateResponse) setValue("");
-
-      console.log(`API call successful for ${field}`, updateResponse);
-      setEmailError("");
-    } catch (error) {
-      if (error.response?.status === 400) {
-        setEmailError("Email already in use");
-      }
-      console.error(`API call failed for ${field}`, error);
+    const friennds =  () => {
+        sendRequestFriend(20)
     }
-  };
-
+    
   
   return (
     <div  className={`${style.profile_container} container profile-container`}>
@@ -74,7 +43,19 @@ export default function UserPage() {
               </div>
         </aside>
         <div className="">
-            <a onClick={()=> navigate("/EditProfile")}>Change Profile</a>
+            <a onClick={()=> navigate("/ProfilePage/edit")}>Change Profile</a>
+            
+        </div>
+        <a onClick={()=> navigate("/ProfilePage/friends")}>Friends</a>
+        <button onClick={() => friennds()}>Send friens requesr</button>
+
+      </section>
+      <section className="section-activity">
+        <div className="section_activity_title-block">
+            <p>Недавня активність</p>
+        </div>
+        <div className="section-activity_gameHourseInfo">
+            <img src={dota} alt="" />
         </div>
       </section>
     </div>
