@@ -254,3 +254,9 @@ button {
   border-color: #c32121 !important;
   color: #08042e !important;
 }
+
+.status-label {
+  font-weight: bold;
+  color: gray;
+  padding: 5px 10px;
+}
