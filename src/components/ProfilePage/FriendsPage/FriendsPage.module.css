@@ -7,6 +7,7 @@
 .profile_section{
     gap: 0px !important; 
     width: 120%;
+    align-items: normal !important;
 }
 
 .image_form{
@@ -22,6 +23,7 @@
 }
 
 .right_side_profile_block{
+    padding-top: 40px;
     width: 60%;
 }
 
@@ -33,7 +35,7 @@
 }
 
 .player_info_block{
-    width: 49%;
+    width: 47%;
     margin: 0;
 }
 
