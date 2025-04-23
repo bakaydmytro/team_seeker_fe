@@ -20,15 +20,11 @@ import './App.css';
 function App() {
   
 
-
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<MainPage/>}/>
         <Route path='/ChooseGamePage' element={<ChooseGamePage/>}/>
-          {/* <Route path='/ProfilePage' element={<ProfilePage/>}/>
-          <Route path='/UserPage'  element={<UserPage/>}/>
-          <Route path='/EditProfile' element={<EditProfile/>}/> */}
           <Route path="/ProfilePage/*" element={<ProfilePage />}>
             <Route index element={<UserPage />} /> {/* <-- це дефолт */}
             <Route path="edit" element={<EditProfile />} />

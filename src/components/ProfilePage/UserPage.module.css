@@ -13,7 +13,7 @@
     gap: 20px !important;
 }
 .profile_section{
-    justify-content: start !important;
+    justify-content: space-between !important;
 }
 .left_side_profile_block{
     flex-direction: row !important;
@@ -56,10 +56,10 @@
 }
 
 .navigate_userProfile{
-    border: 1px solid red;
+    border: 1px solid #ba1f33;
     padding: 10px;
     width: 150px;
-    background: #c32121 !important;
+    background: #ba1f33 !important;
 }
 .navigate_userProfile:hover{
     cursor: pointer;
